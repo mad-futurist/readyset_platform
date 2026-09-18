@@ -1,4 +1,5 @@
 import hashlib
+import logging
 import re
 import tempfile
 import uuid
@@ -11,6 +12,8 @@ from sqlalchemy import delete, func, select
 from app.audit import record_audit
 from app.config import Settings, get_settings
 from app.dependencies import Csrf, Db, OrgContext
+from app.file_security import FileSecurityScanner, ScanResult
+from app.file_validation import InvalidFileContent, validate_content
 from app.models import (
     Document,
     DocumentStatus,
@@ -29,6 +32,7 @@ from app.policy import (
     document_access_predicate,
     require_capability,
 )
+from app.rate_limit import check_upload_rate
 from app.repositories import DocumentRepository
 from app.schemas import (
     DocumentGrantRead,
@@ -41,10 +45,15 @@ from app.schemas import (
 from app.storage import ObjectStorage
 
 router = APIRouter(prefix="/documents", tags=["documents"])
+logger = logging.getLogger("readyset.documents")
 
 
 def get_storage(request: Request) -> ObjectStorage:
     return request.app.state.storage  # type: ignore[no-any-return]
+
+
+def get_file_scanner(request: Request) -> FileSecurityScanner:
+    return request.app.state.file_scanner  # type: ignore[no-any-return]
 
 
 def _safe_filename(value: str | None) -> str:
@@ -56,8 +65,8 @@ def _safe_filename(value: str | None) -> str:
 def _stage_upload(
     file: UploadFile, settings: Settings
 ) -> tuple[tempfile.SpooledTemporaryFile[bytes], int, str, str]:
-    mime = (file.content_type or "application/octet-stream").lower()
-    if mime not in settings.allowed_content_types:
+    declared_mime = (file.content_type or "application/octet-stream").lower()
+    if declared_mime not in settings.allowed_content_types:
         raise HTTPException(status_code=415, detail="Unsupported file type")
     staged = tempfile.SpooledTemporaryFile(max_size=min(settings.max_upload_bytes, 8 * 1024 * 1024))
     digest = hashlib.sha256()
@@ -70,7 +79,21 @@ def _stage_upload(
         digest.update(chunk)
         staged.write(chunk)
     staged.seek(0)
+    try:
+        mime = validate_content(staged, declared_mime)
+    except InvalidFileContent as exc:
+        staged.close()
+        raise HTTPException(status_code=415, detail=str(exc)) from exc
     return staged, size, digest.hexdigest(), mime
+
+
+def _scan_upload(staged: tempfile.SpooledTemporaryFile[bytes], scanner: FileSecurityScanner) -> None:
+    result = scanner.scan(staged)
+    staged.seek(0)
+    if result == ScanResult.INFECTED:
+        raise HTTPException(status_code=422, detail="File did not pass security inspection")
+    if result == ScanResult.UNAVAILABLE:
+        raise HTTPException(status_code=503, detail="File security inspection is unavailable")
 
 
 def _readable_document(db: Db, context: OrgContext, document_id: uuid.UUID) -> Document:
@@ -94,6 +117,7 @@ def upload_document(
     db: Db,
     context: OrgContext,
     csrf: Csrf,
+    request: Request,
     file: UploadFile = File(...),
     title: str = Form(..., min_length=1, max_length=255),
     description: str | None = Form(None, max_length=5000),
@@ -102,8 +126,12 @@ def upload_document(
     visibility: DocumentVisibility = Form(DocumentVisibility.ORGANIZATION),
     settings: Settings = Depends(get_settings),
     storage: ObjectStorage = Depends(get_storage),
+    scanner: FileSecurityScanner = Depends(get_file_scanner),
 ) -> Document:
     require_capability(context, Capability.UPLOAD_DOCUMENTS)
+    if not settings.uploads_enabled:
+        raise HTTPException(status_code=503, detail="Uploads are disabled")
+    check_upload_rate(request, context.user.id, context.organization.id)
     document_id = uuid.uuid4()
     version_id = uuid.uuid4()
     document = Document(
@@ -130,9 +158,16 @@ def upload_document(
         created_by_user_id=context.user.id,
     )
     staged, size, checksum, mime = _stage_upload(file, settings)
+    try:
+        _scan_upload(staged, scanner)
+    except Exception:
+        staged.close()
+        raise
     version.mime_type, version.size_bytes, version.sha256 = mime, size, checksum
+    object_written = False
     try:
         storage.put_stream(version.storage_key, staged, mime)
+        object_written = True
         version.ingestion_status = IngestionStatus.UPLOADED
         db.add_all([document, version])
         db.flush()
@@ -157,7 +192,13 @@ def upload_document(
         db.commit()
     except Exception:
         db.rollback()
-        storage.delete(version.storage_key)
+        if object_written:
+            try:
+                storage.delete(version.storage_key)
+            except Exception:
+                logger.exception(
+                    "Object compensation failed storage_key=%s", version.storage_key
+                )
         raise
     finally:
         staged.close()
@@ -242,9 +283,14 @@ def upload_version(
     db: Db,
     context: OrgContext,
     csrf: Csrf,
+    request: Request,
     settings: Settings = Depends(get_settings),
     storage: ObjectStorage = Depends(get_storage),
+    scanner: FileSecurityScanner = Depends(get_file_scanner),
 ) -> DocumentVersion:
+    if not settings.uploads_enabled:
+        raise HTTPException(status_code=503, detail="Uploads are disabled")
+    check_upload_rate(request, context.user.id, context.organization.id)
     document = _managed_document(db, context, document_id)
     locked_document = db.scalar(
         select(Document)
@@ -282,9 +328,16 @@ def upload_version(
         created_by_user_id=context.user.id,
     )
     staged, size, checksum, mime = _stage_upload(file, settings)
+    try:
+        _scan_upload(staged, scanner)
+    except Exception:
+        staged.close()
+        raise
     version.mime_type, version.size_bytes, version.sha256 = mime, size, checksum
+    object_written = False
     try:
         storage.put_stream(version.storage_key, staged, mime)
+        object_written = True
         version.ingestion_status = IngestionStatus.UPLOADED
         db.add(version)
         db.flush()
@@ -301,7 +354,13 @@ def upload_version(
         db.commit()
     except Exception:
         db.rollback()
-        storage.delete(version.storage_key)
+        if object_written:
+            try:
+                storage.delete(version.storage_key)
+            except Exception:
+                logger.exception(
+                    "Object compensation failed storage_key=%s", version.storage_key
+                )
         raise
     finally:
         staged.close()

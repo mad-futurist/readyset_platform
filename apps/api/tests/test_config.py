@@ -15,7 +15,11 @@ def test_hardened_environment_rejects_development_defaults() -> None:
     message = str(error.value)
     assert "COOKIE_SECURE" in message
     assert "SMTP" in message
-    assert "SHARED_RATE_LIMIT_ENABLED" in message
+    assert "RATE_LIMIT_BACKEND" in message
+    assert "SCANNER_BACKEND" in message
+    assert "storage credentials" in message
+    assert "STORAGE_AUTO_CREATE_BUCKET" in message
+    assert "STORAGE_ENCRYPTION" in message
 
 
 def test_valid_hardened_environment_is_accepted() -> None:
@@ -27,7 +31,10 @@ def test_valid_hardened_environment_is_accepted() -> None:
         cookie_secure=True,
         google_redirect_uri=("https://app.staging.readyset.example/api/v1/auth/google/callback"),
         development_token_exposure=False,
-        shared_rate_limit_enabled=True,
+        rate_limit_backend="redis",
+        redis_url="redis://redis.internal:6379/0",
+        scanner_backend="clamav",
+        clamav_host="clamav.internal",
         email_backend="smtp",
         email_from="ReadySet <no-reply@staging.readyset.example>",
         smtp_host="smtp.internal",
@@ -36,6 +43,8 @@ def test_valid_hardened_environment_is_accepted() -> None:
         storage_endpoint_url="https://objects.internal",
         storage_access_key="staging-access",
         storage_secret_key="staging-secret",
+        storage_auto_create_bucket=False,
+        storage_encryption="AES256",
     )
     assert settings.is_hardened
     assert not settings.expose_development_tokens
@@ -51,14 +60,61 @@ def test_hardened_environment_rejects_default_database_and_insecure_storage() ->
             cookie_secure=True,
             google_redirect_uri="https://app.readyset.example/api/v1/auth/google/callback",
             development_token_exposure=False,
-            shared_rate_limit_enabled=True,
+            rate_limit_backend="redis",
+            redis_url="redis://redis.internal:6379/0",
+            uploads_enabled=False,
             password_auth_enabled=False,
             invitations_enabled=False,
             storage_endpoint_url="http://objects.internal",
             storage_access_key="production-access",
             storage_secret_key="production-secret",
+            storage_auto_create_bucket=False,
+            storage_encryption="AES256",
             email_from="ReadySet <no-reply@readyset.example>",
         )
     message = str(error.value)
     assert "database credentials" in message
     assert "STORAGE_ENDPOINT_URL" in message
+
+
+@pytest.mark.parametrize(
+    ("override", "expected"),
+    [
+        ({"public_web_url": "http://app.example"}, "PUBLIC_WEB_URL"),
+        ({"cookie_secure": False}, "COOKIE_SECURE"),
+        ({"development_token_exposure": True}, "DEVELOPMENT_TOKEN_EXPOSURE"),
+        ({"email_backend": "capture"}, "SMTP"),
+        ({"rate_limit_backend": "memory"}, "RATE_LIMIT_BACKEND"),
+        ({"scanner_backend": "noop"}, "SCANNER_BACKEND"),
+        ({"cors_origins": ["*"]}, "CORS_ORIGINS"),
+        ({"google_redirect_uri": "https://wrong.example/callback"}, "GOOGLE_REDIRECT_URI"),
+    ],
+)
+def test_hardened_configuration_fails_closed(override: dict[str, object], expected: str) -> None:
+    values: dict[str, object] = {
+        "environment": "production",
+        "database_url": "postgresql+psycopg://app:strong-db-password@db.internal/readyset",
+        "public_web_url": "https://app.example",
+        "cors_origins": ["https://app.example"],
+        "cookie_secure": True,
+        "google_redirect_uri": "https://app.example/api/v1/auth/google/callback",
+        "development_token_exposure": False,
+        "rate_limit_backend": "redis",
+        "redis_url": "redis://redis.internal:6379/0",
+        "scanner_backend": "clamav",
+        "clamav_host": "clamav.internal",
+        "email_backend": "smtp",
+        "email_from": "ReadySet <no-reply@example.com>",
+        "smtp_host": "smtp.internal",
+        "smtp_username": "app",
+        "smtp_password": "strong-secret",
+        "storage_endpoint_url": "https://objects.internal",
+        "storage_access_key": None,
+        "storage_secret_key": None,
+        "storage_auto_create_bucket": False,
+        "storage_encryption": "AES256",
+    }
+    values.update(override)
+    with pytest.raises(ValidationError) as error:
+        Settings(**values)
+    assert expected in str(error.value)

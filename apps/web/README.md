@@ -41,7 +41,7 @@ From the repository root:
 
 ## Launch locally
 
-1. Start the backend first and confirm `http://localhost:8000/healthz` returns a successful response.
+1. Start the backend first and confirm `http://localhost:8000/readyz` returns a successful response.
 2. In a second terminal, from the repository root, start the frontend development server:
 
    ```powershell

@@ -1,4 +1,5 @@
 import hmac
+import logging
 import uuid
 from datetime import UTC, datetime, timedelta
 from urllib.parse import urlencode
@@ -30,6 +31,7 @@ from app.models import (
 from app.rate_limit import check_auth_rate
 from app.schemas import (
     AuthResponse,
+    DeliveryStatus,
     LoginRequest,
     MembershipRead,
     MessageResponse,
@@ -54,6 +56,7 @@ from app.security import (
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
 OAUTH_CALLBACK_PATH = "/api/v1/auth/google/callback"
+logger = logging.getLogger("readyset.email")
 
 
 def _memberships(db: Db, user_id: uuid.UUID) -> list[OrganizationMembership]:
@@ -103,13 +106,16 @@ def _oauth_error(settings: Settings, message: str, status_code: int) -> JSONResp
     return response
 
 
-def _send_email(sender: EmailSender, recipient: str, subject: str, body: str) -> None:
+def _send_email(
+    sender: EmailSender, recipient: str, subject: str, body: str
+) -> DeliveryStatus:
     try:
         sender.send(recipient, subject, body)
-    except Exception as exc:
-        raise HTTPException(
-            status_code=503, detail="Email delivery is temporarily unavailable"
-        ) from exc
+    except Exception:
+        # Tokens and message bodies are deliberately absent from the log record.
+        logger.exception("Synchronous email delivery failed")
+        return DeliveryStatus.FAILED
+    return DeliveryStatus.SENT
 
 
 def exchange_google_code(code: str, pending: OAuthLoginState, settings: Settings) -> str:
@@ -145,7 +151,7 @@ def register(
 ) -> RegistrationResponse:
     if not settings.password_auth_enabled:
         raise HTTPException(status_code=404, detail="Password authentication is disabled")
-    check_auth_rate(request, "register", limit=5)
+    check_auth_rate(request, "register", limit=5, email=str(payload.email))
     try:
         validate_password(payload.password)
     except ValueError as exc:
@@ -193,7 +199,7 @@ def register(
         raise HTTPException(
             status_code=409, detail="An account with this email already exists"
         ) from exc
-    _send_email(
+    delivery_status = _send_email(
         sender,
         user.primary_email,
         "Verify your ReadySet email",
@@ -202,7 +208,12 @@ def register(
         f"{urlencode({'token': verification_token})}",
     )
     return RegistrationResponse(
-        message="Check your email to verify your account before signing in.",
+        message=(
+            "Check your email to verify your account before signing in."
+            if delivery_status == DeliveryStatus.SENT
+            else "Your account was created, but verification email delivery failed. Retry delivery."
+        ),
+        delivery_status=delivery_status,
         development_verification_token=(
             verification_token if settings.expose_development_tokens else None
         ),
@@ -219,7 +230,7 @@ def resend_verification(
 ) -> MessageResponse:
     if not settings.password_auth_enabled:
         raise HTTPException(status_code=404, detail="Password authentication is disabled")
-    check_auth_rate(request, "verification-resend", limit=5)
+    check_auth_rate(request, "verification-resend", limit=5, email=str(payload.email))
     normalized = normalize_email(str(payload.email))
     identity = db.scalar(
         select(AuthIdentity).where(
@@ -262,6 +273,7 @@ def resend_verification(
             )
     return MessageResponse(
         message="If an unverified password account exists, verification instructions were sent.",
+        delivery_status=DeliveryStatus.UNDISCLOSED,
         development_token=raw if raw and settings.expose_development_tokens else None,
     )
 
@@ -276,7 +288,7 @@ def login(
 ) -> AuthResponse:
     if not settings.password_auth_enabled:
         raise HTTPException(status_code=404, detail="Password authentication is disabled")
-    check_auth_rate(request, "login", limit=10)
+    check_auth_rate(request, "login", limit=10, email=str(payload.email))
     found = find_password_identity(db, normalize_email(str(payload.email)))
     if not found:
         raise HTTPException(status_code=401, detail="Invalid email or password")
@@ -395,7 +407,7 @@ def request_reset(
 ) -> MessageResponse:
     if not settings.password_auth_enabled:
         raise HTTPException(status_code=404, detail="Password authentication is disabled")
-    check_auth_rate(request, "password-reset-request", limit=5)
+    check_auth_rate(request, "password-reset-request", limit=5, email=str(payload.email))
     found = find_password_identity(db, normalize_email(str(payload.email)))
     raw: str | None = None
     if found and found[1].email_verified_at is not None and found[0].status == UserStatus.ACTIVE:
@@ -420,6 +432,7 @@ def request_reset(
         )
     return MessageResponse(
         message="If the account exists, reset instructions were sent.",
+        delivery_status=DeliveryStatus.UNDISCLOSED,
         development_token=raw if raw and settings.expose_development_tokens else None,
     )
 
@@ -625,6 +638,29 @@ def google_callback(
                 pending.consumed_at = datetime.now(UTC)
                 db.commit()
                 return _oauth_error(settings, "Google identity conflicts with this account", 409)
+            unsafe_password_identity = db.scalar(
+                select(AuthIdentity).where(
+                    AuthIdentity.user_id == user.id,
+                    AuthIdentity.provider == "password",
+                    AuthIdentity.provider_subject == email,
+                    AuthIdentity.email_verified_at.is_(None),
+                )
+            )
+            if unsafe_password_identity:
+                now = datetime.now(UTC)
+                db.execute(
+                    update(OneTimeToken)
+                    .where(
+                        OneTimeToken.user_id == user.id,
+                        OneTimeToken.purpose == "verify_email",
+                        OneTimeToken.consumed_at.is_(None),
+                    )
+                    .values(consumed_at=now)
+                )
+                # Deleting the identity cascades to its password credential and any
+                # impossible pre-verification sessions; the attacker password is not trusted.
+                db.delete(unsafe_password_identity)
+                db.flush()
             has_verified_identity = db.scalar(
                 select(AuthIdentity.id).where(
                     AuthIdentity.user_id == user.id,

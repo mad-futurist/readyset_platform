@@ -21,9 +21,12 @@ from sqlalchemy import (
     Uuid,
     text,
 )
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
+
+JSON_DOCUMENT = JSON().with_variant(JSONB(), "postgresql")
 
 
 def utcnow() -> datetime:
@@ -299,7 +302,7 @@ class EmployeeProfile(Base):
     status: Mapped[EmployeeStatus] = mapped_column(
         Enum(EmployeeStatus), default=EmployeeStatus.ACTIVE
     )
-    profile_metadata: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    profile_metadata: Mapped[dict[str, Any]] = mapped_column(JSON_DOCUMENT, default=dict)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=utcnow, onupdate=utcnow
@@ -507,7 +510,7 @@ class AuditEvent(Base):
     action: Mapped[str] = mapped_column(String(120), nullable=False, index=True)
     resource_type: Mapped[str] = mapped_column(String(100), nullable=False)
     resource_id: Mapped[uuid.UUID | None] = mapped_column(Uuid)
-    event_metadata: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    event_metadata: Mapped[dict[str, Any]] = mapped_column(JSON_DOCUMENT, default=dict)
     ip_address: Mapped[str | None] = mapped_column(String(64))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 

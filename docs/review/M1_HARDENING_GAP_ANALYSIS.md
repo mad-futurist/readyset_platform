@@ -54,6 +54,10 @@ Repository evidence on 2026-09-18:
 7. Reconcile all architecture, security, database, API, deployment, and developer documentation.
 8. Run clean-install/build, backend unit/integration, migration, generated-artifact, ignore/isolation, and production-config validation gates.
 
-## Implementation outcome
+## Historical scope note (2026-09-18)
 
-All non-deferred findings above are implemented in this change set. The two explicitly deferred items remain deferred with their documented controls: PostgreSQL RLS is not an M1 feature, and direct signed transfer/malware inspection is not falsely claimed. Local unit and web gates pass; the three PostgreSQL-specific tests are wired into CI and require either Docker/Compose or the CI PostgreSQL service for execution. The final verification record belongs in the task handoff rather than rewriting the evidence captured at analysis time.
+This report records the first M1 hardening pass. CI later reached green at baseline commit `967070c8c36f3f1fe04c42615690ea2df877e3d6`. Its earlier outcome does not mean final production hardening was complete. Malware scanning, actual content validation, an application Redis limiter, MinIO integration coverage, deployment separation, locked/non-root images, readiness/logging, and related operational work were outside that pass. Current M1.1 tracking is in [M1_FINAL_HARDENING_ANALYSIS.md](M1_FINAL_HARDENING_ANALYSIS.md).
+
+## Implementation outcome (first hardening pass only)
+
+All non-deferred findings scoped to that first pass were implemented in that change set. PostgreSQL RLS remained deferred. The historical deferral of malware inspection was superseded by M1.1; consult the current analysis and implementation status rather than treating this sentence as a present production claim.

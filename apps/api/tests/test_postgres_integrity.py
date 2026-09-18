@@ -5,7 +5,7 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
-from sqlalchemy import create_engine, func, select
+from sqlalchemy import create_engine, func, select, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, sessionmaker
 
@@ -247,3 +247,26 @@ def test_database_allows_only_one_active_owner(
         )
         with pytest.raises(IntegrityError):
             db.commit()
+
+
+def test_flexible_metadata_columns_are_jsonb(
+    postgres_factory: sessionmaker[Session],
+) -> None:
+    with postgres_factory() as db:
+        rows = db.execute(
+            text(
+                """
+                SELECT table_name, column_name, data_type
+                FROM information_schema.columns
+                WHERE table_schema = current_schema()
+                  AND (table_name, column_name) IN (
+                    ('employee_profiles', 'profile_metadata'),
+                    ('audit_events', 'event_metadata')
+                  )
+                """
+            )
+        ).all()
+    assert {(row.table_name, row.column_name, row.data_type) for row in rows} == {
+        ("employee_profiles", "profile_metadata", "jsonb"),
+        ("audit_events", "event_metadata", "jsonb"),
+    }

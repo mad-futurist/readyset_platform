@@ -5,7 +5,7 @@
 - `users`, `auth_identities`, `password_credentials`, `sessions`, `one_time_tokens`, `oauth_login_states`: authentication and account security. Verification and reset tokens share `one_time_tokens` and are distinguished by `purpose`.
 - `organizations`, `organization_memberships`, `organization_invitations`: tenant ownership and access.
 - `employee_profiles`, `teams`, `team_memberships`: organization people directory.
-- `documents`, `document_versions`, `document_user_grants`, `document_team_grants`: logical knowledge items, immutable source versions, and ACLs.
+- `documents`, `document_versions`, `document_user_grants`, `document_team_grants`: logical knowledge items, application-immutable source identities, and ACLs.
 - `audit_events`: append-oriented security/product activity.
 
 ## ER diagram
@@ -65,11 +65,11 @@ Duplicated `organization_id` on joins and versions is intentional: it enables ma
 
 ## Delete behavior
 
-Users and organizations are not hard-deleted through M1 APIs. Membership revocation changes status and immediately invalidates organization access. Deleting a team cascades team membership and team document grants; it never deletes people or documents. Documents are archived; source versions remain for audit/reproducibility. Expired sessions/tokens may be hard-deleted by maintenance. Audit events are append-only.
+Users and organizations are not hard-deleted through M1 APIs. Membership revocation changes status and immediately invalidates organization access. Deleting a team cascades team membership and team document grants; it does not delete people or documents. Documents are archived; source versions remain for audit/reproducibility. Expired sessions/tokens may be hard-deleted by maintenance. No public API updates or deletes audit events; application writes are append-oriented, while privileged database/migration roles retain modification ability.
 
 ## Migration strategy
 
-Alembic is the only production schema-change path. The published initial migration `d24151675ee0` is unchanged. Corrective revision `a42f85c9d319` deletes untrusted legacy sessions/OAuth states, adds identity/browser binding, repairs and strengthens current-version integrity, adds membership principal FKs, deduplicates legacy owner/invitation conflicts, and installs partial unique indexes. Migrations are tested from an empty PostgreSQL database in CI; destructive changes use expand/migrate/contract once production data exists.
+Alembic is the only production schema-change path. The published initial migration `d24151675ee0` is unchanged. Corrective revision `a42f85c9d319` deletes untrusted legacy sessions/OAuth states, adds identity/browser binding, repairs and strengthens current-version integrity, adds membership principal FKs, deduplicates legacy owner/invitation conflicts, and installs partial unique indexes. Additive revision `f6f5b16f7d31` converts the two flexible metadata columns from JSON to PostgreSQL JSONB. Migrations are tested from an empty PostgreSQL database in CI; destructive changes use expand/migrate/contract once production data exists.
 
 Document version creation locks the parent document row with `FOR UPDATE` before calculating `MAX(version_number)+1`, so uploads for the same document serialize. Different documents remain independent.
 

@@ -18,6 +18,22 @@ class EmailBackend(str, enum.Enum):
     SMTP = "smtp"
 
 
+class RateLimitBackend(str, enum.Enum):
+    MEMORY = "memory"
+    REDIS = "redis"
+
+
+class ScannerBackend(str, enum.Enum):
+    NOOP = "noop"
+    CLAMAV = "clamav"
+
+
+class StorageEncryption(str, enum.Enum):
+    NONE = "none"
+    AES256 = "AES256"
+    KMS = "aws:kms"
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
@@ -36,7 +52,14 @@ class Settings(BaseSettings):
     google_auth_enabled: bool = False
     invitations_enabled: bool = True
     development_token_exposure: bool = True
-    shared_rate_limit_enabled: bool = False
+    uploads_enabled: bool = True
+    rate_limit_backend: RateLimitBackend = RateLimitBackend.MEMORY
+    redis_url: str | None = None
+    rate_limit_key_prefix: str = "readyset:rate-limit"
+    scanner_backend: ScannerBackend = ScannerBackend.NOOP
+    clamav_host: str | None = None
+    clamav_port: int = 3310
+    clamav_timeout_seconds: float = 10.0
 
     google_client_id: str | None = None
     google_client_secret: str | None = None
@@ -51,10 +74,13 @@ class Settings(BaseSettings):
     smtp_starttls: bool = True
 
     storage_endpoint_url: str | None = "http://localhost:9000"
-    storage_access_key: str = "readyset"
-    storage_secret_key: str = "readyset-local-only"
+    storage_access_key: str | None = "readyset"
+    storage_secret_key: str | None = "readyset-local-only"
     storage_bucket: str = "readyset-documents"
     storage_region: str = "us-east-1"
+    storage_auto_create_bucket: bool = True
+    storage_encryption: StorageEncryption = StorageEncryption.NONE
+    storage_kms_key_id: str | None = None
     max_upload_bytes: int = 25 * 1024 * 1024
     allowed_content_types: list[str] = Field(
         default_factory=lambda: [
@@ -95,8 +121,12 @@ class Settings(BaseSettings):
             errors.append("CORS_ORIGINS must include PUBLIC_WEB_URL")
         if self.development_token_exposure:
             errors.append("DEVELOPMENT_TOKEN_EXPOSURE must be false")
-        if not self.shared_rate_limit_enabled:
-            errors.append("SHARED_RATE_LIMIT_ENABLED must confirm an external shared limiter")
+        if self.rate_limit_backend != RateLimitBackend.REDIS or not self.redis_url:
+            errors.append("RATE_LIMIT_BACKEND=redis and REDIS_URL are required")
+        if self.uploads_enabled and (
+            self.scanner_backend != ScannerBackend.CLAMAV or not self.clamav_host
+        ):
+            errors.append("SCANNER_BACKEND=clamav and CLAMAV_HOST are required when uploads are enabled")
         if self.google_auth_enabled and (
             not self.google_client_id or not self.google_client_secret
         ):
@@ -124,6 +154,14 @@ class Settings(BaseSettings):
             or self.storage_secret_key in forbidden_secrets
         ):
             errors.append("local/default storage credentials are forbidden")
+        if bool(self.storage_access_key) != bool(self.storage_secret_key):
+            errors.append("storage access and secret keys must be configured together")
+        if self.storage_auto_create_bucket:
+            errors.append("STORAGE_AUTO_CREATE_BUCKET must be false")
+        if self.storage_encryption == StorageEncryption.NONE:
+            errors.append("STORAGE_ENCRYPTION must be AES256 or aws:kms")
+        if self.storage_encryption == StorageEncryption.KMS and not self.storage_kms_key_id:
+            errors.append("STORAGE_KMS_KEY_ID is required for aws:kms")
         storage = urlparse(self.storage_endpoint_url or "")
         if self.storage_endpoint_url and storage.scheme != "https":
             errors.append("STORAGE_ENDPOINT_URL must use HTTPS when explicitly configured")

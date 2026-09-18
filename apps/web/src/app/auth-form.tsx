@@ -15,6 +15,12 @@ export function AuthForm({ mode }: { mode: "signin" | "signup" }) {
   const router = useRouter();
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [email, setEmail] = useState("");
+  const resend = useMutation({
+    mutationFn: api.resendVerification,
+    onSuccess: (result) => setNotice(result.message),
+    onError: (cause: Error) => setError(cause.message),
+  });
   const mutation = useMutation<AuthMutationResult, Error, FormData>({
     mutationFn: async (form: FormData): Promise<AuthMutationResult> => {
       if (mode === "signin") {
@@ -66,12 +72,13 @@ export function AuthForm({ mode }: { mode: "signin" | "signup" }) {
           }}
         >
           {mode === "signup" && <label>Name<input name="name" autoComplete="name" required /></label>}
-          <label>Email<input name="email" type="email" autoComplete="email" required /></label>
+          <label>Email<input name="email" type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} /></label>
           <label>Password<input name="password" type="password" minLength={12} autoComplete={mode === "signin" ? "current-password" : "new-password"} required /></label>
           {error && <p className="error">{error}</p>}
           {notice && <p role="status">{notice}</p>}
           <button className="button" disabled={mutation.isPending}>{mutation.isPending ? "Working…" : mode === "signin" ? "Sign in" : "Create account"}</button>
         </form>
+        {mode === "signin" && <p className="switch"><Link href="/forgot-password">Forgot password?</Link> · <button className="link-button" type="button" disabled={!email || resend.isPending} onClick={() => resend.mutate(email)}>Resend verification</button></p>}
         <p className="switch">{mode === "signin" ? "New to ReadySet? " : "Already have an account? "}<Link href={mode === "signin" ? "/signup" : "/signin"}>{mode === "signin" ? "Create account" : "Sign in"}</Link></p>
       </section>
     </main>

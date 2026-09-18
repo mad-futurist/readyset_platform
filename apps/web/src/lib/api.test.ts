@@ -59,4 +59,39 @@ describe("API transport security context", () => {
       message: "Insufficient permission",
     });
   });
+
+  it("sends role changes with tenant and CSRF context", async () => {
+    fetchMock.mockResolvedValue(
+      new Response(JSON.stringify({ id: "membership", role: "MANAGER" }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+    await api.changeMemberRole("org-admin", "membership", "MANAGER");
+    const [url, init] = fetchMock.mock.calls[0];
+    const headers = new Headers(init?.headers);
+    expect(url).toBe("/api/v1/organizations/current/members/membership");
+    expect(init?.method).toBe("PATCH");
+    expect(headers.get("X-ReadySet-Organization")).toBe("org-admin");
+    expect(headers.get("X-CSRF-Token")).toBe("csrf-value");
+    expect(init?.body).toBe(JSON.stringify({ role: "MANAGER" }));
+  });
+
+  it("uploads a new document version as multipart with tenant context", async () => {
+    fetchMock.mockResolvedValue(
+      new Response(JSON.stringify({ id: "version" }), {
+        status: 201,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+    const form = new FormData();
+    form.set("file", new File(["new"], "new.txt", { type: "text/plain" }));
+    await api.uploadVersion("org-version", "document", form);
+    const [url, init] = fetchMock.mock.calls[0];
+    const headers = new Headers(init?.headers);
+    expect(url).toBe("/api/v1/documents/document/versions");
+    expect(init?.body).toBe(form);
+    expect(headers.get("Content-Type")).toBeNull();
+    expect(headers.get("X-ReadySet-Organization")).toBe("org-version");
+  });
 });

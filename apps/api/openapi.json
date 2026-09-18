@@ -176,6 +176,15 @@
         "title": "Body_upload_version_api_v1_documents__document_id__versions_post",
         "type": "object"
       },
+      "DeliveryStatus": {
+        "enum": [
+          "SENT",
+          "FAILED",
+          "UNDISCLOSED"
+        ],
+        "title": "DeliveryStatus",
+        "type": "string"
+      },
       "DocumentGrantRead": {
         "properties": {
           "team_ids": {
@@ -943,6 +952,10 @@
       },
       "InvitationRead": {
         "properties": {
+          "delivery_status": {
+            "$ref": "#/components/schemas/DeliveryStatus",
+            "default": "UNDISCLOSED"
+          },
           "development_token": {
             "anyOf": [
               {
@@ -1088,6 +1101,10 @@
       },
       "MessageResponse": {
         "properties": {
+          "delivery_status": {
+            "$ref": "#/components/schemas/DeliveryStatus",
+            "default": "UNDISCLOSED"
+          },
           "development_token": {
             "anyOf": [
               {
@@ -1385,6 +1402,9 @@
       },
       "RegistrationResponse": {
         "properties": {
+          "delivery_status": {
+            "$ref": "#/components/schemas/DeliveryStatus"
+          },
           "development_verification_token": {
             "anyOf": [
               {
@@ -1402,7 +1422,8 @@
           }
         },
         "required": [
-          "message"
+          "message",
+          "delivery_status"
         ],
         "title": "RegistrationResponse",
         "type": "object"
@@ -2908,6 +2929,57 @@
       }
     },
     "/api/v1/organizations/current/invitations": {
+      "get": {
+        "operationId": "list_pending_invitations_api_v1_organizations_current_invitations_get",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-ReadySet-Organization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "X-Readyset-Organization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/InvitationRead"
+                  },
+                  "title": "Response List Pending Invitations Api V1 Organizations Current Invitations Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Pending Invitations",
+        "tags": [
+          "organizations"
+        ]
+      },
       "post": {
         "operationId": "invite_member_api_v1_organizations_current_invitations_post",
         "parameters": [
@@ -4031,9 +4103,9 @@
         ]
       }
     },
-    "/healthz": {
+    "/livez": {
       "get": {
-        "operationId": "health_healthz_get",
+        "operationId": "live_livez_get",
         "responses": {
           "200": {
             "content": {
@@ -4042,7 +4114,7 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "title": "Response Health Healthz Get",
+                  "title": "Response Live Livez Get",
                   "type": "object"
                 }
               }
@@ -4050,7 +4122,26 @@
             "description": "Successful Response"
           }
         },
-        "summary": "Health",
+        "summary": "Live",
+        "tags": [
+          "system"
+        ]
+      }
+    },
+    "/readyz": {
+      "get": {
+        "operationId": "ready_readyz_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Ready",
         "tags": [
           "system"
         ]

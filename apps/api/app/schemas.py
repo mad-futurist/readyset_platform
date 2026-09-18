@@ -1,3 +1,4 @@
+import enum
 import uuid
 from datetime import date, datetime
 from typing import Any, ClassVar
@@ -71,13 +72,21 @@ class AuthResponse(BaseModel):
     csrf_token: str
 
 
+class DeliveryStatus(str, enum.Enum):
+    SENT = "SENT"
+    FAILED = "FAILED"
+    UNDISCLOSED = "UNDISCLOSED"
+
+
 class RegistrationResponse(BaseModel):
     message: str
+    delivery_status: DeliveryStatus
     development_verification_token: str | None = None
 
 
 class MessageResponse(BaseModel):
     message: str
+    delivery_status: DeliveryStatus = DeliveryStatus.UNDISCLOSED
     development_token: str | None = None
 
 
@@ -103,6 +112,7 @@ class InvitationRead(ORMModel):
     status: str
     expires_at: datetime
     development_token: str | None = None
+    delivery_status: DeliveryStatus = DeliveryStatus.UNDISCLOSED
 
 
 class MembershipRoleUpdate(BaseModel):

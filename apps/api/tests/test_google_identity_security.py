@@ -9,7 +9,15 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.config import Settings, get_settings
-from app.models import AuthIdentity, OAuthLoginState, SessionRecord, User, UserStatus
+from app.models import (
+    AuthIdentity,
+    OAuthLoginState,
+    OneTimeToken,
+    PasswordCredential,
+    SessionRecord,
+    User,
+    UserStatus,
+)
 from app.security import hash_token
 
 
@@ -86,7 +94,8 @@ def test_unverified_password_prehijack_does_not_survive_google_link(
     client: TestClient, db_factory: sessionmaker[Session], monkeypatch
 ) -> None:
     registration = register(client, "victim@example.com", "Attacker supplied", authenticate=False)
-    assert registration["development_verification_token"]
+    old_token = registration["development_verification_token"]
+    assert old_token
     assert client.get("/api/v1/auth/me").status_code == 401
     assert (
         client.post(
@@ -112,6 +121,29 @@ def test_unverified_password_prehijack_does_not_survive_google_link(
         assert session
         identity = db.get(AuthIdentity, session.auth_identity_id)
         assert identity and identity.provider == "google"
+        assert db.scalar(
+            select(AuthIdentity).where(
+                AuthIdentity.user_id == identity.user_id,
+                AuthIdentity.provider == "password",
+            )
+        ) is None
+        assert db.scalar(select(func.count(PasswordCredential.auth_identity_id))) == 0
+        tokens = list(
+            db.scalars(
+                select(OneTimeToken).where(
+                    OneTimeToken.user_id == identity.user_id,
+                    OneTimeToken.purpose == "verify_email",
+                )
+            )
+        )
+        assert tokens and all(token.consumed_at is not None for token in tokens)
+
+    assert client.post("/api/v1/auth/verify-email", json={"token": old_token}).status_code == 400
+    resend = client.post(
+        "/api/v1/auth/verification/resend", json={"email": "victim@example.com"}
+    )
+    assert resend.status_code == 202
+    assert resend.json()["development_token"] is None
 
     assert client.post("/api/v1/auth/logout", headers=auth_headers(client)).status_code == 204
     assert (
@@ -149,6 +181,14 @@ def test_verified_password_user_links_google_and_repeat_login_is_idempotent(
             )
             == 1
         )
+        password_identity = db.scalar(
+            select(AuthIdentity).where(
+                AuthIdentity.user_id == uuid.UUID(user_id),
+                AuthIdentity.provider == "password",
+            )
+        )
+        assert password_identity and password_identity.email_verified_at is not None
+        assert db.get(PasswordCredential, password_identity.id)
 
 
 def test_oauth_binding_replay_unverified_claims_and_subject_conflict_fail_closed(

@@ -1,3 +1,4 @@
+import logging
 import uuid
 from datetime import UTC, datetime, timedelta
 from urllib.parse import urlencode
@@ -21,6 +22,7 @@ from app.models import (
 )
 from app.policy import Capability, require_capability
 from app.schemas import (
+    DeliveryStatus,
     InvitationCreate,
     InvitationRead,
     MembershipRead,
@@ -34,6 +36,7 @@ from app.schemas import (
 from app.security import hash_token, normalize_email, random_token, slugify
 
 router = APIRouter(prefix="/organizations", tags=["organizations"])
+logger = logging.getLogger("readyset.email")
 
 
 @router.get("", response_model=list[MembershipRead])
@@ -117,6 +120,21 @@ def list_members(db: Db, context: OrgContext) -> list[OrganizationMembership]:
     )
 
 
+@router.get("/current/invitations", response_model=list[InvitationRead])
+def list_pending_invitations(db: Db, context: OrgContext) -> list[OrganizationInvitation]:
+    require_capability(context, Capability.MANAGE_MEMBERS)
+    return list(
+        db.scalars(
+            select(OrganizationInvitation)
+            .where(
+                OrganizationInvitation.organization_id == context.organization.id,
+                OrganizationInvitation.status == InvitationStatus.PENDING,
+            )
+            .order_by(OrganizationInvitation.created_at, OrganizationInvitation.id)
+        )
+    )
+
+
 @router.post("/current/invitations", response_model=InvitationRead, status_code=201)
 def invite_member(
     payload: InvitationCreate,
@@ -188,6 +206,7 @@ def invite_member(
         raise HTTPException(
             status_code=409, detail="A pending invitation for this email already exists"
         ) from exc
+    delivery_status = DeliveryStatus.SENT
     try:
         sender.send(
             invitation.email,
@@ -195,12 +214,12 @@ def invite_member(
             f"Accept your ReadySet invitation: {settings.public_web_url.rstrip('/')}/"
             f"accept-invitation?{urlencode({'token': raw})}",
         )
-    except Exception as exc:
-        raise HTTPException(
-            status_code=503, detail="Email delivery is temporarily unavailable"
-        ) from exc
+    except Exception:
+        logger.exception("Synchronous invitation delivery failed invitation_id=%s", invitation.id)
+        delivery_status = DeliveryStatus.FAILED
     result = InvitationRead.model_validate(invitation)
     result.development_token = raw if settings.expose_development_tokens else None
+    result.delivery_status = delivery_status
     return result
 
 

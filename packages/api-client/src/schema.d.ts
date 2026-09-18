@@ -323,7 +323,8 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        /** List Pending Invitations */
+        get: operations["list_pending_invitations_api_v1_organizations_current_invitations_get"];
         put?: never;
         /** Invite Member */
         post: operations["invite_member_api_v1_organizations_current_invitations_post"];
@@ -508,15 +509,32 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/healthz": {
+    "/livez": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Health */
-        get: operations["health_healthz_get"];
+        /** Live */
+        get: operations["live_livez_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/readyz": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Ready */
+        get: operations["ready_readyz_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -584,6 +602,11 @@ export interface components {
             /** File */
             file: string;
         };
+        /**
+         * DeliveryStatus
+         * @enum {string}
+         */
+        DeliveryStatus: "SENT" | "FAILED" | "UNDISCLOSED";
         /** DocumentGrantRead */
         DocumentGrantRead: {
             /** Team Ids */
@@ -822,6 +845,8 @@ export interface components {
         };
         /** InvitationRead */
         InvitationRead: {
+            /** @default UNDISCLOSED */
+            delivery_status: components["schemas"]["DeliveryStatus"];
             /** Development Token */
             development_token?: string | null;
             /**
@@ -891,6 +916,8 @@ export interface components {
         MembershipStatus: "ACTIVE" | "REVOKED";
         /** MessageResponse */
         MessageResponse: {
+            /** @default UNDISCLOSED */
+            delivery_status: components["schemas"]["DeliveryStatus"];
             /** Development Token */
             development_token?: string | null;
             /** Message */
@@ -1006,6 +1033,7 @@ export interface components {
         };
         /** RegistrationResponse */
         RegistrationResponse: {
+            delivery_status: components["schemas"]["DeliveryStatus"];
             /** Development Verification Token */
             development_verification_token?: string | null;
             /** Message */
@@ -1867,6 +1895,37 @@ export interface operations {
             };
         };
     };
+    list_pending_invitations_api_v1_organizations_current_invitations_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InvitationRead"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     invite_member_api_v1_organizations_current_invitations_post: {
         parameters: {
             query?: never;
@@ -2420,7 +2479,7 @@ export interface operations {
             };
         };
     };
-    health_healthz_get: {
+    live_livez_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -2438,6 +2497,26 @@ export interface operations {
                     "application/json": {
                         [key: string]: string;
                     };
+                };
+            };
+        };
+    };
+    ready_readyz_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
         };

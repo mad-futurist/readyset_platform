@@ -77,6 +77,16 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ token } satisfies Schemas["TokenRequest"]),
     }),
+  resendVerification: (email: string) =>
+    request<Schemas["MessageResponse"]>("/auth/verification/resend", {
+      method: "POST",
+      body: JSON.stringify({ email } satisfies Schemas["PasswordResetRequest"]),
+    }),
+  requestPasswordReset: (email: string) =>
+    request<Schemas["MessageResponse"]>("/auth/password-reset/request", {
+      method: "POST",
+      body: JSON.stringify({ email } satisfies Schemas["PasswordResetRequest"]),
+    }),
   confirmPasswordReset: (token: string, password: string) =>
     request<void>("/auth/password-reset/confirm", {
       method: "POST",
@@ -116,6 +126,40 @@ export const api = {
       },
       organizationId,
     ),
+  pendingInvitations: (organizationId: string) =>
+    request<Schemas["InvitationRead"][]>(
+      "/organizations/current/invitations",
+      {},
+      organizationId,
+    ),
+  revokeInvitation: (organizationId: string, invitationId: string) =>
+    request<void>(
+      `/organizations/current/invitations/${invitationId}`,
+      { method: "DELETE" },
+      organizationId,
+    ),
+  changeMemberRole: (
+    organizationId: string,
+    membershipId: string,
+    role: Exclude<Schemas["OrganizationRole"], "OWNER">,
+  ) =>
+    request<Schemas["MembershipRead"]>(
+      `/organizations/current/members/${membershipId}`,
+      { method: "PATCH", body: JSON.stringify({ role }) },
+      organizationId,
+    ),
+  revokeMember: (organizationId: string, membershipId: string) =>
+    request<void>(
+      `/organizations/current/members/${membershipId}`,
+      { method: "DELETE" },
+      organizationId,
+    ),
+  transferOwnership: (organizationId: string, membershipId: string) =>
+    request<Schemas["MembershipRead"]>(
+      "/organizations/current/ownership-transfer",
+      { method: "POST", body: JSON.stringify({ membership_id: membershipId }) },
+      organizationId,
+    ),
   acceptInvitation: (token: string) =>
     request<Schemas["MembershipRead"]>("/organizations/invitations/accept", {
       method: "POST",
@@ -149,6 +193,30 @@ export const api = {
     request<Schemas["DocumentRead"]>(
       "/documents",
       { method: "POST", body: form },
+      organizationId,
+    ),
+  document: (organizationId: string, documentId: string) =>
+    request<Schemas["DocumentRead"]>(`/documents/${documentId}`, {}, organizationId),
+  uploadVersion: (organizationId: string, documentId: string, form: FormData) =>
+    request<Schemas["DocumentVersionRead"]>(
+      `/documents/${documentId}/versions`,
+      { method: "POST", body: form },
+      organizationId,
+    ),
+  grants: (organizationId: string, documentId: string) =>
+    request<Schemas["DocumentGrantRead"]>(
+      `/documents/${documentId}/access`,
+      {},
+      organizationId,
+    ),
+  replaceGrants: (
+    organizationId: string,
+    documentId: string,
+    input: Schemas["DocumentGrantUpdate"],
+  ) =>
+    request<Schemas["DocumentGrantRead"]>(
+      `/documents/${documentId}/access`,
+      { method: "PUT", body: JSON.stringify(input) },
       organizationId,
     ),
   versions: (organizationId: string, documentId: string) =>

@@ -8,7 +8,7 @@ services:
     ports: ["5432:5432"]
     volumes: ["readyset_postgres:/var/lib/postgresql/data"]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U readyset"]
+      test: ["CMD-SHELL", "pg_isready -U readyset -d readyset"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -27,9 +27,19 @@ services:
       timeout: 5s
       retries: 10
 
-  api:
+  redis:
+    image: redis:8-alpine
+    command: redis-server --save "" --appendonly no
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  migrate:
     build: ./apps/api
-    environment:
+    command: ["alembic", "upgrade", "head"]
+    environment: &api-environment
       ENVIRONMENT: development
       DATABASE_URL: postgresql+psycopg://readyset:readyset@postgres:5432/readyset
       PUBLIC_WEB_URL: http://localhost:3000
@@ -39,17 +49,27 @@ services:
       INVITATIONS_ENABLED: "true"
       DEVELOPMENT_TOKEN_EXPOSURE: "true"
       EMAIL_BACKEND: capture
+      RATE_LIMIT_BACKEND: redis
+      REDIS_URL: redis://redis:6379/0
       STORAGE_ENDPOINT_URL: http://minio:9000
       STORAGE_ACCESS_KEY: readyset
       STORAGE_SECRET_KEY: readyset-local-only
       STORAGE_BUCKET: readyset-documents
+      STORAGE_AUTO_CREATE_BUCKET: "true"
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
       GOOGLE_REDIRECT_URI: http://localhost:3000/api/v1/auth/google/callback
-    ports: ["8000:8000"]
     depends_on:
       postgres: { condition: service_healthy }
+
+  api:
+    build: ./apps/api
+    environment: *api-environment
+    ports: ["8000:8000"]
+    depends_on:
+      migrate: { condition: service_completed_successfully }
       minio: { condition: service_healthy }
+      redis: { condition: service_healthy }
 
   web:
     build:

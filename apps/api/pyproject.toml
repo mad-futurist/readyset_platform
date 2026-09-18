@@ -18,6 +18,7 @@ dependencies = [
   "pydantic-settings>=2.6,<3",
   "python-multipart>=0.0.12,<1",
   "requests>=2.32,<3",
+  "redis>=5.2,<6",
   "sqlalchemy>=2.0.36,<3",
   "uvicorn[standard]>=0.32,<1",
 ]
@@ -25,7 +26,8 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "mypy>=1.13,<2",
-  "pytest>=8.3,<9",
+  "pip-audit>=2.9,<3",
+  "pytest>=9.0.3,<10",
   "pytest-cov>=6,<7",
   "ruff>=0.8,<1",
 ]
@@ -51,4 +53,8 @@ exclude = ["alembic"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q --disable-warnings --strict-markers"
-markers = ["postgres: requires a migrated PostgreSQL database"]
+markers = [
+  "postgres: requires a migrated PostgreSQL database",
+  "storage: requires an S3-compatible object store",
+  "redis: requires a Redis server",
+]

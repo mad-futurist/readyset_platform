@@ -57,6 +57,7 @@ def get_current_user(
         )
     session, user, identity = row
     session.last_seen_at = datetime.now(UTC)
+    request.state.user_id = user.id
     return AuthenticatedUser(user=user, session_id=session.id, auth_identity_id=identity.id)
 
 
@@ -87,6 +88,7 @@ Csrf = Annotated[None, Depends(require_csrf)]
 
 
 def get_organization_context(
+    request: Request,
     db: Db,
     current: CurrentUser,
     organization_header: Annotated[str | None, Header(alias="X-ReadySet-Organization")] = None,
@@ -111,6 +113,7 @@ def get_organization_context(
     if not organization_header and len(rows) != 1:
         raise HTTPException(status_code=400, detail="X-ReadySet-Organization is required")
     membership, organization = rows[0]
+    request.state.organization_id = organization.id
     return OrganizationContext(user=current.user, organization=organization, membership=membership)
 
 

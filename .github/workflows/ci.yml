@@ -16,7 +16,13 @@ jobs:
           POSTGRES_PASSWORD: readyset
         ports: ["5432:5432"]
         options: >-
-          --health-cmd "pg_isready -U readyset"
+          --health-cmd "pg_isready -U readyset -d readyset_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+      redis:
+        image: redis:8-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
           --health-interval 5s --health-timeout 5s --health-retries 10
     defaults:
       run:
@@ -25,31 +31,79 @@ jobs:
       ENVIRONMENT: test
       DATABASE_URL: postgresql+psycopg://readyset:readyset@localhost:5432/readyset_test
       RUN_POSTGRES_TESTS: "1"
+      REDIS_TEST_URL: redis://localhost:6379/1
+      S3_TEST_ENDPOINT_URL: http://localhost:9000
+      S3_TEST_ACCESS_KEY: readyset
+      S3_TEST_SECRET_KEY: readyset-local-only
+      S3_TEST_BUCKET: readyset-ci
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
-        with: { python-version: "3.13" }
-      - run: pip install -e ".[dev]"
-      - run: ruff check app tests scripts
-      - run: mypy app
-      - run: alembic upgrade head
-      - run: alembic check
-      - run: pytest --cov=app --cov-report=term-missing
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        with: { version: "0.12.16", python-version: "3.13" }
+      - run: uv sync --frozen --extra dev
+      - name: Start MinIO
+        run: >-
+          docker run -d --name readyset-minio -p 9000:9000
+          -e MINIO_ROOT_USER=readyset -e MINIO_ROOT_PASSWORD=readyset-local-only
+          minio/minio:RELEASE.2025-07-23T15-54-02Z server /data
+      - name: Wait for MinIO
+        run: |
+          for attempt in {1..30}; do
+            curl --fail --silent http://localhost:9000/minio/health/ready && exit 0
+            sleep 1
+          done
+          docker logs readyset-minio
+          exit 1
+      - run: uv run --frozen ruff check app tests scripts
+      - run: uv run --frozen mypy app
+      - run: uv run --frozen alembic upgrade head
+      - run: uv run --frozen alembic check
+      - run: uv run --frozen pytest --cov=app --cov-report=term-missing
 
   web:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
-        with: { python-version: "3.13" }
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        with: { version: "0.12.16", python-version: "3.13" }
       - uses: actions/setup-node@v5
         with: { node-version: 22, cache: npm }
-      - run: pip install -e ./apps/api
+      - run: uv sync --project apps/api --frozen
       - run: npm ci
-      - run: python apps/api/scripts/export_openapi.py
+      - run: uv run --project apps/api --frozen python apps/api/scripts/export_openapi.py
       - run: npm run generate:api-client
       - run: git diff --exit-code -- apps/api/openapi.json packages/api-client/src/schema.d.ts
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+
+  containers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: docker build -t readyset-api:ci apps/api
+      - run: docker build -t readyset-web:ci -f apps/web/Dockerfile .
+      - name: Verify non-root runtime users
+        run: |
+          test "$(docker image inspect --format '{{.Config.User}}' readyset-api:ci)" = "readyset"
+          test "$(docker image inspect --format '{{.Config.User}}' readyset-web:ci)" = "node"
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with: { fetch-depth: 0 }
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        with: { version: "0.12.16", python-version: "3.13" }
+      - uses: actions/setup-node@v5
+        with: { node-version: 22, cache: npm }
+      - run: uv sync --project apps/api --frozen --extra dev
+      - run: uv run --project apps/api --frozen pip-audit
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - name: Scan committed history for secrets
+        run: >-
+          docker run --rm -v "$PWD:/repo"
+          ghcr.io/gitleaks/gitleaks:v8.30.1@sha256:b109bc5f8f76a38196a3e413704fc5b9e3c32360bce4e4b603bd6f45b3721dbb
+          detect --source=/repo --redact --no-banner

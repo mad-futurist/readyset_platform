@@ -7,6 +7,11 @@ from sqlalchemy.orm import Session, sessionmaker
 from app.models import AuditEvent, AuthIdentity, Organization, SessionRecord
 
 
+class FailingEmailSender:
+    def send(self, recipient: str, subject: str, body: str) -> None:
+        raise ConnectionError("SMTP is down")
+
+
 def test_register_login_logout_and_password_is_not_returned(
     client: TestClient, db_factory: sessionmaker[Session]
 ) -> None:
@@ -36,6 +41,46 @@ def test_mutations_require_csrf(client: TestClient) -> None:
     register(client, "csrf@example.com")
     response = client.post("/api/v1/organizations", json={"name": "No CSRF"})
     assert response.status_code == 403
+
+
+def test_committed_registration_reports_delivery_failure_without_rollback(
+    client: TestClient,
+) -> None:
+    client.app.state.email_sender = FailingEmailSender()
+    response = client.post(
+        "/api/v1/auth/register",
+        json={
+            "email": "mail-failure@example.com",
+            "password": "correct horse battery staple",
+            "display_name": "Mail Failure",
+        },
+    )
+    assert response.status_code == 202
+    assert response.json()["delivery_status"] == "FAILED"
+    token = response.json()["development_verification_token"]
+    assert token
+    assert client.post("/api/v1/auth/verify-email", json={"token": token}).status_code == 204
+
+
+def test_committed_invitation_reports_delivery_failure_and_remains_reissuable(
+    client: TestClient,
+) -> None:
+    register(client, "mail-owner@example.com")
+    org = create_org(client, "Mail semantics")
+    client.app.state.email_sender = FailingEmailSender()
+    response = client.post(
+        "/api/v1/organizations/current/invitations",
+        json={"email": "pending@example.com", "role": "MEMBER"},
+        headers=auth_headers(client, org["id"]),
+    )
+    assert response.status_code == 201
+    assert response.json()["delivery_status"] == "FAILED"
+    pending = client.get(
+        "/api/v1/organizations/current/invitations",
+        headers={"X-ReadySet-Organization": org["id"]},
+    )
+    assert pending.status_code == 200
+    assert [item["id"] for item in pending.json()] == [response.json()["id"]]
 
 
 def test_verification_resend_rotates_token_and_delivers_email(client: TestClient) -> None:
