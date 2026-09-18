@@ -73,47 +73,63 @@ def upgrade() -> None:
 
     # Tenant-owned user principals must have a membership row. Membership status remains policy.
     constraints = (
-        ("fk_employee_membership", "employee_profiles", ["organization_id", "user_id"]),
-        ("fk_document_owner_membership", "documents", ["organization_id", "owner_user_id"]),
+        (
+            "fk_employee_membership",
+            "employee_profiles",
+            ["organization_id", "user_id"],
+            "RESTRICT",
+        ),
+        (
+            "fk_document_owner_membership",
+            "documents",
+            ["organization_id", "owner_user_id"],
+            "RESTRICT",
+        ),
         (
             "fk_document_version_creator_membership",
             "document_versions",
             ["organization_id", "created_by_user_id"],
+            "RESTRICT",
         ),
         (
             "fk_document_user_grant_principal_membership",
             "document_user_grants",
             ["organization_id", "user_id"],
+            "CASCADE",
         ),
         (
             "fk_document_user_grant_creator_membership",
             "document_user_grants",
             ["organization_id", "created_by_user_id"],
+            "RESTRICT",
         ),
         (
             "fk_document_team_grant_creator_membership",
             "document_team_grants",
             ["organization_id", "created_by_user_id"],
+            "RESTRICT",
         ),
         (
             "fk_invitation_inviter_membership",
             "organization_invitations",
             ["organization_id", "invited_by_user_id"],
+            "RESTRICT",
         ),
         (
             "fk_invitation_acceptor_membership",
             "organization_invitations",
             ["organization_id", "accepted_by_user_id"],
+            "RESTRICT",
         ),
     )
-    for name, table, columns in constraints:
+    for name, table, columns, ondelete in constraints:
         op.create_foreign_key(
             name,
             table,
             "organization_memberships",
             columns,
             ["organization_id", "user_id"],
-            ondelete="RESTRICT",
+            ondelete=ondelete,
         )
 
     op.execute(
