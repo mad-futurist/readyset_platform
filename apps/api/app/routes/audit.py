@@ -9,8 +9,10 @@ from app.schemas import AuditEventRead, Page
 router = APIRouter(prefix="/audit-events", tags=["audit"])
 
 
-@router.get("", response_model=Page)
-def list_audit_events(db: Db, context: OrgContext, page: int = 1, page_size: int = 50) -> Page:
+@router.get("", response_model=Page[AuditEventRead])
+def list_audit_events(
+    db: Db, context: OrgContext, page: int = 1, page_size: int = 50
+) -> Page[AuditEventRead]:
     require_capability(context, Capability.VIEW_AUDIT)
     if page < 1 or page_size < 1 or page_size > 100:
         raise HTTPException(status_code=422, detail="Invalid pagination")
@@ -31,7 +33,7 @@ def list_audit_events(db: Db, context: OrgContext, page: int = 1, page_size: int
             .limit(page_size)
         )
     )
-    return Page(
+    return Page[AuditEventRead](
         items=[AuditEventRead.model_validate(event) for event in events],
         page=page,
         page_size=page_size,

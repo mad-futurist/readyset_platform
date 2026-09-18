@@ -164,8 +164,10 @@ def upload_document(
     return document
 
 
-@router.get("", response_model=Page)
-def list_documents(db: Db, context: OrgContext, page: int = 1, page_size: int = 50) -> Page:
+@router.get("", response_model=Page[DocumentRead])
+def list_documents(
+    db: Db, context: OrgContext, page: int = 1, page_size: int = 50
+) -> Page[DocumentRead]:
     if page < 1 or page_size < 1 or page_size > 100:
         raise HTTPException(status_code=422, detail="Invalid pagination")
     predicate = document_access_predicate(context)
@@ -186,7 +188,7 @@ def list_documents(db: Db, context: OrgContext, page: int = 1, page_size: int = 
             .limit(page_size)
         )
     )
-    return Page(
+    return Page[DocumentRead](
         items=[DocumentRead.model_validate(item) for item in items],
         page=page,
         page_size=page_size,
@@ -244,6 +246,18 @@ def upload_version(
     storage: ObjectStorage = Depends(get_storage),
 ) -> DocumentVersion:
     document = _managed_document(db, context, document_id)
+    locked_document = db.scalar(
+        select(Document)
+        .where(
+            Document.id == document.id,
+            Document.organization_id == context.organization.id,
+            Document.status == DocumentStatus.ACTIVE,
+        )
+        .with_for_update()
+    )
+    if not locked_document:
+        raise HTTPException(status_code=404, detail="Document not found")
+    document = locked_document
     number = (
         db.scalar(
             select(func.max(DocumentVersion.version_number)).where(

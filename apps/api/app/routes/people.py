@@ -1,7 +1,7 @@
 import uuid
 
 from fastapi import APIRouter, HTTPException
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 
 from app.audit import record_audit
@@ -19,6 +19,7 @@ from app.schemas import (
     EmployeeProfileCreate,
     EmployeeProfileRead,
     EmployeeProfileUpdate,
+    Page,
     TeamCreate,
     TeamMemberCreate,
     TeamRead,
@@ -60,14 +61,34 @@ def _validate_links(
         raise HTTPException(status_code=422, detail="Manager profile is not in this organization")
 
 
-@router.get("/people", response_model=list[EmployeeProfileRead])
-def list_people(db: Db, context: OrgContext) -> list[EmployeeProfile]:
-    return list(
+@router.get("/people", response_model=Page[EmployeeProfileRead])
+def list_people(
+    db: Db, context: OrgContext, page: int = 1, page_size: int = 50
+) -> Page[EmployeeProfileRead]:
+    if page < 1 or page_size < 1 or page_size > 100:
+        raise HTTPException(status_code=422, detail="Invalid pagination")
+    total = (
+        db.scalar(
+            select(func.count(EmployeeProfile.id)).where(
+                EmployeeProfile.organization_id == context.organization.id
+            )
+        )
+        or 0
+    )
+    items = list(
         db.scalars(
             select(EmployeeProfile)
             .where(EmployeeProfile.organization_id == context.organization.id)
-            .order_by(EmployeeProfile.display_name)
+            .order_by(EmployeeProfile.display_name, EmployeeProfile.id)
+            .offset((page - 1) * page_size)
+            .limit(page_size)
         )
+    )
+    return Page[EmployeeProfileRead](
+        items=[EmployeeProfileRead.model_validate(item) for item in items],
+        page=page,
+        page_size=page_size,
+        total=total,
     )
 
 
@@ -145,12 +166,30 @@ def update_profile(
     return profile
 
 
-@router.get("/teams", response_model=list[TeamRead])
-def list_teams(db: Db, context: OrgContext) -> list[Team]:
-    return list(
-        db.scalars(
-            select(Team).where(Team.organization_id == context.organization.id).order_by(Team.name)
+@router.get("/teams", response_model=Page[TeamRead])
+def list_teams(db: Db, context: OrgContext, page: int = 1, page_size: int = 50) -> Page[TeamRead]:
+    if page < 1 or page_size < 1 or page_size > 100:
+        raise HTTPException(status_code=422, detail="Invalid pagination")
+    total = (
+        db.scalar(
+            select(func.count(Team.id)).where(Team.organization_id == context.organization.id)
         )
+        or 0
+    )
+    items = list(
+        db.scalars(
+            select(Team)
+            .where(Team.organization_id == context.organization.id)
+            .order_by(Team.name, Team.id)
+            .offset((page - 1) * page_size)
+            .limit(page_size)
+        )
+    )
+    return Page[TeamRead](
+        items=[TeamRead.model_validate(item) for item in items],
+        page=page,
+        page_size=page_size,
+        total=total,
     )
 
 
@@ -203,7 +242,7 @@ def list_team_members(team_id: uuid.UUID, db: Db, context: OrgContext) -> list[E
                 TeamMembership.organization_id == context.organization.id,
                 TeamMembership.team_id == team_id,
             )
-            .order_by(EmployeeProfile.display_name)
+            .order_by(EmployeeProfile.display_name, EmployeeProfile.id)
         )
     )
 

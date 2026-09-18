@@ -4,6 +4,7 @@
   "workspaces": ["apps/web", "packages/api-client"],
   "scripts": {
     "build": "npm run build --workspace @readyset/web",
+    "export:openapi": "python apps/api/scripts/export_openapi.py",
     "lint": "npm run lint --workspace @readyset/web",
     "typecheck": "npm run typecheck --workspace @readyset/web",
     "test": "npm run test --workspace @readyset/web",

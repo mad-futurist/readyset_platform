@@ -6,6 +6,7 @@ from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import StaticPool
 
+from app.config import get_settings
 from app.database import Base, get_db
 from app.main import create_app
 from app.storage import MemoryObjectStorage
@@ -32,7 +33,12 @@ def db_factory() -> Generator[sessionmaker[Session], None, None]:
 
 
 @pytest.fixture
-def client(db_factory: sessionmaker[Session]) -> Generator[TestClient, None, None]:
+def client(
+    db_factory: sessionmaker[Session], monkeypatch: pytest.MonkeyPatch
+) -> Generator[TestClient, None, None]:
+    monkeypatch.setenv("ENVIRONMENT", "test")
+    monkeypatch.setenv("DEVELOPMENT_TOKEN_EXPOSURE", "true")
+    get_settings.cache_clear()
     app = create_app()
     app.state.storage = MemoryObjectStorage()
 
@@ -46,15 +52,35 @@ def client(db_factory: sessionmaker[Session]) -> Generator[TestClient, None, Non
     app.dependency_overrides[get_db] = override_db
     with TestClient(app, base_url="http://localhost") as test_client:
         yield test_client
+    get_settings.cache_clear()
 
 
-def register(client: TestClient, email: str, name: str = "Test User") -> dict:
+def register(
+    client: TestClient, email: str, name: str = "Test User", *, authenticate: bool = True
+) -> dict:
     response = client.post(
         "/api/v1/auth/register",
         json={"email": email, "password": "correct horse battery staple", "display_name": name},
     )
-    assert response.status_code == 201, response.text
-    return response.json()
+    assert response.status_code == 202, response.text
+    registration = response.json()
+    if not authenticate:
+        return registration
+    assert (
+        client.post(
+            "/api/v1/auth/verify-email",
+            json={"token": registration["development_verification_token"]},
+        ).status_code
+        == 204
+    )
+    login = client.post(
+        "/api/v1/auth/login",
+        json={"email": email, "password": "correct horse battery staple"},
+    )
+    assert login.status_code == 200, login.text
+    result = login.json()
+    result["development_verification_token"] = registration["development_verification_token"]
+    return result
 
 
 def auth_headers(client: TestClient, organization_id: str | None = None) -> dict[str, str]:

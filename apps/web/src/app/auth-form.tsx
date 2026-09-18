@@ -7,19 +7,35 @@ import { FormEvent, useState } from "react";
 
 import { api } from "@/lib/api";
 
+type AuthMutationResult =
+  | Awaited<ReturnType<typeof api.login>>
+  | Awaited<ReturnType<typeof api.register>>;
+
 export function AuthForm({ mode }: { mode: "signin" | "signup" }) {
   const router = useRouter();
   const [error, setError] = useState("");
-  const mutation = useMutation({
-    mutationFn: (form: FormData) =>
-      mode === "signin"
-        ? api.login({ email: String(form.get("email")), password: String(form.get("password")) })
-        : api.register({
-            email: String(form.get("email")),
-            password: String(form.get("password")),
-            display_name: String(form.get("name")),
-          }),
-    onSuccess: () => router.push("/"),
+  const [notice, setNotice] = useState("");
+  const mutation = useMutation<AuthMutationResult, Error, FormData>({
+    mutationFn: async (form: FormData): Promise<AuthMutationResult> => {
+      if (mode === "signin") {
+        return api.login({
+          email: String(form.get("email")),
+          password: String(form.get("password")),
+        });
+      }
+      return api.register({
+        email: String(form.get("email")),
+        password: String(form.get("password")),
+        display_name: String(form.get("name")),
+      });
+    },
+    onSuccess: (result) => {
+      if ("message" in result && typeof result.message === "string") {
+        setNotice(result.message);
+        return;
+      }
+      router.push("/");
+    },
     onError: (cause: Error) => setError(cause.message),
   });
 
@@ -45,6 +61,7 @@ export function AuthForm({ mode }: { mode: "signin" | "signup" }) {
           onSubmit={(event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             setError("");
+            setNotice("");
             mutation.mutate(new FormData(event.currentTarget));
           }}
         >
@@ -52,6 +69,7 @@ export function AuthForm({ mode }: { mode: "signin" | "signup" }) {
           <label>Email<input name="email" type="email" autoComplete="email" required /></label>
           <label>Password<input name="password" type="password" minLength={12} autoComplete={mode === "signin" ? "current-password" : "new-password"} required /></label>
           {error && <p className="error">{error}</p>}
+          {notice && <p role="status">{notice}</p>}
           <button className="button" disabled={mutation.isPending}>{mutation.isPending ? "Working…" : mode === "signin" ? "Sign in" : "Create account"}</button>
         </form>
         <p className="switch">{mode === "signin" ? "New to ReadySet? " : "Already have an account? "}<Link href={mode === "signin" ? "/signup" : "/signin"}>{mode === "signin" ? "Create account" : "Sign in"}</Link></p>

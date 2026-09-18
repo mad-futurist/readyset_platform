@@ -9,6 +9,7 @@ from fastapi.responses import JSONResponse
 from starlette.concurrency import run_in_threadpool
 
 from app.config import get_settings
+from app.email import create_email_sender
 from app.rate_limit import InProcessRateLimiter
 from app.routes import audit, auth, documents, organizations, people
 from app.storage import S3ObjectStorage
@@ -27,11 +28,12 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title="ReadySet API",
         version="1.0.0",
-        docs_url=None if settings.is_production else "/docs",
+        docs_url=None if settings.is_hardened else "/docs",
         redoc_url=None,
         lifespan=lifespan,
     )
     app.state.storage = S3ObjectStorage(settings)
+    app.state.email_sender = create_email_sender(settings)
     app.state.auth_limiter = InProcessRateLimiter()
     app.add_middleware(
         CORSMiddleware,
@@ -42,7 +44,6 @@ def create_app() -> FastAPI:
             "Content-Type",
             "X-CSRF-Token",
             "X-ReadySet-Organization",
-            "Idempotency-Key",
         ],
     )
 

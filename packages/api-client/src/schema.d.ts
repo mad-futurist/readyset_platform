@@ -4,15 +4,15 @@
  */
 
 export interface paths {
-    "/healthz": {
+    "/api/v1/audit-events": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Health */
-        get: operations["health_healthz_get"];
+        /** List Audit Events */
+        get: operations["list_audit_events_api_v1_audit_events_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -21,119 +21,17 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/auth/register": {
+    "/api/v1/auth/google/callback": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get?: never;
-        put?: never;
-        /** Register */
-        post: operations["register_api_v1_auth_register_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/auth/login": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Login */
-        post: operations["login_api_v1_auth_login_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/auth/me": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Me */
-        get: operations["me_api_v1_auth_me_get"];
+        /** Google Callback */
+        get: operations["google_callback_api_v1_auth_google_callback_get"];
         put?: never;
         post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/auth/logout": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Logout */
-        post: operations["logout_api_v1_auth_logout_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/auth/verify-email": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Verify Email */
-        post: operations["verify_email_api_v1_auth_verify_email_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/auth/password-reset/request": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Request Reset */
-        post: operations["request_reset_api_v1_auth_password_reset_request_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/auth/password-reset/confirm": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Confirm Reset */
-        post: operations["confirm_reset_api_v1_auth_password_reset_confirm_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -157,15 +55,224 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/auth/google/callback": {
+    "/api/v1/auth/login": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Google Callback */
-        get: operations["google_callback_api_v1_auth_google_callback_get"];
+        get?: never;
+        put?: never;
+        /** Login */
+        post: operations["login_api_v1_auth_login_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/logout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Logout */
+        post: operations["logout_api_v1_auth_logout_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Me */
+        get: operations["me_api_v1_auth_me_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/password-reset/confirm": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Confirm Reset */
+        post: operations["confirm_reset_api_v1_auth_password_reset_confirm_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/password-reset/request": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Request Reset */
+        post: operations["request_reset_api_v1_auth_password_reset_request_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/register": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Register */
+        post: operations["register_api_v1_auth_register_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/verification/resend": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Resend Verification */
+        post: operations["resend_verification_api_v1_auth_verification_resend_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/verify-email": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Verify Email */
+        post: operations["verify_email_api_v1_auth_verify_email_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Documents */
+        get: operations["list_documents_api_v1_documents_get"];
+        put?: never;
+        /** Upload Document */
+        post: operations["upload_document_api_v1_documents_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/{document_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Document */
+        get: operations["get_document_api_v1_documents__document_id__get"];
+        put?: never;
+        post?: never;
+        /** Archive Document */
+        delete: operations["archive_document_api_v1_documents__document_id__delete"];
+        options?: never;
+        head?: never;
+        /** Update Document */
+        patch: operations["update_document_api_v1_documents__document_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/documents/{document_id}/access": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Grants */
+        get: operations["get_grants_api_v1_documents__document_id__access_get"];
+        /** Replace Grants */
+        put: operations["replace_grants_api_v1_documents__document_id__access_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/{document_id}/versions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Versions */
+        get: operations["list_versions_api_v1_documents__document_id__versions_get"];
+        put?: never;
+        /** Upload Version */
+        post: operations["upload_version_api_v1_documents__document_id__versions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/documents/{document_id}/versions/{version_id}/download": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Download Version */
+        get: operations["download_version_api_v1_documents__document_id__versions__version_id__download_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -209,23 +316,6 @@ export interface paths {
         patch: operations["update_organization_api_v1_organizations_current_patch"];
         trace?: never;
     };
-    "/api/v1/organizations/current/members": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** List Members */
-        get: operations["list_members_api_v1_organizations_current_members_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/v1/organizations/current/invitations": {
         parameters: {
             query?: never;
@@ -243,7 +333,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/organizations/invitations/accept": {
+    "/api/v1/organizations/current/invitations/{invitation_id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -252,8 +342,25 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Accept Invitation */
-        post: operations["accept_invitation_api_v1_organizations_invitations_accept_post"];
+        post?: never;
+        /** Revoke Invitation */
+        delete: operations["revoke_invitation_api_v1_organizations_current_invitations__invitation_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/current/members": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Members */
+        get: operations["list_members_api_v1_organizations_current_members_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -276,6 +383,40 @@ export interface paths {
         head?: never;
         /** Change Role */
         patch: operations["change_role_api_v1_organizations_current_members__membership_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/organizations/current/ownership-transfer": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Transfer Ownership */
+        post: operations["transfer_ownership_api_v1_organizations_current_ownership_transfer_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/invitations/accept": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept Invitation */
+        post: operations["accept_invitation_api_v1_organizations_invitations_accept_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/api/v1/people": {
@@ -367,105 +508,15 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/v1/documents": {
+    "/healthz": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** List Documents */
-        get: operations["list_documents_api_v1_documents_get"];
-        put?: never;
-        /** Upload Document */
-        post: operations["upload_document_api_v1_documents_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/documents/{document_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Document */
-        get: operations["get_document_api_v1_documents__document_id__get"];
-        put?: never;
-        post?: never;
-        /** Archive Document */
-        delete: operations["archive_document_api_v1_documents__document_id__delete"];
-        options?: never;
-        head?: never;
-        /** Update Document */
-        patch: operations["update_document_api_v1_documents__document_id__patch"];
-        trace?: never;
-    };
-    "/api/v1/documents/{document_id}/versions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** List Versions */
-        get: operations["list_versions_api_v1_documents__document_id__versions_get"];
-        put?: never;
-        /** Upload Version */
-        post: operations["upload_version_api_v1_documents__document_id__versions_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/documents/{document_id}/versions/{version_id}/download": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Download Version */
-        get: operations["download_version_api_v1_documents__document_id__versions__version_id__download_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/documents/{document_id}/access": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Grants */
-        get: operations["get_grants_api_v1_documents__document_id__access_get"];
-        /** Replace Grants */
-        put: operations["replace_grants_api_v1_documents__document_id__access_put"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/audit-events": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** List Audit Events */
-        get: operations["list_audit_events_api_v1_audit_events_get"];
+        /** Health */
+        get: operations["health_healthz_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -478,28 +529,53 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AuditEventRead */
+        AuditEventRead: {
+            /** Action */
+            action: string;
+            /** Actor User Id */
+            actor_user_id: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Event Metadata */
+            event_metadata: {
+                [key: string]: unknown;
+            };
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Organization Id */
+            organization_id: string | null;
+            /** Resource Id */
+            resource_id: string | null;
+            /** Resource Type */
+            resource_type: string;
+        };
         /** AuthResponse */
         AuthResponse: {
-            user: components["schemas"]["UserRead"];
-            /** Memberships */
-            memberships: components["schemas"]["MembershipRead"][];
             /** Csrf Token */
             csrf_token: string;
-            /** Development Verification Token */
-            development_verification_token?: string | null;
+            /** Memberships */
+            memberships: components["schemas"]["MembershipRead"][];
+            user: components["schemas"]["UserRead"];
         };
         /** Body_upload_document_api_v1_documents_post */
         Body_upload_document_api_v1_documents_post: {
-            /** File */
-            file: string;
-            /** Title */
-            title: string;
             /** Description */
             description?: string | null;
             /** Document Type */
             document_type?: string | null;
             /** Domain */
             domain?: string | null;
+            /** File */
+            file: string;
+            /** Title */
+            title: string;
             /** @default ORGANIZATION */
             visibility: components["schemas"]["DocumentVisibility"];
         };
@@ -510,20 +586,33 @@ export interface components {
         };
         /** DocumentGrantRead */
         DocumentGrantRead: {
-            /** User Ids */
-            user_ids: string[];
             /** Team Ids */
             team_ids: string[];
+            /** User Ids */
+            user_ids: string[];
         };
         /** DocumentGrantUpdate */
         DocumentGrantUpdate: {
-            /** User Ids */
-            user_ids?: string[];
             /** Team Ids */
             team_ids?: string[];
+            /** User Ids */
+            user_ids?: string[];
         };
         /** DocumentRead */
         DocumentRead: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Current Version Id */
+            current_version_id: string | null;
+            /** Description */
+            description: string | null;
+            /** Document Type */
+            document_type: string | null;
+            /** Domain */
+            domain: string | null;
             /**
              * Id
              * Format: uuid
@@ -534,33 +623,20 @@ export interface components {
              * Format: uuid
              */
             organization_id: string;
-            /** Title */
-            title: string;
-            /** Description */
-            description: string | null;
-            /** Document Type */
-            document_type: string | null;
-            /** Domain */
-            domain: string | null;
             /**
              * Owner User Id
              * Format: uuid
              */
             owner_user_id: string;
-            visibility: components["schemas"]["DocumentVisibility"];
             status: components["schemas"]["DocumentStatus"];
-            /** Current Version Id */
-            current_version_id: string | null;
-            /**
-             * Created At
-             * Format: date-time
-             */
-            created_at: string;
+            /** Title */
+            title: string;
             /**
              * Updated At
              * Format: date-time
              */
             updated_at: string;
+            visibility: components["schemas"]["DocumentVisibility"];
         };
         /**
          * DocumentStatus
@@ -569,49 +645,49 @@ export interface components {
         DocumentStatus: "ACTIVE" | "ARCHIVED";
         /** DocumentUpdate */
         DocumentUpdate: {
-            /** Title */
-            title?: string | null;
             /** Description */
             description?: string | null;
             /** Document Type */
             document_type?: string | null;
             /** Domain */
             domain?: string | null;
+            /** Title */
+            title?: string | null;
             visibility?: components["schemas"]["DocumentVisibility"] | null;
         };
         /** DocumentVersionRead */
         DocumentVersionRead: {
             /**
-             * Id
-             * Format: uuid
+             * Created At
+             * Format: date-time
              */
-            id: string;
-            /**
-             * Document Id
-             * Format: uuid
-             */
-            document_id: string;
-            /** Version Number */
-            version_number: number;
-            /** Original Filename */
-            original_filename: string;
-            /** Mime Type */
-            mime_type: string;
-            /** Size Bytes */
-            size_bytes: number;
-            /** Sha256 */
-            sha256: string;
-            ingestion_status: components["schemas"]["IngestionStatus"];
+            created_at: string;
             /**
              * Created By User Id
              * Format: uuid
              */
             created_by_user_id: string;
             /**
-             * Created At
-             * Format: date-time
+             * Document Id
+             * Format: uuid
              */
-            created_at: string;
+            document_id: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            ingestion_status: components["schemas"]["IngestionStatus"];
+            /** Mime Type */
+            mime_type: string;
+            /** Original Filename */
+            original_filename: string;
+            /** Sha256 */
+            sha256: string;
+            /** Size Bytes */
+            size_bytes: number;
+            /** Version Number */
+            version_number: number;
         };
         /**
          * DocumentVisibility
@@ -620,104 +696,104 @@ export interface components {
         DocumentVisibility: "ORGANIZATION" | "RESTRICTED";
         /** EmployeeProfileCreate */
         EmployeeProfileCreate: {
-            /** User Id */
-            user_id?: string | null;
-            /** Display Name */
-            display_name: string;
-            /** Work Email */
-            work_email?: string | null;
-            /** Job Title */
-            job_title?: string | null;
             /** Department */
             department?: string | null;
-            /** Seniority */
-            seniority?: string | null;
-            /** Manager Profile Id */
-            manager_profile_id?: string | null;
-            /** Start Date */
-            start_date?: string | null;
-            /** Timezone */
-            timezone?: string | null;
+            /** Display Name */
+            display_name: string;
+            /** Job Title */
+            job_title?: string | null;
             /** Locale */
             locale?: string | null;
+            /** Manager Profile Id */
+            manager_profile_id?: string | null;
             /** Metadata */
             metadata?: {
                 [key: string]: unknown;
             };
+            /** Seniority */
+            seniority?: string | null;
+            /** Start Date */
+            start_date?: string | null;
+            /** Timezone */
+            timezone?: string | null;
+            /** User Id */
+            user_id?: string | null;
+            /** Work Email */
+            work_email?: string | null;
         };
         /** EmployeeProfileRead */
         EmployeeProfileRead: {
-            /**
-             * Id
-             * Format: uuid
-             */
-            id: string;
-            /**
-             * Organization Id
-             * Format: uuid
-             */
-            organization_id: string;
-            /** User Id */
-            user_id: string | null;
-            /** Display Name */
-            display_name: string;
-            /** Work Email */
-            work_email: string | null;
-            /** Job Title */
-            job_title: string | null;
-            /** Department */
-            department: string | null;
-            /** Seniority */
-            seniority: string | null;
-            /** Manager Profile Id */
-            manager_profile_id: string | null;
-            /** Start Date */
-            start_date: string | null;
-            /** Timezone */
-            timezone: string | null;
-            /** Locale */
-            locale: string | null;
-            status: components["schemas"]["EmployeeStatus"];
-            /** Profile Metadata */
-            profile_metadata: {
-                [key: string]: unknown;
-            };
             /**
              * Created At
              * Format: date-time
              */
             created_at: string;
+            /** Department */
+            department: string | null;
+            /** Display Name */
+            display_name: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Job Title */
+            job_title: string | null;
+            /** Locale */
+            locale: string | null;
+            /** Manager Profile Id */
+            manager_profile_id: string | null;
+            /**
+             * Organization Id
+             * Format: uuid
+             */
+            organization_id: string;
+            /** Profile Metadata */
+            profile_metadata: {
+                [key: string]: unknown;
+            };
+            /** Seniority */
+            seniority: string | null;
+            /** Start Date */
+            start_date: string | null;
+            status: components["schemas"]["EmployeeStatus"];
+            /** Timezone */
+            timezone: string | null;
             /**
              * Updated At
              * Format: date-time
              */
             updated_at: string;
+            /** User Id */
+            user_id: string | null;
+            /** Work Email */
+            work_email: string | null;
         };
         /** EmployeeProfileUpdate */
         EmployeeProfileUpdate: {
-            /** Display Name */
-            display_name?: string | null;
-            /** Work Email */
-            work_email?: string | null;
-            /** Job Title */
-            job_title?: string | null;
             /** Department */
             department?: string | null;
-            /** Seniority */
-            seniority?: string | null;
-            /** Manager Profile Id */
-            manager_profile_id?: string | null;
-            /** Start Date */
-            start_date?: string | null;
-            /** Timezone */
-            timezone?: string | null;
+            /** Display Name */
+            display_name?: string | null;
+            /** Job Title */
+            job_title?: string | null;
             /** Locale */
             locale?: string | null;
-            status?: components["schemas"]["EmployeeStatus"] | null;
+            /** Manager Profile Id */
+            manager_profile_id?: string | null;
             /** Metadata */
             metadata?: {
                 [key: string]: unknown;
             } | null;
+            /** Seniority */
+            seniority?: string | null;
+            /** Start Date */
+            start_date?: string | null;
+            status?: components["schemas"]["EmployeeStatus"] | null;
+            /** Timezone */
+            timezone?: string | null;
+            /** Work Email */
+            work_email?: string | null;
         };
         /**
          * EmployeeStatus
@@ -746,6 +822,18 @@ export interface components {
         };
         /** InvitationRead */
         InvitationRead: {
+            /** Development Token */
+            development_token?: string | null;
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
             /**
              * Id
              * Format: uuid
@@ -756,21 +844,9 @@ export interface components {
              * Format: uuid
              */
             organization_id: string;
-            /**
-             * Email
-             * Format: email
-             */
-            email: string;
             role: components["schemas"]["OrganizationRole"];
             /** Status */
             status: string;
-            /**
-             * Expires At
-             * Format: date-time
-             */
-            expires_at: string;
-            /** Development Token */
-            development_token?: string | null;
         };
         /** LoginRequest */
         LoginRequest: {
@@ -789,20 +865,20 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            organization?: components["schemas"]["OrganizationRead"] | null;
             /**
              * Organization Id
              * Format: uuid
              */
             organization_id: string;
+            role: components["schemas"]["OrganizationRole"];
+            status: components["schemas"]["MembershipStatus"];
+            user?: components["schemas"]["UserRead"] | null;
             /**
              * User Id
              * Format: uuid
              */
             user_id: string;
-            role: components["schemas"]["OrganizationRole"];
-            status: components["schemas"]["MembershipStatus"];
-            user?: components["schemas"]["UserRead"] | null;
-            organization?: components["schemas"]["OrganizationRead"] | null;
         };
         /** MembershipRoleUpdate */
         MembershipRoleUpdate: {
@@ -813,6 +889,13 @@ export interface components {
          * @enum {string}
          */
         MembershipStatus: "ACTIVE" | "REVOKED";
+        /** MessageResponse */
+        MessageResponse: {
+            /** Development Token */
+            development_token?: string | null;
+            /** Message */
+            message: string;
+        };
         /** OrganizationCreate */
         OrganizationCreate: {
             /** Name */
@@ -842,10 +925,51 @@ export interface components {
             /** Name */
             name: string;
         };
-        /** Page */
-        Page: {
+        /** OwnershipTransferRequest */
+        OwnershipTransferRequest: {
+            /**
+             * Membership Id
+             * Format: uuid
+             */
+            membership_id: string;
+        };
+        /** Page[AuditEventRead] */
+        Page_AuditEventRead_: {
             /** Items */
-            items: unknown[];
+            items: components["schemas"]["AuditEventRead"][];
+            /** Page */
+            page: number;
+            /** Page Size */
+            page_size: number;
+            /** Total */
+            total: number;
+        };
+        /** Page[DocumentRead] */
+        Page_DocumentRead_: {
+            /** Items */
+            items: components["schemas"]["DocumentRead"][];
+            /** Page */
+            page: number;
+            /** Page Size */
+            page_size: number;
+            /** Total */
+            total: number;
+        };
+        /** Page[EmployeeProfileRead] */
+        Page_EmployeeProfileRead_: {
+            /** Items */
+            items: components["schemas"]["EmployeeProfileRead"][];
+            /** Page */
+            page: number;
+            /** Page Size */
+            page_size: number;
+            /** Total */
+            total: number;
+        };
+        /** Page[TeamRead] */
+        Page_TeamRead_: {
+            /** Items */
+            items: components["schemas"]["TeamRead"][];
             /** Page */
             page: number;
             /** Page Size */
@@ -855,10 +979,10 @@ export interface components {
         };
         /** PasswordResetConfirm */
         PasswordResetConfirm: {
-            /** Token */
-            token: string;
             /** Password */
             password: string;
+            /** Token */
+            token: string;
         };
         /** PasswordResetRequest */
         PasswordResetRequest: {
@@ -870,6 +994,8 @@ export interface components {
         };
         /** RegisterRequest */
         RegisterRequest: {
+            /** Display Name */
+            display_name: string;
             /**
              * Email
              * Format: email
@@ -877,17 +1003,22 @@ export interface components {
             email: string;
             /** Password */
             password: string;
-            /** Display Name */
-            display_name: string;
+        };
+        /** RegistrationResponse */
+        RegistrationResponse: {
+            /** Development Verification Token */
+            development_verification_token?: string | null;
+            /** Message */
+            message: string;
         };
         /** TeamCreate */
         TeamCreate: {
+            /** Description */
+            description?: string | null;
             /** Name */
             name: string;
             /** Slug */
             slug?: string | null;
-            /** Description */
-            description?: string | null;
         };
         /** TeamMemberCreate */
         TeamMemberCreate: {
@@ -900,26 +1031,26 @@ export interface components {
         /** TeamRead */
         TeamRead: {
             /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Description */
+            description: string | null;
+            /**
              * Id
              * Format: uuid
              */
             id: string;
+            /** Name */
+            name: string;
             /**
              * Organization Id
              * Format: uuid
              */
             organization_id: string;
-            /** Name */
-            name: string;
             /** Slug */
             slug: string;
-            /** Description */
-            description: string | null;
-            /**
-             * Created At
-             * Format: date-time
-             */
-            created_at: string;
         };
         /** TokenRequest */
         TokenRequest: {
@@ -928,6 +1059,10 @@ export interface components {
         };
         /** UserRead */
         UserRead: {
+            /** Avatar Url */
+            avatar_url: string | null;
+            /** Display Name */
+            display_name: string;
             /**
              * Id
              * Format: uuid
@@ -938,23 +1073,19 @@ export interface components {
              * Format: email
              */
             primary_email: string;
-            /** Display Name */
-            display_name: string;
-            /** Avatar Url */
-            avatar_url: string | null;
         };
         /** ValidationError */
         ValidationError: {
+            /** Context */
+            ctx?: Record<string, never>;
+            /** Input */
+            input?: unknown;
             /** Location */
             loc: (string | number)[];
             /** Message */
             msg: string;
             /** Error Type */
             type: string;
-            /** Input */
-            input?: unknown;
-            /** Context */
-            ctx?: Record<string, never>;
         };
     };
     responses: never;
@@ -965,7 +1096,73 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    health_healthz_get: {
+    list_audit_events_api_v1_audit_events_get: {
+        parameters: {
+            query?: {
+                page?: number;
+                page_size?: number;
+            };
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Page_AuditEventRead_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    google_callback_api_v1_auth_google_callback_get: {
+        parameters: {
+            query: {
+                code: string;
+                state: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    google_start_api_v1_auth_google_start_get: {
         parameters: {
             query?: never;
             header?: never;
@@ -983,39 +1180,6 @@ export interface operations {
                     "application/json": {
                         [key: string]: string;
                     };
-                };
-            };
-        };
-    };
-    register_api_v1_auth_register_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["RegisterRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["AuthResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
@@ -1053,6 +1217,35 @@ export interface operations {
             };
         };
     };
+    logout_api_v1_auth_logout_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-CSRF-Token"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     me_api_v1_auth_me_get: {
         parameters: {
             query?: never;
@@ -1073,16 +1266,18 @@ export interface operations {
             };
         };
     };
-    logout_api_v1_auth_logout_post: {
+    confirm_reset_api_v1_auth_password_reset_confirm_post: {
         parameters: {
             query?: never;
-            header?: {
-                "X-CSRF-Token"?: string | null;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody?: never;
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PasswordResetConfirm"];
+            };
+        };
         responses: {
             /** @description Successful Response */
             204: {
@@ -1090,6 +1285,105 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    request_reset_api_v1_auth_password_reset_request_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PasswordResetRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    register_api_v1_auth_register_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RegisterRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RegistrationResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    resend_verification_api_v1_auth_verification_resend_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PasswordResetRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageResponse"];
+                };
             };
             /** @description Validation Error */
             422: {
@@ -1133,696 +1427,6 @@ export interface operations {
             };
         };
     };
-    request_reset_api_v1_auth_password_reset_request_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PasswordResetRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            202: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        [key: string]: string | null;
-                    };
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    confirm_reset_api_v1_auth_password_reset_confirm_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PasswordResetConfirm"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    google_start_api_v1_auth_google_start_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        [key: string]: string;
-                    };
-                };
-            };
-        };
-    };
-    google_callback_api_v1_auth_google_callback_get: {
-        parameters: {
-            query: {
-                code: string;
-                state: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    list_organizations_api_v1_organizations_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MembershipRead"][];
-                };
-            };
-        };
-    };
-    create_organization_api_v1_organizations_post: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-CSRF-Token"?: string | null;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["OrganizationCreate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrganizationRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    update_organization_api_v1_organizations_current_patch: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-                "X-CSRF-Token"?: string | null;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["OrganizationUpdate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrganizationRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    list_members_api_v1_organizations_current_members_get: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MembershipRead"][];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    invite_member_api_v1_organizations_current_invitations_post: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-                "X-CSRF-Token"?: string | null;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["InvitationCreate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["InvitationRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    accept_invitation_api_v1_organizations_invitations_accept_post: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-CSRF-Token"?: string | null;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["TokenRequest"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MembershipRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    revoke_member_api_v1_organizations_current_members__membership_id__delete: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-                "X-CSRF-Token"?: string | null;
-            };
-            path: {
-                membership_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    change_role_api_v1_organizations_current_members__membership_id__patch: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-                "X-CSRF-Token"?: string | null;
-            };
-            path: {
-                membership_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["MembershipRoleUpdate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MembershipRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    list_people_api_v1_people_get: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["EmployeeProfileRead"][];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    create_profile_api_v1_people_post: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-                "X-CSRF-Token"?: string | null;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["EmployeeProfileCreate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["EmployeeProfileRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    get_profile_api_v1_people__profile_id__get: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-            };
-            path: {
-                profile_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["EmployeeProfileRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    update_profile_api_v1_people__profile_id__patch: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-                "X-CSRF-Token"?: string | null;
-            };
-            path: {
-                profile_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["EmployeeProfileUpdate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["EmployeeProfileRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    list_teams_api_v1_teams_get: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TeamRead"][];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    create_team_api_v1_teams_post: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-                "X-CSRF-Token"?: string | null;
-            };
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["TeamCreate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TeamRead"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    list_team_members_api_v1_teams__team_id__members_get: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-            };
-            path: {
-                team_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["EmployeeProfileRead"][];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    add_team_member_api_v1_teams__team_id__members_post: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-                "X-CSRF-Token"?: string | null;
-            };
-            path: {
-                team_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["TeamMemberCreate"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    remove_team_member_api_v1_teams__team_id__members__profile_id__delete: {
-        parameters: {
-            query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-                "X-CSRF-Token"?: string | null;
-            };
-            path: {
-                team_id: string;
-                profile_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
     list_documents_api_v1_documents_get: {
         parameters: {
             query?: {
@@ -1843,7 +1447,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Page"];
+                    "application/json": components["schemas"]["Page_DocumentRead_"];
                 };
             };
             /** @description Validation Error */
@@ -1996,6 +1600,77 @@ export interface operations {
             };
         };
     };
+    get_grants_api_v1_documents__document_id__access_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+            };
+            path: {
+                document_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentGrantRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    replace_grants_api_v1_documents__document_id__access_put: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path: {
+                document_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DocumentGrantUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentGrantRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     list_versions_api_v1_documents__document_id__versions_get: {
         parameters: {
             query?: never;
@@ -2101,15 +1776,11 @@ export interface operations {
             };
         };
     };
-    get_grants_api_v1_documents__document_id__access_get: {
+    list_organizations_api_v1_organizations_get: {
         parameters: {
             query?: never;
-            header?: {
-                "X-ReadySet-Organization"?: string | null;
-            };
-            path: {
-                document_id: string;
-            };
+            header?: never;
+            path?: never;
             cookie?: never;
         };
         requestBody?: never;
@@ -2120,7 +1791,33 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["DocumentGrantRead"];
+                    "application/json": components["schemas"]["MembershipRead"][];
+                };
+            };
+        };
+    };
+    create_organization_api_v1_organizations_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-CSRF-Token"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OrganizationCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrganizationRead"];
                 };
             };
             /** @description Validation Error */
@@ -2134,21 +1831,19 @@ export interface operations {
             };
         };
     };
-    replace_grants_api_v1_documents__document_id__access_put: {
+    update_organization_api_v1_organizations_current_patch: {
         parameters: {
             query?: never;
             header?: {
                 "X-ReadySet-Organization"?: string | null;
                 "X-CSRF-Token"?: string | null;
             };
-            path: {
-                document_id: string;
-            };
+            path?: never;
             cookie?: never;
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["DocumentGrantUpdate"];
+                "application/json": components["schemas"]["OrganizationUpdate"];
             };
         };
         responses: {
@@ -2158,7 +1853,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["DocumentGrantRead"];
+                    "application/json": components["schemas"]["OrganizationRead"];
                 };
             };
             /** @description Validation Error */
@@ -2172,7 +1867,247 @@ export interface operations {
             };
         };
     };
-    list_audit_events_api_v1_audit_events_get: {
+    invite_member_api_v1_organizations_current_invitations_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["InvitationCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InvitationRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    revoke_invitation_api_v1_organizations_current_invitations__invitation_id__delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path: {
+                invitation_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_members_api_v1_organizations_current_members_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MembershipRead"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    revoke_member_api_v1_organizations_current_members__membership_id__delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path: {
+                membership_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    change_role_api_v1_organizations_current_members__membership_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path: {
+                membership_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MembershipRoleUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MembershipRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    transfer_ownership_api_v1_organizations_current_ownership_transfer_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OwnershipTransferRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MembershipRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    accept_invitation_api_v1_organizations_invitations_accept_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-CSRF-Token"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TokenRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MembershipRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_people_api_v1_people_get: {
         parameters: {
             query?: {
                 page?: number;
@@ -2192,7 +2127,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Page"];
+                    "application/json": components["schemas"]["Page_EmployeeProfileRead_"];
                 };
             };
             /** @description Validation Error */
@@ -2202,6 +2137,307 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_profile_api_v1_people_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EmployeeProfileCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EmployeeProfileRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_profile_api_v1_people__profile_id__get: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+            };
+            path: {
+                profile_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EmployeeProfileRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_profile_api_v1_people__profile_id__patch: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path: {
+                profile_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EmployeeProfileUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EmployeeProfileRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_teams_api_v1_teams_get: {
+        parameters: {
+            query?: {
+                page?: number;
+                page_size?: number;
+            };
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Page_TeamRead_"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_team_api_v1_teams_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TeamCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TeamRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_team_members_api_v1_teams__team_id__members_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+            };
+            path: {
+                team_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EmployeeProfileRead"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_team_member_api_v1_teams__team_id__members_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path: {
+                team_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TeamMemberCreate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    remove_team_member_api_v1_teams__team_id__members__profile_id__delete: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path: {
+                team_id: string;
+                profile_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    health_healthz_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: string;
+                    };
                 };
             };
         };

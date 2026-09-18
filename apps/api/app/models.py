@@ -19,6 +19,7 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
     Uuid,
+    text,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -134,6 +135,9 @@ class SessionRecord(Base):
     user_id: Mapped[uuid.UUID] = mapped_column(
         Uuid, ForeignKey("users.id", ondelete="CASCADE"), index=True
     )
+    auth_identity_id: Mapped[uuid.UUID] = mapped_column(
+        Uuid, ForeignKey("auth_identities.id", ondelete="CASCADE"), index=True
+    )
     token_hash: Mapped[bytes] = mapped_column(LargeBinary(32), unique=True, nullable=False)
     csrf_hash: Mapped[bytes] = mapped_column(LargeBinary(32), nullable=False)
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
@@ -144,6 +148,7 @@ class SessionRecord(Base):
     ip_address: Mapped[str | None] = mapped_column(String(64))
 
     user: Mapped[User] = relationship()
+    auth_identity: Mapped[AuthIdentity] = relationship()
 
 
 class OneTimeToken(Base):
@@ -165,6 +170,7 @@ class OAuthLoginState(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     state_hash: Mapped[bytes] = mapped_column(LargeBinary(32), unique=True, nullable=False)
+    binding_hash: Mapped[bytes] = mapped_column(LargeBinary(32), nullable=False)
     code_verifier: Mapped[str] = mapped_column(String(128), nullable=False)
     nonce: Mapped[str] = mapped_column(String(128), nullable=False)
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
@@ -188,7 +194,16 @@ class Organization(Base):
 
 class OrganizationMembership(Base):
     __tablename__ = "organization_memberships"
-    __table_args__ = (UniqueConstraint("organization_id", "user_id"),)
+    __table_args__ = (
+        UniqueConstraint("organization_id", "user_id"),
+        Index(
+            "uq_active_owner_per_organization",
+            "organization_id",
+            unique=True,
+            postgresql_where=text("role = 'OWNER' AND status = 'ACTIVE'"),
+            sqlite_where=text("role = 'OWNER' AND status = 'ACTIVE'"),
+        ),
+    )
 
     id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     organization_id: Mapped[uuid.UUID] = mapped_column(
@@ -208,7 +223,27 @@ class OrganizationMembership(Base):
 
 class OrganizationInvitation(Base):
     __tablename__ = "organization_invitations"
-    __table_args__ = (Index("ix_invitation_org_email", "organization_id", "normalized_email"),)
+    __table_args__ = (
+        Index("ix_invitation_org_email", "organization_id", "normalized_email"),
+        Index(
+            "uq_pending_invitation_org_email",
+            "organization_id",
+            "normalized_email",
+            unique=True,
+            postgresql_where=text("status = 'PENDING'"),
+            sqlite_where=text("status = 'PENDING'"),
+        ),
+        ForeignKeyConstraint(
+            ["organization_id", "invited_by_user_id"],
+            ["organization_memberships.organization_id", "organization_memberships.user_id"],
+            ondelete="RESTRICT",
+        ),
+        ForeignKeyConstraint(
+            ["organization_id", "accepted_by_user_id"],
+            ["organization_memberships.organization_id", "organization_memberships.user_id"],
+            ondelete="RESTRICT",
+        ),
+    )
 
     id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     organization_id: Mapped[uuid.UUID] = mapped_column(
@@ -237,6 +272,11 @@ class EmployeeProfile(Base):
         ForeignKeyConstraint(
             ["organization_id", "manager_profile_id"],
             ["employee_profiles.organization_id", "employee_profiles.id"],
+            ondelete="RESTRICT",
+        ),
+        ForeignKeyConstraint(
+            ["organization_id", "user_id"],
+            ["organization_memberships.organization_id", "organization_memberships.user_id"],
             ondelete="RESTRICT",
         ),
         Index("ix_employee_org_name", "organization_id", "display_name"),
@@ -310,6 +350,11 @@ class Document(Base):
     __tablename__ = "documents"
     __table_args__ = (
         UniqueConstraint("organization_id", "id"),
+        ForeignKeyConstraint(
+            ["organization_id", "owner_user_id"],
+            ["organization_memberships.organization_id", "organization_memberships.user_id"],
+            ondelete="RESTRICT",
+        ),
         Index("ix_document_org_updated", "organization_id", "updated_at"),
     )
 
@@ -339,11 +384,17 @@ class DocumentVersion(Base):
     __tablename__ = "document_versions"
     __table_args__ = (
         UniqueConstraint("organization_id", "id"),
+        UniqueConstraint("organization_id", "document_id", "id"),
         UniqueConstraint("document_id", "version_number"),
         UniqueConstraint("storage_key"),
         ForeignKeyConstraint(
             ["organization_id", "document_id"],
             ["documents.organization_id", "documents.id"],
+            ondelete="RESTRICT",
+        ),
+        ForeignKeyConstraint(
+            ["organization_id", "created_by_user_id"],
+            ["organization_memberships.organization_id", "organization_memberships.user_id"],
             ondelete="RESTRICT",
         ),
         CheckConstraint("version_number > 0"),
@@ -378,6 +429,16 @@ class DocumentUserGrant(Base):
             ["documents.organization_id", "documents.id"],
             ondelete="CASCADE",
         ),
+        ForeignKeyConstraint(
+            ["organization_id", "user_id"],
+            ["organization_memberships.organization_id", "organization_memberships.user_id"],
+            ondelete="CASCADE",
+        ),
+        ForeignKeyConstraint(
+            ["organization_id", "created_by_user_id"],
+            ["organization_memberships.organization_id", "organization_memberships.user_id"],
+            ondelete="RESTRICT",
+        ),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
@@ -408,6 +469,11 @@ class DocumentTeamGrant(Base):
             ["organization_id", "team_id"],
             ["teams.organization_id", "teams.id"],
             ondelete="CASCADE",
+        ),
+        ForeignKeyConstraint(
+            ["organization_id", "created_by_user_id"],
+            ["organization_memberships.organization_id", "organization_memberships.user_id"],
+            ondelete="RESTRICT",
         ),
     )
 
@@ -449,8 +515,12 @@ class AuditEvent(Base):
 # Circular current-version FK is intentionally declared after both tables exist.
 Document.__table__.append_constraint(  # type: ignore[attr-defined]
     ForeignKeyConstraint(
-        [Document.organization_id, Document.current_version_id],
-        [DocumentVersion.organization_id, DocumentVersion.id],
+        [Document.organization_id, Document.id, Document.current_version_id],
+        [
+            DocumentVersion.organization_id,
+            DocumentVersion.document_id,
+            DocumentVersion.id,
+        ],
         name="fk_document_current_version",
         use_alter=True,
         ondelete="RESTRICT",

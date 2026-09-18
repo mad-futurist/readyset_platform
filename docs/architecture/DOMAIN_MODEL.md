@@ -4,7 +4,9 @@
 
 `User` is a product-wide human account. It holds stable account presentation data, not an organization's HR truth. A person can authenticate before joining an organization, belong to two organizations, and retain an account after leaving one.
 
-`AuthIdentity` is evidence that an external or local authentication method maps to a user. Provider and provider subject are unique. Google fields never appear on `User`. Password hashes are stored in a password credential attached to an email/password identity. A verified Google email may link to an existing normalized email account; unverified provider email never links accounts.
+`AuthIdentity` is evidence that an external or local authentication method maps to a user. `(provider, provider_subject)` is authoritative and unique. Google fields never appear on `User`. Password hashes are stored in a password credential attached to an email/password identity. A password identity grants access only after that exact identity is email-verified. A Google identity requires a provider-verified email and may link to the one existing user with the same normalized primary email; unverified claims, conflicting subjects, disabled users, and ambiguous links fail closed. Linking Google never verifies or enables an unverified password identity.
+
+`SessionRecord` belongs to both a user and the exact authentication identity that created it. Password login creates a password-bound session and Google login creates a Google-bound session. Every authenticated request revalidates the user and identity; legacy sessions without trustworthy provenance are deleted by the hardening migration.
 
 `OrganizationMembership` is the authorization join between user and tenant. OWNER/ADMIN/MANAGER/MEMBER are deliberately small organization roles. They are translated to capabilities in one policy module.
 

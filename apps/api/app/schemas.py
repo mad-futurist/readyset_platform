@@ -1,8 +1,8 @@
 import uuid
 from datetime import date, datetime
-from typing import Any
+from typing import Any, ClassVar
 
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, model_validator
 
 from app.models import (
     DocumentStatus,
@@ -69,7 +69,16 @@ class AuthResponse(BaseModel):
     user: UserRead
     memberships: list[MembershipRead]
     csrf_token: str
+
+
+class RegistrationResponse(BaseModel):
+    message: str
     development_verification_token: str | None = None
+
+
+class MessageResponse(BaseModel):
+    message: str
+    development_token: str | None = None
 
 
 class OrganizationCreate(BaseModel):
@@ -100,6 +109,26 @@ class MembershipRoleUpdate(BaseModel):
     role: OrganizationRole
 
 
+class OwnershipTransferRequest(BaseModel):
+    membership_id: uuid.UUID
+
+
+class RejectNullPatchModel(BaseModel):
+    non_nullable_fields: ClassVar[frozenset[str]] = frozenset()
+
+    @model_validator(mode="before")
+    @classmethod
+    def reject_explicit_nulls(cls, value: object) -> object:
+        if isinstance(value, dict):
+            null_fields = cls.non_nullable_fields.intersection(
+                key for key, item in value.items() if item is None
+            )
+            if null_fields:
+                fields = ", ".join(sorted(null_fields))
+                raise ValueError(f"Fields may be omitted but cannot be null: {fields}")
+        return value
+
+
 class EmployeeProfileCreate(BaseModel):
     user_id: uuid.UUID | None = None
     display_name: str = Field(min_length=1, max_length=255)
@@ -114,7 +143,8 @@ class EmployeeProfileCreate(BaseModel):
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
-class EmployeeProfileUpdate(BaseModel):
+class EmployeeProfileUpdate(RejectNullPatchModel):
+    non_nullable_fields = frozenset({"display_name", "status", "metadata"})
     display_name: str | None = Field(default=None, min_length=1, max_length=255)
     work_email: EmailStr | None = None
     job_title: str | None = Field(default=None, max_length=255)
@@ -194,7 +224,8 @@ class DocumentRead(ORMModel):
     updated_at: datetime
 
 
-class DocumentUpdate(BaseModel):
+class DocumentUpdate(RejectNullPatchModel):
+    non_nullable_fields = frozenset({"title", "visibility"})
     title: str | None = Field(default=None, min_length=1, max_length=255)
     description: str | None = Field(default=None, max_length=5000)
     document_type: str | None = Field(default=None, max_length=100)
@@ -223,8 +254,8 @@ class AuditEventRead(ORMModel):
     created_at: datetime
 
 
-class Page(BaseModel):
-    items: list[Any]
+class Page[PageItem](BaseModel):
+    items: list[PageItem]
     page: int
     page_size: int
     total: int

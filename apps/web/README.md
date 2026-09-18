@@ -30,11 +30,14 @@ From the repository root:
 
    `API_INTERNAL_URL` is read by Next.js and is not exposed as a browser-side `NEXT_PUBLIC_*` variable. During development it is read when the dev server starts; for a production image it must be supplied as a Docker build argument because Next.js serializes rewrites during the build.
 
-3. If the backend OpenAPI contract changed, regenerate the shared client declarations before starting the frontend:
+3. If the backend OpenAPI contract changed, export the real FastAPI schema and regenerate the shared client declarations before starting the frontend:
 
    ```powershell
+   .\apps\api\.venv\Scripts\python apps/api/scripts/export_openapi.py
    npm run generate:api-client
    ```
+
+   Both `apps/api/openapi.json` and `packages/api-client/src/schema.d.ts` are checked in. CI rejects either artifact if it is stale.
 
 ## Launch locally
 

@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 from app.config import Settings, get_settings
 from app.database import get_db
 from app.models import (
+    AuthIdentity,
     MembershipStatus,
     Organization,
     OrganizationMembership,
@@ -34,22 +35,29 @@ def get_current_user(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Authentication required"
         )
     row = db.execute(
-        select(SessionRecord, User)
+        select(SessionRecord, User, AuthIdentity)
         .join(User, User.id == SessionRecord.user_id)
+        .join(
+            AuthIdentity,
+            (AuthIdentity.id == SessionRecord.auth_identity_id)
+            & (AuthIdentity.user_id == SessionRecord.user_id),
+        )
         .where(
             SessionRecord.token_hash == hash_token(session_token),
             SessionRecord.revoked_at.is_(None),
             SessionRecord.expires_at > datetime.now(UTC),
             User.status == UserStatus.ACTIVE,
+            AuthIdentity.email_verified_at.is_not(None),
+            AuthIdentity.provider.in_(("password", "google")),
         )
     ).first()
     if not row:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Authentication required"
         )
-    session, user = row
+    session, user, identity = row
     session.last_seen_at = datetime.now(UTC)
-    return AuthenticatedUser(user=user, session_id=session.id)
+    return AuthenticatedUser(user=user, session_id=session.id, auth_identity_id=identity.id)
 
 
 CurrentUser = Annotated[AuthenticatedUser, Depends(get_current_user)]
@@ -59,9 +67,10 @@ def require_csrf(
     request: Request,
     db: Db,
     current: CurrentUser,
+    settings: Annotated[Settings, Depends(get_settings)],
     csrf_header: Annotated[str | None, Header(alias="X-CSRF-Token")] = None,
 ) -> None:
-    csrf_cookie = request.cookies.get(get_settings().csrf_cookie_name)
+    csrf_cookie = request.cookies.get(settings.csrf_cookie_name)
     if request.method in {"GET", "HEAD", "OPTIONS"}:
         return
     if not csrf_cookie or not csrf_header or not hmac.compare_digest(csrf_cookie, csrf_header):
@@ -70,7 +79,6 @@ def require_csrf(
     if not session or not hmac.compare_digest(session.csrf_hash, hash_token(csrf_header)):
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid CSRF token")
     origin = request.headers.get("origin")
-    settings = get_settings()
     if origin and origin not in settings.cors_origins:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Origin not allowed")
 

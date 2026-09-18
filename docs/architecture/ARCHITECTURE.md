@@ -6,7 +6,8 @@ ReadySet is a modular monolith in a monorepo. `apps/api` is the sole owner of bu
 
 ```mermaid
 flowchart LR
-  Browser[Next.js web] -->|HTTPS /api/v1 + secure cookie| API[FastAPI modular monolith]
+  Browser[Browser] -->|HTTPS| Web[Next.js public origin]
+  Web -->|/api/* internal proxy| API[FastAPI modular monolith]
   API --> DB[(PostgreSQL)]
   API --> Store[(S3-compatible object storage)]
   API --> Google[Google OIDC]
@@ -21,13 +22,13 @@ flowchart LR
 - `people`: employee profiles, teams, team memberships.
 - `documents`: logical documents, immutable versions, access grants, storage operations.
 - `audit`: append-oriented actor/resource records.
-- `common`: database, request context, errors, settings, and shared pagination.
+- shared infrastructure modules: database/session dependencies, configuration, policy, rate limiting, storage, email, security helpers, and typed schemas.
 
-Routes validate transport data, resolve an authenticated organization context, and call services. Services enforce use-case policy and transaction boundaries. Repositories always accept organization context for tenant-owned data. ORM models are infrastructure and are never shared with the frontend.
+This is deliberately a small modular monolith, not a ceremonial service/repository stack. Route modules currently contain transport handling and cohesive application/transaction logic. Central policy and dependency modules enforce authentication, tenant context, CSRF, and capabilities; the document policy query centralizes ACL-sensitive lookup. Storage and email sit behind ports. Repeated or security-sensitive data access should be extracted when it gains a real second consumer, but simple CRUD does not require an interface. ORM models never cross the API boundary; the web client uses generated OpenAPI types.
 
 ## Tenant request path
 
-1. The opaque session cookie is hashed and resolved to an active session and `User`.
+1. The opaque session cookie is hashed and resolved to an active session, its creating `AuthIdentity`, and an active `User`; the identity must still be valid and password identities must remain verified.
 2. The requested organization comes from `X-ReadySet-Organization` or an unambiguous single active membership.
 3. The API loads an active `OrganizationMembership`; client-provided organization/user IDs never establish authority.
 4. `OrganizationContext` carries actor, organization, membership, and derived capabilities.
@@ -36,7 +37,9 @@ Routes validate transport data, resolve an authenticated organization context, a
 
 ## Deployment and evolution
 
-The API and web build separately. PostgreSQL and S3-compatible storage are required production dependencies. Docker Compose supplies PostgreSQL and MinIO locally. M2 may deploy `apps/worker` from the same codebase and add version-scoped ingestion jobs without splitting services or changing the document identity model.
+The API and web build separately. The public topology is one host: `https://app.readyset.example` serves Next.js and proxies `/api/*` to the private FastAPI origin. The public Google callback is therefore `https://app.readyset.example/api/v1/auth/google/callback`. Session, CSRF, and OAuth-binding cookies are host-only; no broad cookie domain is configured. `PUBLIC_WEB_URL` is public, while `API_INTERNAL_URL` is a build-time/server-side Next.js proxy target and is never exposed to the browser.
+
+PostgreSQL and S3-compatible storage are required production dependencies. Docker Compose supplies PostgreSQL and MinIO locally. M2 may deploy `apps/worker` from the same codebase and add version-scoped ingestion jobs without splitting services or changing the document identity model.
 
 ## Explicit non-goals
 

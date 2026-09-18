@@ -106,9 +106,6 @@ def test_restricted_document_requires_grant_and_team_grant_works(client: TestCli
     member_client = TestClient(client.app, base_url="http://localhost")
     member = register(member_client, "acl-member@example.com")
     member_client.post(
-        "/api/v1/auth/verify-email", json={"token": member["development_verification_token"]}
-    )
-    member_client.post(
         "/api/v1/organizations/invitations/accept",
         json={"token": invitation["development_token"]},
         headers=auth_headers(member_client),
@@ -176,3 +173,15 @@ def test_upload_validation(client: TestClient) -> None:
         headers=auth_headers(client, org["id"]),
     )
     assert unsupported.status_code == 415
+
+
+def test_document_patch_rejects_null_non_nullable_fields(client: TestClient) -> None:
+    register(client, "patch-doc@example.com")
+    org = create_org(client, "Patch Documents")
+    document = upload(client, org["id"]).json()
+    response = client.patch(
+        f"/api/v1/documents/{document['id']}",
+        json={"title": None, "visibility": None},
+        headers=auth_headers(client, org["id"]),
+    )
+    assert response.status_code == 422

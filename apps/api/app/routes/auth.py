@@ -1,10 +1,12 @@
+import hmac
 import uuid
 from datetime import UTC, datetime, timedelta
 from urllib.parse import urlencode
 
 import httpx
 from fastapi import APIRouter, Depends, HTTPException, Request, Response
-from fastapi.responses import RedirectResponse
+from fastapi.responses import JSONResponse, RedirectResponse
+from google.auth.exceptions import GoogleAuthError
 from google.auth.transport import requests as google_requests
 from google.oauth2 import id_token as google_id_token
 from sqlalchemy import select, update
@@ -13,6 +15,7 @@ from sqlalchemy.exc import IntegrityError
 from app.audit import record_audit
 from app.config import Settings, get_settings
 from app.dependencies import Csrf, CurrentUser, Db
+from app.email import EmailSender, get_email_sender
 from app.models import (
     AuthIdentity,
     MembershipStatus,
@@ -22,15 +25,18 @@ from app.models import (
     PasswordCredential,
     SessionRecord,
     User,
+    UserStatus,
 )
 from app.rate_limit import check_auth_rate
 from app.schemas import (
     AuthResponse,
     LoginRequest,
     MembershipRead,
+    MessageResponse,
     PasswordResetConfirm,
     PasswordResetRequest,
     RegisterRequest,
+    RegistrationResponse,
     TokenRequest,
     UserRead,
 )
@@ -43,19 +49,22 @@ from app.security import (
     pkce_challenge,
     random_token,
     validate_password,
-    verify_password,
+    verify_and_update_password,
 )
 
 router = APIRouter(prefix="/auth", tags=["authentication"])
+OAUTH_CALLBACK_PATH = "/api/v1/auth/google/callback"
 
 
 def _memberships(db: Db, user_id: uuid.UUID) -> list[OrganizationMembership]:
     return list(
         db.scalars(
-            select(OrganizationMembership).where(
+            select(OrganizationMembership)
+            .where(
                 OrganizationMembership.user_id == user_id,
                 OrganizationMembership.status == MembershipStatus.ACTIVE,
             )
+            .order_by(OrganizationMembership.joined_at, OrganizationMembership.id)
         )
     )
 
@@ -81,14 +90,61 @@ def _set_auth_cookies(response: Response, token: str, csrf: str, settings: Setti
     )
 
 
-@router.post("/register", response_model=AuthResponse, status_code=201)
+def _delete_oauth_cookie(response: Response, settings: Settings) -> None:
+    response.delete_cookie(settings.oauth_binding_cookie_name, path=OAUTH_CALLBACK_PATH)
+
+
+def _oauth_error(settings: Settings, message: str, status_code: int) -> JSONResponse:
+    response = JSONResponse(
+        status_code=status_code,
+        content={"error": {"code": "oauth_failed", "message": message}},
+    )
+    _delete_oauth_cookie(response, settings)
+    return response
+
+
+def _send_email(sender: EmailSender, recipient: str, subject: str, body: str) -> None:
+    try:
+        sender.send(recipient, subject, body)
+    except Exception as exc:
+        raise HTTPException(
+            status_code=503, detail="Email delivery is temporarily unavailable"
+        ) from exc
+
+
+def exchange_google_code(code: str, pending: OAuthLoginState, settings: Settings) -> str:
+    with httpx.Client(timeout=10) as client:
+        token_response = client.post(
+            "https://oauth2.googleapis.com/token",
+            data={
+                "code": code,
+                "client_id": settings.google_client_id,
+                "client_secret": settings.google_client_secret,
+                "redirect_uri": settings.google_redirect_uri,
+                "grant_type": "authorization_code",
+                "code_verifier": pending.code_verifier,
+            },
+        )
+        token_response.raise_for_status()
+        return str(token_response.json()["id_token"])
+
+
+def verify_google_token(raw_id_token: str, settings: Settings) -> dict[str, object]:
+    return google_id_token.verify_oauth2_token(  # type: ignore[no-any-return,no-untyped-call]
+        raw_id_token, google_requests.Request(), settings.google_client_id
+    )
+
+
+@router.post("/register", response_model=RegistrationResponse, status_code=202)
 def register(
     payload: RegisterRequest,
     request: Request,
-    response: Response,
     db: Db,
     settings: Settings = Depends(get_settings),
-) -> AuthResponse:
+    sender: EmailSender = Depends(get_email_sender),
+) -> RegistrationResponse:
+    if not settings.password_auth_enabled:
+        raise HTTPException(status_code=404, detail="Password authentication is disabled")
     check_auth_rate(request, "register", limit=5)
     try:
         validate_password(payload.password)
@@ -122,13 +178,6 @@ def register(
             expires_at=datetime.now(UTC) + timedelta(hours=24),
         )
     )
-    _, token, csrf = create_session(
-        db,
-        user,
-        settings,
-        request.headers.get("user-agent"),
-        request.client.host if request.client else None,
-    )
     record_audit(
         db,
         action="user.registered",
@@ -144,12 +193,76 @@ def register(
         raise HTTPException(
             status_code=409, detail="An account with this email already exists"
         ) from exc
-    _set_auth_cookies(response, token, csrf, settings)
-    return AuthResponse(
-        user=UserRead.model_validate(user),
-        memberships=[],
-        csrf_token=csrf,
-        development_verification_token=verification_token if not settings.is_production else None,
+    _send_email(
+        sender,
+        user.primary_email,
+        "Verify your ReadySet email",
+        "Verify your ReadySet email: "
+        f"{settings.public_web_url.rstrip('/')}/verify-email?"
+        f"{urlencode({'token': verification_token})}",
+    )
+    return RegistrationResponse(
+        message="Check your email to verify your account before signing in.",
+        development_verification_token=(
+            verification_token if settings.expose_development_tokens else None
+        ),
+    )
+
+
+@router.post("/verification/resend", response_model=MessageResponse, status_code=202)
+def resend_verification(
+    payload: PasswordResetRequest,
+    request: Request,
+    db: Db,
+    settings: Settings = Depends(get_settings),
+    sender: EmailSender = Depends(get_email_sender),
+) -> MessageResponse:
+    if not settings.password_auth_enabled:
+        raise HTTPException(status_code=404, detail="Password authentication is disabled")
+    check_auth_rate(request, "verification-resend", limit=5)
+    normalized = normalize_email(str(payload.email))
+    identity = db.scalar(
+        select(AuthIdentity).where(
+            AuthIdentity.provider == "password",
+            AuthIdentity.provider_subject == normalized,
+            AuthIdentity.email_verified_at.is_(None),
+        )
+    )
+    raw: str | None = None
+    if identity:
+        user = db.get(User, identity.user_id)
+        if user and user.status == UserStatus.ACTIVE:
+            now = datetime.now(UTC)
+            db.execute(
+                update(OneTimeToken)
+                .where(
+                    OneTimeToken.user_id == user.id,
+                    OneTimeToken.purpose == "verify_email",
+                    OneTimeToken.consumed_at.is_(None),
+                )
+                .values(consumed_at=now)
+            )
+            raw = random_token()
+            db.add(
+                OneTimeToken(
+                    user_id=user.id,
+                    purpose="verify_email",
+                    token_hash=hash_token(raw),
+                    expires_at=now + timedelta(hours=24),
+                )
+            )
+            db.commit()
+            _send_email(
+                sender,
+                user.primary_email,
+                "Verify your ReadySet email",
+                "Verify your ReadySet email: "
+                f"{settings.public_web_url.rstrip('/')}/verify-email?"
+                f"{urlencode({'token': raw})}",
+            )
+    return MessageResponse(
+        message="If an unverified password account exists, verification instructions were sent.",
+        development_token=raw if raw and settings.expose_development_tokens else None,
     )
 
 
@@ -161,14 +274,21 @@ def login(
     db: Db,
     settings: Settings = Depends(get_settings),
 ) -> AuthResponse:
+    if not settings.password_auth_enabled:
+        raise HTTPException(status_code=404, detail="Password authentication is disabled")
     check_auth_rate(request, "login", limit=10)
     found = find_password_identity(db, normalize_email(str(payload.email)))
-    if not found or not verify_password(payload.password, found[1].password_hash):
+    if not found:
         raise HTTPException(status_code=401, detail="Invalid email or password")
-    user, _ = found
+    user, identity, credential = found
+    valid, updated_hash = verify_and_update_password(payload.password, credential.password_hash)
+    if not valid or user.status != UserStatus.ACTIVE or identity.email_verified_at is None:
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    if updated_hash:
+        credential.password_hash = updated_hash
     _, token, csrf = create_session(
         db,
-        user,
+        identity,
         settings,
         request.headers.get("user-agent"),
         request.client.host if request.client else None,
@@ -180,6 +300,7 @@ def login(
         resource_id=user.id,
         organization_id=None,
         actor_user_id=user.id,
+        metadata={"provider": "password"},
     )
     db.commit()
     _set_auth_cookies(response, token, csrf, settings)
@@ -191,8 +312,13 @@ def login(
 
 
 @router.get("/me", response_model=AuthResponse)
-def me(current: CurrentUser, db: Db, request: Request) -> AuthResponse:
-    csrf = request.cookies.get(get_settings().csrf_cookie_name) or ""
+def me(
+    current: CurrentUser,
+    db: Db,
+    request: Request,
+    settings: Settings = Depends(get_settings),
+) -> AuthResponse:
+    csrf = request.cookies.get(settings.csrf_cookie_name) or ""
     return AuthResponse(
         user=UserRead.model_validate(current.user),
         memberships=[MembershipRead.model_validate(m) for m in _memberships(db, current.user.id)],
@@ -237,24 +363,43 @@ def verify_email(payload: TokenRequest, db: Db) -> None:
     )
     if not identity:
         raise HTTPException(status_code=400, detail="Invalid token")
-    identity.email_verified_at = datetime.now(UTC)
-    token.consumed_at = datetime.now(UTC)
+    now = datetime.now(UTC)
+    identity.email_verified_at = now
+    db.execute(
+        update(OneTimeToken)
+        .where(
+            OneTimeToken.user_id == token.user_id,
+            OneTimeToken.purpose == "verify_email",
+            OneTimeToken.consumed_at.is_(None),
+        )
+        .values(consumed_at=now)
+    )
+    record_audit(
+        db,
+        action="user.email_verified",
+        resource_type="auth_identity",
+        resource_id=identity.id,
+        organization_id=None,
+        actor_user_id=identity.user_id,
+    )
     db.commit()
 
 
-@router.post("/password-reset/request", status_code=202)
+@router.post("/password-reset/request", response_model=MessageResponse, status_code=202)
 def request_reset(
     payload: PasswordResetRequest,
     request: Request,
     db: Db,
     settings: Settings = Depends(get_settings),
-) -> dict[str, str | None]:
-    check_auth_rate(request, "password-reset", limit=5)
-    user = db.scalar(
-        select(User).where(User.normalized_email == normalize_email(str(payload.email)))
-    )
+    sender: EmailSender = Depends(get_email_sender),
+) -> MessageResponse:
+    if not settings.password_auth_enabled:
+        raise HTTPException(status_code=404, detail="Password authentication is disabled")
+    check_auth_rate(request, "password-reset-request", limit=5)
+    found = find_password_identity(db, normalize_email(str(payload.email)))
     raw: str | None = None
-    if user:
+    if found and found[1].email_verified_at is not None and found[0].status == UserStatus.ACTIVE:
+        user = found[0]
         raw = random_token()
         db.add(
             OneTimeToken(
@@ -265,14 +410,23 @@ def request_reset(
             )
         )
         db.commit()
-    return {
-        "message": "If the account exists, reset instructions were created.",
-        "development_token": raw if raw and not settings.is_production else None,
-    }
+        _send_email(
+            sender,
+            user.primary_email,
+            "Reset your ReadySet password",
+            "Reset your ReadySet password: "
+            f"{settings.public_web_url.rstrip('/')}/reset-password?"
+            f"{urlencode({'token': raw})}",
+        )
+    return MessageResponse(
+        message="If the account exists, reset instructions were sent.",
+        development_token=raw if raw and settings.expose_development_tokens else None,
+    )
 
 
 @router.post("/password-reset/confirm", status_code=204)
-def confirm_reset(payload: PasswordResetConfirm, db: Db) -> None:
+def confirm_reset(payload: PasswordResetConfirm, request: Request, db: Db) -> None:
+    check_auth_rate(request, "password-reset-confirm", limit=5)
     try:
         validate_password(payload.password)
     except ValueError as exc:
@@ -291,40 +445,82 @@ def confirm_reset(payload: PasswordResetConfirm, db: Db) -> None:
         raise HTTPException(status_code=400, detail="Invalid or expired token")
     identity = db.scalar(
         select(AuthIdentity).where(
-            AuthIdentity.user_id == token.user_id, AuthIdentity.provider == "password"
+            AuthIdentity.user_id == token.user_id,
+            AuthIdentity.provider == "password",
+            AuthIdentity.email_verified_at.is_not(None),
         )
     )
     credential = db.get(PasswordCredential, identity.id) if identity else None
     if not credential:
         raise HTTPException(status_code=400, detail="Invalid token")
+    assert identity is not None
+    now = datetime.now(UTC)
     credential.password_hash = hash_password(payload.password)
-    credential.password_changed_at = datetime.now(UTC)
-    token.consumed_at = datetime.now(UTC)
+    credential.password_changed_at = now
+    db.execute(
+        update(OneTimeToken)
+        .where(
+            OneTimeToken.user_id == token.user_id,
+            OneTimeToken.purpose == "password_reset",
+            OneTimeToken.consumed_at.is_(None),
+        )
+        .values(consumed_at=now)
+    )
     db.execute(
         update(SessionRecord)
-        .where(SessionRecord.user_id == token.user_id)
-        .values(revoked_at=datetime.now(UTC))
+        .where(SessionRecord.user_id == token.user_id, SessionRecord.revoked_at.is_(None))
+        .values(revoked_at=now)
+    )
+    record_audit(
+        db,
+        action="user.password_reset",
+        resource_type="auth_identity",
+        resource_id=identity.id,
+        organization_id=None,
+        actor_user_id=token.user_id,
     )
     db.commit()
 
 
 @router.get("/google/start")
 def google_start(
-    request: Request, db: Db, settings: Settings = Depends(get_settings)
+    request: Request,
+    response: Response,
+    db: Db,
+    settings: Settings = Depends(get_settings),
 ) -> dict[str, str]:
     check_auth_rate(request, "google-start", limit=20)
-    if not settings.google_client_id or not settings.google_client_secret:
+    if (
+        not settings.google_auth_enabled
+        or not settings.google_client_id
+        or not settings.google_client_secret
+    ):
         raise HTTPException(status_code=503, detail="Google authentication is not configured")
-    state, verifier, nonce = random_token(), random_token(48), random_token()
+    state, verifier, nonce, binding = (
+        random_token(),
+        random_token(48),
+        random_token(),
+        random_token(),
+    )
     db.add(
         OAuthLoginState(
             state_hash=hash_token(state),
+            binding_hash=hash_token(binding),
             code_verifier=verifier,
             nonce=nonce,
-            expires_at=datetime.now(UTC) + timedelta(minutes=10),
+            expires_at=datetime.now(UTC) + timedelta(minutes=settings.oauth_state_ttl_minutes),
         )
     )
     db.commit()
+    response.set_cookie(
+        settings.oauth_binding_cookie_name,
+        binding,
+        httponly=True,
+        secure=settings.cookie_secure,
+        samesite="lax",
+        max_age=settings.oauth_state_ttl_minutes * 60,
+        path=OAUTH_CALLBACK_PATH,
+    )
     params = {
         "client_id": settings.google_client_id,
         "redirect_uri": settings.google_redirect_uri,
@@ -341,10 +537,15 @@ def google_start(
     }
 
 
-@router.get("/google/callback")
+@router.get("/google/callback", response_model=None)
 def google_callback(
-    code: str, state: str, request: Request, db: Db, settings: Settings = Depends(get_settings)
-) -> RedirectResponse:
+    code: str,
+    state: str,
+    request: Request,
+    db: Db,
+    settings: Settings = Depends(get_settings),
+) -> Response:
+    binding = request.cookies.get(settings.oauth_binding_cookie_name)
     pending = db.scalar(
         select(OAuthLoginState)
         .where(
@@ -354,61 +555,108 @@ def google_callback(
         )
         .with_for_update()
     )
-    if not pending or not settings.google_client_id or not settings.google_client_secret:
-        raise HTTPException(status_code=400, detail="Invalid OAuth state")
-    with httpx.Client(timeout=10) as client:
-        token_response = client.post(
-            "https://oauth2.googleapis.com/token",
-            data={
-                "code": code,
-                "client_id": settings.google_client_id,
-                "client_secret": settings.google_client_secret,
-                "redirect_uri": settings.google_redirect_uri,
-                "grant_type": "authorization_code",
-                "code_verifier": pending.code_verifier,
-            },
-        )
-        token_response.raise_for_status()
-        raw_id_token = token_response.json()["id_token"]
-    claims = google_id_token.verify_oauth2_token(  # type: ignore[no-untyped-call]
-        raw_id_token, google_requests.Request(), settings.google_client_id
-    )
-    if claims.get("nonce") != pending.nonce or not claims.get("email_verified"):
-        raise HTTPException(status_code=401, detail="Google identity could not be verified")
-    subject, email = str(claims["sub"]), normalize_email(str(claims["email"]))
+    if (
+        not pending
+        or not binding
+        or not hmac.compare_digest(pending.binding_hash, hash_token(binding))
+        or not settings.google_auth_enabled
+        or not settings.google_client_id
+        or not settings.google_client_secret
+    ):
+        if pending:
+            pending.consumed_at = datetime.now(UTC)
+            db.commit()
+        return _oauth_error(settings, "Invalid or expired OAuth request", 400)
+    try:
+        raw_id_token = exchange_google_code(code, pending, settings)
+        claims = verify_google_token(raw_id_token, settings)
+    except (httpx.HTTPError, GoogleAuthError, ValueError, KeyError, TypeError):
+        pending.consumed_at = datetime.now(UTC)
+        db.commit()
+        return _oauth_error(settings, "Google authentication could not be completed", 401)
+    if (
+        claims.get("nonce") != pending.nonce
+        or claims.get("email_verified") is not True
+        or not claims.get("sub")
+        or not claims.get("email")
+    ):
+        pending.consumed_at = datetime.now(UTC)
+        db.commit()
+        return _oauth_error(settings, "Google identity could not be verified", 401)
+    subject = str(claims["sub"])
+    provider_email = str(claims["email"])
+    email = normalize_email(provider_email)
+    picture_claim = claims.get("picture")
+    picture = str(picture_claim) if picture_claim else None
     identity = db.scalar(
         select(AuthIdentity).where(
             AuthIdentity.provider == "google", AuthIdentity.provider_subject == subject
         )
     )
+    user: User | None
     if identity:
         user = db.get(User, identity.user_id)
+        if not user or user.status != UserStatus.ACTIVE:
+            pending.consumed_at = datetime.now(UTC)
+            db.commit()
+            return _oauth_error(settings, "Google identity could not be verified", 401)
+        if (
+            user.normalized_email != email
+            or normalize_email(identity.provider_email or "") != email
+        ):
+            pending.consumed_at = datetime.now(UTC)
+            db.commit()
+            return _oauth_error(settings, "Google identity conflicts with this account", 409)
     else:
-        user = db.scalar(select(User).where(User.normalized_email == email))
-        if not user:
+        user = db.scalar(select(User).where(User.normalized_email == email).with_for_update())
+        if user and user.status != UserStatus.ACTIVE:
+            pending.consumed_at = datetime.now(UTC)
+            db.commit()
+            return _oauth_error(settings, "Google identity could not be verified", 401)
+        if user:
+            conflicting = db.scalar(
+                select(AuthIdentity.id).where(
+                    AuthIdentity.user_id == user.id,
+                    AuthIdentity.provider == "google",
+                    AuthIdentity.provider_subject != subject,
+                )
+            )
+            if conflicting:
+                pending.consumed_at = datetime.now(UTC)
+                db.commit()
+                return _oauth_error(settings, "Google identity conflicts with this account", 409)
+            has_verified_identity = db.scalar(
+                select(AuthIdentity.id).where(
+                    AuthIdentity.user_id == user.id,
+                    AuthIdentity.email_verified_at.is_not(None),
+                )
+            )
+            user.primary_email = provider_email
+            if not has_verified_identity:
+                user.display_name = str(claims.get("name") or email)
+                user.avatar_url = picture
+        else:
             user = User(
-                primary_email=str(claims["email"]),
+                primary_email=provider_email,
                 normalized_email=email,
                 display_name=str(claims.get("name") or email),
-                avatar_url=claims.get("picture"),
+                avatar_url=picture,
             )
             db.add(user)
             db.flush()
-        db.add(
-            AuthIdentity(
-                user_id=user.id,
-                provider="google",
-                provider_subject=subject,
-                provider_email=email,
-                email_verified_at=datetime.now(UTC),
-            )
+        identity = AuthIdentity(
+            id=uuid.uuid4(),
+            user_id=user.id,
+            provider="google",
+            provider_subject=subject,
+            provider_email=email,
+            email_verified_at=datetime.now(UTC),
         )
-    if not user:
-        raise HTTPException(status_code=401, detail="Google identity could not be verified")
+        db.add(identity)
     pending.consumed_at = datetime.now(UTC)
     _, token, csrf = create_session(
         db,
-        user,
+        identity,
         settings,
         request.headers.get("user-agent"),
         request.client.host if request.client else None,
@@ -420,8 +668,14 @@ def google_callback(
         resource_id=user.id,
         organization_id=None,
         actor_user_id=user.id,
+        metadata={"provider": "google"},
     )
-    db.commit()
-    response = RedirectResponse(f"{settings.web_url}/", status_code=303)
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        return _oauth_error(settings, "Google identity linking conflicted; retry sign-in", 409)
+    response = RedirectResponse(f"{settings.public_web_url.rstrip('/')}/", status_code=303)
     _set_auth_cookies(response, token, csrf, settings)
+    _delete_oauth_cookie(response, settings)
     return response

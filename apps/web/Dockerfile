@@ -5,7 +5,7 @@ ENV API_INTERNAL_URL=${API_INTERNAL_URL}
 COPY package.json package-lock.json* ./
 COPY apps/web/package.json ./apps/web/package.json
 COPY packages/api-client/package.json ./packages/api-client/package.json
-RUN npm install
+RUN npm ci
 COPY apps/web ./apps/web
 COPY packages/api-client ./packages/api-client
 RUN npm run build --workspace @readyset/web

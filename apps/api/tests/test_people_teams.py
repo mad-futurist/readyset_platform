@@ -67,11 +67,7 @@ def test_member_role_cannot_manage_people(client: TestClient) -> None:
         headers=auth_headers(client, org["id"]),
     ).json()
     member_client = TestClient(client.app, base_url="http://localhost")
-    member = register(member_client, "role-member@example.com")
-    member_client.post(
-        "/api/v1/auth/verify-email",
-        json={"token": member["development_verification_token"]},
-    )
+    register(member_client, "role-member@example.com")
     member_client.post(
         "/api/v1/organizations/invitations/accept",
         json={"token": invite["development_token"]},
@@ -83,3 +79,19 @@ def test_member_role_cannot_manage_people(client: TestClient) -> None:
         headers=auth_headers(member_client, org["id"]),
     )
     assert denied.status_code == 403
+
+
+def test_profile_patch_rejects_null_non_nullable_fields(client: TestClient) -> None:
+    register(client, "patch-person@example.com")
+    org = create_org(client, "Patch People")
+    profile = client.post(
+        "/api/v1/people",
+        json={"display_name": "Pat"},
+        headers=auth_headers(client, org["id"]),
+    ).json()
+    response = client.patch(
+        f"/api/v1/people/{profile['id']}",
+        json={"display_name": None},
+        headers=auth_headers(client, org["id"]),
+    )
+    assert response.status_code == 422

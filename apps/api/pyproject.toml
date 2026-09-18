@@ -51,3 +51,4 @@ exclude = ["alembic"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q --disable-warnings --strict-markers"
+markers = ["postgres: requires a migrated PostgreSQL database"]

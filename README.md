@@ -8,7 +8,7 @@ The legacy `demo/` and external `references/` trees are read-only research input
 
 ```text
 apps/api       FastAPI, SQLAlchemy 2, Alembic, PostgreSQL
-apps/web       Next.js, React, TanStack Query, Zod
+    apps/web       Next.js, React, TanStack Query
 apps/worker    M2 ingestion boundary (documentation only in M1)
 packages/api-client  generated OpenAPI TypeScript declarations
 docs           architecture, ADRs, and research
@@ -27,7 +27,7 @@ The frontend and backend have separate manifests, Dockerfiles, ignore rules, and
 2. Run `docker compose up --build`.
 3. Open `http://localhost:3000`; API documentation is at `http://localhost:8000/docs` in development.
 
-Google's OAuth client must allow the callback `http://localhost:8000/api/v1/auth/google/callback`. Email verification/reset and invitation delivery use development-captured tokens in local responses; production must connect an email delivery adapter before launch.
+Google's OAuth client must allow the public same-origin callback `http://localhost:3000/api/v1/auth/google/callback`. In development, email is captured in memory and raw one-time tokens can be returned by the API. Staging and production refuse to start with those development behaviors; SMTP and the other hardened settings in `.env.example` must be configured.
 
 ## Native development
 
@@ -47,7 +47,7 @@ npm run dev --workspace @readyset/web
 
 ```powershell
 Push-Location apps\api
-.\.venv\Scripts\ruff check app tests
+.\.venv\Scripts\ruff check app tests scripts
 .\.venv\Scripts\mypy app
 .\.venv\Scripts\pytest --cov=app
 .\.venv\Scripts\alembic check
@@ -58,4 +58,4 @@ npm test
 npm run build
 ```
 
-Regenerate the API contract with `scripts/export-openapi.ps1`. Architecture starts at [ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md); security invariants are in [SECURITY_INVARIANTS.md](docs/architecture/SECURITY_INVARIANTS.md).
+Regenerate the API contract cross-platform with `python apps/api/scripts/export_openapi.py` followed by `npm run generate:api-client`, or use `scripts/export-openapi.ps1` on Windows. CI exports from the real FastAPI app and rejects drift in both generated files. Architecture starts at [ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md); security invariants are in [SECURITY_INVARIANTS.md](docs/architecture/SECURITY_INVARIANTS.md).

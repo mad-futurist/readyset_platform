@@ -30,8 +30,8 @@ def hash_password(password: str) -> str:
     return password_hash.hash(password)
 
 
-def verify_password(password: str, encoded: str) -> bool:
-    return password_hash.verify(password, encoded)
+def verify_and_update_password(password: str, encoded: str) -> tuple[bool, str | None]:
+    return password_hash.verify_and_update(password, encoded)
 
 
 def validate_password(password: str) -> None:
@@ -46,7 +46,7 @@ def slugify(value: str) -> str:
 
 def create_session(
     db: Session,
-    user: User,
+    identity: AuthIdentity,
     settings: Settings,
     user_agent: str | None,
     ip_address: str | None,
@@ -54,7 +54,8 @@ def create_session(
     token = random_token()
     csrf = random_token()
     session = SessionRecord(
-        user_id=user.id,
+        user_id=identity.user_id,
+        auth_identity_id=identity.id,
         token_hash=hash_token(token),
         csrf_hash=hash_token(csrf),
         expires_at=datetime.now(UTC) + timedelta(hours=settings.session_ttl_hours),
@@ -67,9 +68,9 @@ def create_session(
 
 def find_password_identity(
     db: Session, normalized_email: str
-) -> tuple[User, PasswordCredential] | None:
+) -> tuple[User, AuthIdentity, PasswordCredential] | None:
     row = db.execute(
-        select(User, PasswordCredential)
+        select(User, AuthIdentity, PasswordCredential)
         .join(AuthIdentity, AuthIdentity.user_id == User.id)
         .join(PasswordCredential, PasswordCredential.auth_identity_id == AuthIdentity.id)
         .where(
@@ -77,7 +78,7 @@ def find_password_identity(
             AuthIdentity.provider == "password",
         )
     ).first()
-    return (row[0], row[1]) if row else None
+    return (row[0], row[1], row[2]) if row else None
 
 
 def pkce_challenge(verifier: str) -> str:

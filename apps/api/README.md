@@ -35,7 +35,7 @@ Run these steps from the repository root.
    Copy-Item .env.example apps/api/.env
    ```
 
-   The checked-in defaults work with the Compose services. Keep secrets in `apps/api/.env`; this file is ignored. If using Google sign-in, set `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`, and configure the provider callback as `http://localhost:8000/api/v1/auth/google/callback`.
+   The checked-in defaults work with the Compose services. Keep secrets in `apps/api/.env`; this file is ignored. If using Google sign-in, set `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`, and configure the provider callback as `http://localhost:3000/api/v1/auth/google/callback`. The browser always reaches that path through the Next.js same-origin proxy.
 
 4. Start only the backend infrastructure from the repository root:
 
@@ -92,12 +92,16 @@ With PostgreSQL and MinIO running, execute from the repository root:
 
 ```powershell
 Push-Location apps/api
-.\.venv\Scripts\ruff check app tests
+.\.venv\Scripts\ruff check app tests scripts
 .\.venv\Scripts\mypy app
 .\.venv\Scripts\pytest --cov=app
 .\.venv\Scripts\alembic check
 Pop-Location
 ```
+
+PostgreSQL-only integrity and locking tests run when `RUN_POSTGRES_TESTS=1`; CI enables that flag against its PostgreSQL service. SQLite remains the fast local unit-test backend, not a production target.
+
+Export the source-of-truth OpenAPI snapshot with `python apps/api/scripts/export_openapi.py`, then run `npm run generate:api-client` from the repository root. Commit both generated artifacts together.
 
 To confirm that the backend is independently packageable:
 

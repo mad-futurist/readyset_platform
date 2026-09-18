@@ -2,7 +2,7 @@
 
 ## Entity responsibilities
 
-- `users`, `auth_identities`, `password_credentials`, `sessions`, `email_verification_tokens`, `password_reset_tokens`, `oauth_login_states`: authentication and account security.
+- `users`, `auth_identities`, `password_credentials`, `sessions`, `one_time_tokens`, `oauth_login_states`: authentication and account security. Verification and reset tokens share `one_time_tokens` and are distinguished by `purpose`.
 - `organizations`, `organization_memberships`, `organization_invitations`: tenant ownership and access.
 - `employee_profiles`, `teams`, `team_memberships`: organization people directory.
 - `documents`, `document_versions`, `document_user_grants`, `document_team_grants`: logical knowledge items, immutable source versions, and ACLs.
@@ -15,6 +15,7 @@ erDiagram
   USER ||--o{ AUTH_IDENTITY : authenticates_as
   AUTH_IDENTITY ||--o| PASSWORD_CREDENTIAL : has
   USER ||--o{ SESSION : owns
+  AUTH_IDENTITY ||--o{ SESSION : created
   USER ||--o{ ORGANIZATION_MEMBERSHIP : joins
   ORGANIZATION ||--o{ ORGANIZATION_MEMBERSHIP : has
   ORGANIZATION ||--o{ ORGANIZATION_INVITATION : invites
@@ -54,12 +55,13 @@ Duplicated `organization_id` on joins and versions is intentional: it enables ma
 - UUID primary keys use application-generated UUIDv4 values.
 - Normalized primary email is unique; `(provider, provider_subject)` is unique.
 - `(organization_id, user_id)` membership, `(organization_id, slug)` team, and `(team_id, employee_profile_id)` membership are unique.
+- Partial unique indexes permit at most one active OWNER per organization and one pending invitation per organization/normalized email. Application transactions preserve the complementary rule that an organization always has an active owner; PostgreSQL cannot express that minimum-cardinality rule with a simple constraint.
 - Employee `(organization_id, user_id)` is unique when a user link exists.
-- `(document_id, version_number)` and `storage_key` are unique.
+- `(document_id, version_number)`, `(organization_id, document_id, id)`, and `storage_key` are unique. The document current pointer uses `(organization_id, id, current_version_id)` to reference `(organization_id, document_id, id)`, proving the version belongs to that document.
 - Document grant pairs are unique and use concrete FKs.
-- Composite organization/id FKs ensure profiles, teams, documents, versions, and grants cannot be joined across tenants.
+- Composite organization/id FKs ensure profiles, teams, documents, versions, and grants cannot be joined across tenants. Tenant-owned user principals and grant/invitation creators reference `(organization_id, user_id)` membership rows; membership may be revoked for history, while application authorization still requires ACTIVE status.
 - Common list indexes begin with `organization_id`; session/token hashes and invitation token hashes are uniquely indexed; audit events index organization/time and resource.
-- Check constraints enforce positive version numbers/sizes and token expiry semantics where practical.
+- Check constraints enforce positive version numbers and non-negative sizes. Token expiry and purpose semantics are enforced by application queries; there is no database claim that wall-clock expiry is a static check constraint.
 
 ## Delete behavior
 
@@ -67,7 +69,9 @@ Users and organizations are not hard-deleted through M1 APIs. Membership revocat
 
 ## Migration strategy
 
-Alembic is the only production schema-change path. Migrations are forward-only, reviewed alongside models, tested from an empty database, and must not import demo migrations. Destructive changes use expand/migrate/contract once production data exists.
+Alembic is the only production schema-change path. The published initial migration `d24151675ee0` is unchanged. Corrective revision `a42f85c9d319` deletes untrusted legacy sessions/OAuth states, adds identity/browser binding, repairs and strengthens current-version integrity, adds membership principal FKs, deduplicates legacy owner/invitation conflicts, and installs partial unique indexes. Migrations are tested from an empty PostgreSQL database in CI; destructive changes use expand/migrate/contract once production data exists.
+
+Document version creation locks the parent document row with `FOR UPDATE` before calculating `MAX(version_number)+1`, so uploads for the same document serialize. Different documents remain independent.
 
 ## Intentionally deferred fields and M2 extensions
 

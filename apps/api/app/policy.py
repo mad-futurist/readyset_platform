@@ -40,6 +40,7 @@ ROLE_CAPABILITIES: dict[OrganizationRole, frozenset[Capability]] = {
 class AuthenticatedUser:
     user: User
     session_id: uuid.UUID
+    auth_identity_id: uuid.UUID
 
 
 @dataclass(frozen=True)
