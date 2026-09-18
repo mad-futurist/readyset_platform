@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+/references/
+/demo/
+
+# ReadySet generated and local files
+node_modules/
+.next/
+*.tsbuildinfo

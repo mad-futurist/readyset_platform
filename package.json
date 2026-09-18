@@ -1,0 +1,12 @@
+{
+  "name": "readyset-platform",
+  "private": true,
+  "workspaces": ["apps/web", "packages/api-client"],
+  "scripts": {
+    "build": "npm run build --workspace @readyset/web",
+    "lint": "npm run lint --workspace @readyset/web",
+    "typecheck": "npm run typecheck --workspace @readyset/web",
+    "test": "npm run test --workspace @readyset/web",
+    "generate:api-client": "npm run generate --workspace @readyset/api-client"
+  }
+}

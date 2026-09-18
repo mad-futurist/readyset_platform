@@ -1,0 +1,60 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: readyset
+      POSTGRES_USER: readyset
+      POSTGRES_PASSWORD: readyset
+    ports: ["5432:5432"]
+    volumes: ["readyset_postgres:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U readyset"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio:
+    image: minio/minio:RELEASE.2025-07-23T15-54-02Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: readyset
+      MINIO_ROOT_PASSWORD: readyset-local-only
+    ports: ["9000:9000", "9001:9001"]
+    volumes: ["readyset_minio:/data"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: ./apps/api
+    environment:
+      ENVIRONMENT: development
+      DATABASE_URL: postgresql+psycopg://readyset:readyset@postgres:5432/readyset
+      WEB_URL: http://localhost:3000
+      CORS_ORIGINS: http://localhost:3000
+      STORAGE_ENDPOINT_URL: http://minio:9000
+      STORAGE_ACCESS_KEY: readyset
+      STORAGE_SECRET_KEY: readyset-local-only
+      STORAGE_BUCKET: readyset-documents
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      GOOGLE_REDIRECT_URI: http://localhost:8000/api/v1/auth/google/callback
+    ports: ["8000:8000"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      minio: { condition: service_healthy }
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        API_INTERNAL_URL: http://api:8000
+    ports: ["3000:3000"]
+    depends_on: [api]
+
+volumes:
+  readyset_postgres:
+  readyset_minio:
