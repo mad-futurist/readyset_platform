@@ -1,8 +1,11 @@
 # M1.1 final hardening analysis
 
-Date: 2026-09-18  
+Date: 2026-09-18
+
 Baseline: `967070c8c36f3f1fe04c42615690ea2df877e3d6`
-M1.1 implementation: `e7453a49e8ae2e50d8e8c34502c8b0fea1f62b80`  
+
+M1.1 implementation: `e7453a49e8ae2e50d8e8c34502c8b0fea1f62b80`
+
 Closure implementation: `5da1c18453379ceaca3f03038ee63c610ca55ff0`
 
 ## Method and verified baseline
