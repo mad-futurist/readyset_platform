@@ -50,23 +50,27 @@ def _seed_document(factory: sessionmaker[Session]) -> tuple[uuid.UUID, uuid.UUID
                 display_name="Postgres Owner",
             )
         )
-        db.add(
-            AuthIdentity(
-                id=identity_id,
-                user_id=user_id,
-                provider="password",
-                provider_subject=f"postgres-{suffix}@example.com",
-                provider_email=f"postgres-{suffix}@example.com",
-                email_verified_at=datetime.now(UTC),
-            )
-        )
-        db.add(
-            Organization(
-                id=organization_id,
-                name=f"Postgres {suffix}",
-                slug=f"postgres-{suffix}",
-                created_by_user_id=user_id,
-            )
+        # These models intentionally do not expose ORM relationships for every FK.
+        # Flush each dependency layer so the fixture is valid on PostgreSQL rather
+        # than relying on incidental unit-of-work ordering.
+        db.flush()
+        db.add_all(
+            [
+                AuthIdentity(
+                    id=identity_id,
+                    user_id=user_id,
+                    provider="password",
+                    provider_subject=f"postgres-{suffix}@example.com",
+                    provider_email=f"postgres-{suffix}@example.com",
+                    email_verified_at=datetime.now(UTC),
+                ),
+                Organization(
+                    id=organization_id,
+                    name=f"Postgres {suffix}",
+                    slug=f"postgres-{suffix}",
+                    created_by_user_id=user_id,
+                ),
+            ]
         )
         db.flush()
         db.add(
