@@ -2,6 +2,8 @@
 
 Date: 2026-09-18  
 Baseline: `967070c8c36f3f1fe04c42615690ea2df877e3d6`
+M1.1 implementation: `e7453a49e8ae2e50d8e8c34502c8b0fea1f62b80`  
+Closure implementation: `5da1c18453379ceaca3f03038ee63c610ca55ff0`
 
 ## Method and verified baseline
 
@@ -55,22 +57,22 @@ This is the current status ledger; the detailed table above intentionally preser
 | Finding | Final status |
 |---|---|
 | Google/password reclaim | IMPLEMENTED and unit-tested with database-state assertions |
-| PostgreSQL JSONB truth | IMPLEMENTED by additive migration; PostgreSQL execution pending an available service |
+| PostgreSQL JSONB truth | TESTED by empty-DB online PostgreSQL upgrade, JSONB assertion and clean Alembic drift check |
 | Actual file-content validation | IMPLEMENTED and unit-tested |
 | Malware scan gate | IMPLEMENTED and fake-adapter tested; real clamd is an OPERATIONAL REQUIREMENT |
-| Shared/upload rate limiting | IMPLEMENTED and unit-tested; real Redis test is CI-defined and locally pending |
-| Object storage hardening | IMPLEMENTED; MinIO integration is CI-defined and locally pending |
+| Shared/upload rate limiting | TESTED with direct/trusted/untrusted/malformed address cases and real shared Redis state/TTL/threshold/scope |
+| Object storage hardening | TESTED against real MinIO for lifecycle, missing object, compensation and pre-storage authorization |
 | Upload compensation | IMPLEMENTED and unit-tested |
 | Synchronous email semantics | IMPLEMENTED and unit-tested |
 | Liveness/readiness | IMPLEMENTED and unit-tested with dependency fakes |
 | Structured logging/unexpected errors | IMPLEMENTED; controlled envelope tested |
 | Public web security headers | IMPLEMENTED; Next production build verified locally |
-| Separate migration release step | IMPLEMENTED in image/Compose/runbook; image execution pending Docker availability |
-| Non-root containers | IMPLEMENTED in Dockerfiles; runtime inspection pending Docker availability |
+| Separate migration release step | TESTED by image build and Compose model; API command remains Uvicorn-only |
+| Non-root containers | TESTED by image builds and runtime inspection (`readyset` API, `node` web) |
 | Reproducible Python dependencies | IMPLEMENTED with committed `uv.lock` and frozen CI/image commands |
-| Security/image CI gates | IMPLEMENTED in workflow; remote run pending |
+| Security/image CI gates | TESTED by the final remote closure run |
 | Correct PostgreSQL probes | IMPLEMENTED in Compose and CI |
-| MinIO/Redis integration coverage | IMPLEMENTED and CI-wired; locally pending services |
+| MinIO/Redis integration coverage | TESTED against real service containers in isolated CI jobs |
 | Immutability/audit wording | IMPLEMENTED in reconciled docs |
 | Frontend operational flows | IMPLEMENTED; typecheck, tests and production build verified locally |
 | Engineering constitution | IMPLEMENTED |
@@ -78,7 +80,7 @@ This is the current status ledger; the detailed table above intentionally preser
 | PostgreSQL RLS | DEFERRED |
 | M2 intelligence/workflows | DEFERRED and untouched |
 
-M1.1 is not declared complete until the PostgreSQL, MinIO, Redis, Docker-image, secret-scan, and remote CI gates execute successfully.
+All repository-level M1.1 completion gates executed successfully in remote CI. Production provider selection, maintained ClamAV operation, backups and deployment rehearsal remain explicitly operational rather than repository refactoring work.
 
 ## Local verification record
 
@@ -99,3 +101,21 @@ Executed on 2026-09-18:
 - Alembic PostgreSQL offline SQL generation through `f6f5b16f7d31`: passed.
 
 Not executed locally: online Alembic upgrade/check, PostgreSQL-marked tests, MinIO test, Redis test, gitleaks, and API/web image builds. Docker Desktop's engine did not become responsive and local PostgreSQL timed out. These gates are defined in CI but must pass there before M1.1 is called complete.
+
+## Targeted closure and remote chronology
+
+The local record above describes the initial M1.1 implementation pass. The targeted closure pass then added eager storage-stream opening with controlled pre-header 404/503 responses, explicit trusted-proxy address resolution, hardened `rediss://` validation, isolated service CI jobs, and the pinned official Quay MinIO image. It deliberately removed the ineffective uncommitted per-request `last_seen_at` mutation rather than adding a write to every authenticated request.
+
+Remote GitHub Actions chronology:
+
+1. Baseline commit `967070c8c36f3f1fe04c42615690ea2df877e3d6` completed successfully in run `35342953177`.
+2. M1.1 implementation commit `e7453a49e8ae2e50d8e8c34502c8b0fea1f62b80` ran as `35349141198`. Web, container image builds, non-root inspection, dependency/security scans, PostgreSQL service startup and Redis service startup succeeded. The combined API job failed before API tests because Docker Hub denied the invalid `minio/minio:RELEASE.2025-07-23T15-54-02Z` pull. This failed run is retained as the evidence that motivated registry correction and job isolation.
+3. Closure implementation commit `5da1c18453379ceaca3f03038ee63c610ca55ff0` completed successfully in run `35351063508`. Every job was green:
+   - `api-core`: frozen sync, Ruff, strict mypy, empty PostgreSQL migration through `f6f5b16f7d31`, `alembic check` with “No new upgrade operations detected”, and 68 tests passed with 87% coverage. This included all four PostgreSQL tests: JSONB types and the previously proven relational/concurrency invariants.
+   - `storage-integration`: pinned `quay.io/minio/minio:RELEASE.2025-07-23T15-54-02Z` started and 3 real-service tests passed.
+   - `redis-integration`: Redis 8 service started and 1 shared-state atomic limiter test passed.
+   - `web`: generated-contract drift, ESLint, strict TypeScript, 9 Vitest tests and the Next.js production build passed.
+   - `containers`: API and web images built; runtime users were `readyset` and `node`.
+   - `security`: `pip-audit` found no known vulnerabilities, npm audit found 0 vulnerabilities, and pinned gitleaks reported no leaks across full history.
+
+The closure-pass local suite was also green: 64 passed, 8 external-service skips, 2 warnings and 87% coverage; Ruff and strict mypy passed; frontend lint/typecheck, 9 tests and production build passed; dependency audits, generated-contract drift, Compose validation, CI YAML parsing, production isolation and `git diff --check` passed.
