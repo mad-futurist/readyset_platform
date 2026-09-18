@@ -36,6 +36,11 @@ services:
       timeout: 5s
       retries: 10
 
+  mailpit:
+    image: axllent/mailpit:v1.31.1
+    profiles: ["smtp"]
+    ports: ["1025:1025", "8025:8025"]
+
   migrate:
     build: ./apps/api
     command: ["alembic", "upgrade", "head"]
@@ -48,7 +53,13 @@ services:
       GOOGLE_AUTH_ENABLED: ${GOOGLE_AUTH_ENABLED:-false}
       INVITATIONS_ENABLED: "true"
       DEVELOPMENT_TOKEN_EXPOSURE: "true"
-      EMAIL_BACKEND: capture
+      EMAIL_BACKEND: ${EMAIL_BACKEND:-capture}
+      EMAIL_FROM: ${EMAIL_FROM:-ReadySet <no-reply@localhost>}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_STARTTLS: ${SMTP_STARTTLS:-false}
       RATE_LIMIT_BACKEND: redis
       REDIS_URL: redis://redis:6379/0
       STORAGE_ENDPOINT_URL: http://minio:9000

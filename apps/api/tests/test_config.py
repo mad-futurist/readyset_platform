@@ -9,6 +9,20 @@ def test_unknown_environment_is_rejected() -> None:
         Settings(environment="prod")
 
 
+def test_list_settings_accept_compose_style_csv_environment(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+    monkeypatch.setenv("TRUSTED_PROXY_CIDRS", "10.0.0.0/8,192.0.2.10/32")
+    monkeypatch.setenv("ALLOWED_CONTENT_TYPES", "text/plain,text/markdown")
+
+    settings = Settings(environment="test")
+
+    assert settings.cors_origins == ["http://localhost:3000", "http://127.0.0.1:3000"]
+    assert settings.trusted_proxy_cidrs == ["10.0.0.0/8", "192.0.2.10/32"]
+    assert settings.allowed_content_types == ["text/plain", "text/markdown"]
+
+
 def test_hardened_environment_rejects_development_defaults() -> None:
     with pytest.raises(ValidationError) as error:
         Settings(environment="production")

@@ -78,6 +78,27 @@ Run these steps from the repository root.
 
    Use `docker compose down` to remove the containers and network. Add `--volumes` only when you intentionally want to delete the local PostgreSQL and MinIO data.
 
+## Test email locally with Mailpit
+
+The default Compose configuration uses the in-memory `capture` backend. To send registration, verification, password-reset, and invitation messages through a local SMTP server, enable the optional Mailpit profile from the repository root:
+
+```powershell
+$env:EMAIL_BACKEND = "smtp"
+$env:SMTP_HOST = "mailpit"
+$env:SMTP_PORT = "1025"
+$env:SMTP_STARTTLS = "false"
+docker compose --profile smtp up --build -d
+```
+
+Open the Mailpit inbox at `http://localhost:8025`, then register a new address through the application. Mailpit accepts local messages without SMTP credentials and displays the verification link. These values are for local development only; staging and production require authenticated SMTP with STARTTLS.
+
+To return to the default capture backend in the current PowerShell session:
+
+```powershell
+Remove-Item Env:EMAIL_BACKEND,Env:SMTP_HOST,Env:SMTP_PORT,Env:SMTP_STARTTLS
+docker compose up --build -d
+```
+
 ## Validate the backend
 
 With PostgreSQL, MinIO, and Redis running, execute from the repository root:

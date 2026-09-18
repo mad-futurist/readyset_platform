@@ -1,10 +1,11 @@
 import enum
 from functools import lru_cache
 from ipaddress import ip_network
+from typing import Annotated
 from urllib.parse import urlparse
 
 from pydantic import Field, field_validator, model_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
 class Environment(str, enum.Enum):
@@ -41,7 +42,9 @@ class Settings(BaseSettings):
     environment: Environment = Environment.DEVELOPMENT
     database_url: str = "postgresql+psycopg://readyset:readyset@localhost:5432/readyset"
     public_web_url: str = "http://localhost:3000"
-    cors_origins: list[str] = Field(default_factory=lambda: ["http://localhost:3000"])
+    cors_origins: Annotated[list[str], NoDecode] = Field(
+        default_factory=lambda: ["http://localhost:3000"]
+    )
     cookie_secure: bool = False
     session_cookie_name: str = "rs_session"
     csrf_cookie_name: str = "rs_csrf"
@@ -58,7 +61,7 @@ class Settings(BaseSettings):
     redis_url: str | None = None
     rate_limit_key_prefix: str = "readyset:rate-limit"
     trust_proxy_headers: bool = False
-    trusted_proxy_cidrs: list[str] = Field(default_factory=list)
+    trusted_proxy_cidrs: Annotated[list[str], NoDecode] = Field(default_factory=list)
     scanner_backend: ScannerBackend = ScannerBackend.NOOP
     clamav_host: str | None = None
     clamav_port: int = 3310
@@ -85,7 +88,7 @@ class Settings(BaseSettings):
     storage_encryption: StorageEncryption = StorageEncryption.NONE
     storage_kms_key_id: str | None = None
     max_upload_bytes: int = 25 * 1024 * 1024
-    allowed_content_types: list[str] = Field(
+    allowed_content_types: Annotated[list[str], NoDecode] = Field(
         default_factory=lambda: [
             "application/pdf",
             "text/plain",
