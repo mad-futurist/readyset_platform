@@ -32,7 +32,7 @@ def test_valid_hardened_environment_is_accepted() -> None:
         google_redirect_uri=("https://app.staging.readyset.example/api/v1/auth/google/callback"),
         development_token_exposure=False,
         rate_limit_backend="redis",
-        redis_url="redis://redis.internal:6379/0",
+        redis_url="rediss://redis.internal:6379/0",
         scanner_backend="clamav",
         clamav_host="clamav.internal",
         email_backend="smtp",
@@ -50,6 +50,57 @@ def test_valid_hardened_environment_is_accepted() -> None:
     assert not settings.expose_development_tokens
 
 
+def test_hardened_environment_requires_tls_redis() -> None:
+    with pytest.raises(ValidationError) as error:
+        Settings(
+            environment="production",
+            database_url="postgresql+psycopg://app:strong-db-password@db.internal/readyset",
+            public_web_url="https://app.example",
+            cors_origins=["https://app.example"],
+            cookie_secure=True,
+            google_redirect_uri="https://app.example/api/v1/auth/google/callback",
+            development_token_exposure=False,
+            rate_limit_backend="redis",
+            redis_url="redis://redis.internal:6379/0",
+            uploads_enabled=False,
+            password_auth_enabled=False,
+            invitations_enabled=False,
+            storage_endpoint_url="https://objects.internal",
+            storage_access_key=None,
+            storage_secret_key=None,
+            storage_auto_create_bucket=False,
+            storage_encryption="AES256",
+            email_from="ReadySet <no-reply@example.com>",
+        )
+    assert "rediss://" in str(error.value)
+
+
+def test_trusted_proxy_headers_require_explicit_networks() -> None:
+    with pytest.raises(ValidationError) as error:
+        Settings(
+            environment="production",
+            database_url="postgresql+psycopg://app:strong-db-password@db.internal/readyset",
+            public_web_url="https://app.example",
+            cors_origins=["https://app.example"],
+            cookie_secure=True,
+            google_redirect_uri="https://app.example/api/v1/auth/google/callback",
+            development_token_exposure=False,
+            rate_limit_backend="redis",
+            redis_url="rediss://redis.internal:6379/0",
+            trust_proxy_headers=True,
+            uploads_enabled=False,
+            password_auth_enabled=False,
+            invitations_enabled=False,
+            storage_endpoint_url="https://objects.internal",
+            storage_access_key=None,
+            storage_secret_key=None,
+            storage_auto_create_bucket=False,
+            storage_encryption="AES256",
+            email_from="ReadySet <no-reply@example.com>",
+        )
+    assert "TRUSTED_PROXY_CIDRS" in str(error.value)
+
+
 def test_hardened_environment_rejects_default_database_and_insecure_storage() -> None:
     with pytest.raises(ValidationError) as error:
         Settings(
@@ -61,7 +112,7 @@ def test_hardened_environment_rejects_default_database_and_insecure_storage() ->
             google_redirect_uri="https://app.readyset.example/api/v1/auth/google/callback",
             development_token_exposure=False,
             rate_limit_backend="redis",
-            redis_url="redis://redis.internal:6379/0",
+            redis_url="rediss://redis.internal:6379/0",
             uploads_enabled=False,
             password_auth_enabled=False,
             invitations_enabled=False,
@@ -100,7 +151,7 @@ def test_hardened_configuration_fails_closed(override: dict[str, object], expect
         "google_redirect_uri": "https://app.example/api/v1/auth/google/callback",
         "development_token_exposure": False,
         "rate_limit_backend": "redis",
-        "redis_url": "redis://redis.internal:6379/0",
+        "redis_url": "rediss://redis.internal:6379/0",
         "scanner_backend": "clamav",
         "clamav_host": "clamav.internal",
         "email_backend": "smtp",

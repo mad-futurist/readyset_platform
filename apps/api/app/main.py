@@ -65,6 +65,7 @@ def create_app() -> FastAPI:
         lifespan=lifespan,
     )
     app.state.storage = S3ObjectStorage(settings)
+    app.state.settings = settings
     app.state.email_sender = create_email_sender(settings)
     app.state.rate_limiter = create_rate_limiter(settings)
     app.state.file_scanner = create_file_scanner(settings)

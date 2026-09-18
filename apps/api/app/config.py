@@ -1,5 +1,6 @@
 import enum
 from functools import lru_cache
+from ipaddress import ip_network
 from urllib.parse import urlparse
 
 from pydantic import Field, field_validator, model_validator
@@ -56,6 +57,8 @@ class Settings(BaseSettings):
     rate_limit_backend: RateLimitBackend = RateLimitBackend.MEMORY
     redis_url: str | None = None
     rate_limit_key_prefix: str = "readyset:rate-limit"
+    trust_proxy_headers: bool = False
+    trusted_proxy_cidrs: list[str] = Field(default_factory=list)
     scanner_backend: ScannerBackend = ScannerBackend.NOOP
     clamav_host: str | None = None
     clamav_port: int = 3310
@@ -91,11 +94,18 @@ class Settings(BaseSettings):
         ]
     )
 
-    @field_validator("cors_origins", "allowed_content_types", mode="before")
+    @field_validator("cors_origins", "allowed_content_types", "trusted_proxy_cidrs", mode="before")
     @classmethod
     def split_csv(cls, value: object) -> object:
         if isinstance(value, str):
             return [item.strip() for item in value.split(",") if item.strip()]
+        return value
+
+    @field_validator("trusted_proxy_cidrs")
+    @classmethod
+    def validate_trusted_proxy_cidrs(cls, value: list[str]) -> list[str]:
+        for cidr in value:
+            ip_network(cidr, strict=False)
         return value
 
     @model_validator(mode="after")
@@ -123,6 +133,10 @@ class Settings(BaseSettings):
             errors.append("DEVELOPMENT_TOKEN_EXPOSURE must be false")
         if self.rate_limit_backend != RateLimitBackend.REDIS or not self.redis_url:
             errors.append("RATE_LIMIT_BACKEND=redis and REDIS_URL are required")
+        elif urlparse(self.redis_url).scheme != "rediss":
+            errors.append("REDIS_URL must use rediss:// in hardened environments")
+        if self.trust_proxy_headers and not self.trusted_proxy_cidrs:
+            errors.append("TRUSTED_PROXY_CIDRS is required when TRUST_PROXY_HEADERS=true")
         if self.uploads_enabled and (
             self.scanner_backend != ScannerBackend.CLAMAV or not self.clamav_host
         ):

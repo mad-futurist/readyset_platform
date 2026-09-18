@@ -48,10 +48,10 @@ def test_s3_compatible_object_lifecycle_and_missing_object() -> None:
     storage.check_access()
     key = f"integration/{uuid.uuid4()}"
     storage.put_stream(key, io.BytesIO(b"readyset-storage-test"), "text/plain")
-    assert b"".join(storage.iter_bytes(key)) == b"readyset-storage-test"
+    assert b"".join(storage.open_stream(key).iter_bytes()) == b"readyset-storage-test"
     storage.delete(key)
     with pytest.raises(ObjectNotFound):
-        b"".join(storage.iter_bytes(key))
+        storage.open_stream(key)
 
 
 @pytest.mark.storage
@@ -79,3 +79,26 @@ def test_s3_object_is_compensated_after_database_failure(
         )
     listed = storage.client.list_objects_v2(Bucket=storage.bucket, Prefix=prefix)
     assert listed.get("KeyCount", 0) == 0
+
+
+@pytest.mark.storage
+def test_unauthorized_download_never_opens_real_storage(
+    client: TestClient,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    storage = _integration_storage()
+    client.app.state.storage = storage
+    opened = False
+    real_open_stream = storage.open_stream
+
+    def observed_open_stream(key: str):
+        nonlocal opened
+        opened = True
+        return real_open_stream(key)
+
+    monkeypatch.setattr(storage, "open_stream", observed_open_stream)
+    response = client.get(
+        f"/api/v1/documents/{uuid.uuid4()}/versions/{uuid.uuid4()}/download"
+    )
+    assert response.status_code == 401
+    assert not opened

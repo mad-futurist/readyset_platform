@@ -1,4 +1,5 @@
 from collections.abc import Iterator
+from dataclasses import dataclass
 from typing import IO, Protocol
 
 import boto3
@@ -23,11 +24,42 @@ class StoragePermissionDenied(StorageError):
     pass
 
 
+class OpenedObjectStream(Protocol):
+    def iter_bytes(self) -> Iterator[bytes]: ...
+    def close(self) -> None: ...
+
+
 class ObjectStorage(Protocol):
     def put_stream(self, key: str, stream: IO[bytes], content_type: str) -> None: ...
-    def iter_bytes(self, key: str) -> Iterator[bytes]: ...
+    def open_stream(self, key: str) -> OpenedObjectStream: ...
     def delete(self, key: str) -> None: ...
     def check_access(self) -> None: ...
+
+
+@dataclass
+class _S3OpenedObjectStream:
+    body: object
+
+    def iter_bytes(self) -> Iterator[bytes]:
+        try:
+            while chunk := self.body.read(64 * 1024):  # type: ignore[attr-defined]
+                yield chunk
+        finally:
+            self.close()
+
+    def close(self) -> None:
+        self.body.close()  # type: ignore[attr-defined]
+
+
+@dataclass
+class _MemoryOpenedObjectStream:
+    content: bytes
+
+    def iter_bytes(self) -> Iterator[bytes]:
+        yield self.content
+
+    def close(self) -> None:
+        return None
 
 
 class S3ObjectStorage:
@@ -96,16 +128,12 @@ class S3ObjectStorage:
         except (ClientError, BotoCoreError) as exc:
             raise self._translate(exc) from exc
 
-    def iter_bytes(self, key: str) -> Iterator[bytes]:
+    def open_stream(self, key: str) -> OpenedObjectStream:
         try:
             body = self.client.get_object(Bucket=self.bucket, Key=key)["Body"]
         except (ClientError, BotoCoreError) as exc:
             raise self._translate(exc) from exc
-        try:
-            while chunk := body.read(64 * 1024):
-                yield chunk
-        finally:
-            body.close()
+        return _S3OpenedObjectStream(body)
 
     def delete(self, key: str) -> None:
         try:
@@ -121,8 +149,12 @@ class MemoryObjectStorage:
     def put_stream(self, key: str, stream: IO[bytes], content_type: str) -> None:
         self.objects[key] = stream.read()
 
-    def iter_bytes(self, key: str) -> Iterator[bytes]:
-        yield self.objects[key]
+    def open_stream(self, key: str) -> OpenedObjectStream:
+        try:
+            content = self.objects[key]
+        except KeyError as exc:
+            raise ObjectNotFound("Object not found") from exc
+        return _MemoryOpenedObjectStream(content)
 
     def delete(self, key: str) -> None:
         self.objects.pop(key, None)

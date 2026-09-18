@@ -54,11 +54,11 @@ This is a traceability spec. “Enforced by” names code/schema boundaries; “
 
 ## Storage access and source identity
 
-**Invariant:** The browser never receives storage credentials. Keys are server-generated and tenant/document/version scoped. New bytes create a new key and row; no update endpoint rewrites a source. Runtime errors are translated and bucket creation is disabled in hardened environments.
+**Invariant:** The browser never receives storage credentials. Keys are server-generated and tenant/document/version scoped. New bytes create a new key and row; no update endpoint rewrites a source. A download opens the remote object before response headers start, maps missing/unavailable opens to controlled 404/503 responses, streams without buffering the whole body, and closes the body. Bucket creation is disabled in hardened environments.
 
 **Enforced by:** `S3ObjectStorage`, document upload/download routes, deterministic key format, configuration validation.
 
-**Verified by:** memory-storage route tests, unauthorized-storage test, MinIO-marked lifecycle/missing-object test, compensation test.
+**Verified by:** successful/missing/unavailable download route tests, unauthorized-storage tests, and MinIO-marked lifecycle/missing-object/compensation tests.
 
 **Operational dependency:** private pre-created bucket, least-privilege IAM/workload identity, TLS, bucket or configured SSE/KMS encryption. Source identity is application-immutable, not DB-trigger-immutable.
 
@@ -84,13 +84,13 @@ This is a traceability spec. “Enforced by” names code/schema boundaries; “
 
 ## Rate limiting
 
-**Invariant:** Hardened deployments use the shared Redis implementation. Authentication is bucketed by hashed direct-peer address and, where available, hashed normalized email. Uploads are bucketed by authenticated user, organization and address. Arbitrary forwarding headers are ignored.
+**Invariant:** Hardened deployments use the shared Redis implementation over TLS. Authentication is bucketed by hashed resolved address and, where available, hashed normalized email. Uploads are bucketed by authenticated user, organization and address. Forwarding headers are used only when enabled and the immediate peer belongs to an explicitly configured trusted network; otherwise the direct peer is authoritative. Malformed forwarding chains fail safely to the peer.
 
-**Enforced by:** `RateLimiter` port, atomic Redis Lua increment/expiry, route checks, hardened configuration.
+**Enforced by:** `RateLimiter` port, atomic Redis Lua increment/expiry, `client_address`, route checks, and hardened `rediss://`/trusted-proxy configuration validation.
 
-**Verified by:** memory allow/block/scope test, Redis-marked shared integration test, configuration tests.
+**Verified by:** memory allow/block/scope tests; direct, spoofed, trusted-chain and malformed proxy tests; Redis-marked shared-state/TTL/threshold/scope integration test; hardened configuration tests.
 
-**Operational dependency:** available Redis and trusted proxy/peer normalization. Rate limits are abuse controls, not an authorization boundary.
+**Operational dependency:** authenticated TLS Redis and exact trusted-proxy CIDRs/topology. Rate limits are abuse controls, not an authorization boundary.
 
 ## Production configuration
 

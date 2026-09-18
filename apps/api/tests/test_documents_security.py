@@ -9,7 +9,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.file_security import FakeFileSecurityScanner, ScanResult
-from app.storage import MemoryObjectStorage
+from app.storage import MemoryObjectStorage, StorageUnavailable
 
 
 def upload(
@@ -320,9 +320,9 @@ def test_unauthorized_request_never_reaches_storage(client: TestClient) -> None:
     class ObservedStorage(MemoryObjectStorage):
         reads = 0
 
-        def iter_bytes(self, key: str):
+        def open_stream(self, key: str):
             self.reads += 1
-            yield from super().iter_bytes(key)
+            return super().open_stream(key)
 
     storage = ObservedStorage()
     client.app.state.storage = storage
@@ -331,6 +331,49 @@ def test_unauthorized_request_never_reaches_storage(client: TestClient) -> None:
     )
     assert response.status_code == 401
     assert storage.reads == 0
+
+
+def test_missing_download_object_returns_404_before_streaming(client: TestClient) -> None:
+    register(client, "missing-object@example.com")
+    organization = create_org(client, "Missing object")
+    document = upload(client, organization["id"]).json()
+    version = client.get(
+        f"/api/v1/documents/{document['id']}/versions",
+        headers={"X-ReadySet-Organization": organization["id"]},
+    ).json()[0]
+    storage = client.app.state.storage
+    assert isinstance(storage, MemoryObjectStorage)
+    storage.objects.clear()
+
+    response = client.get(
+        f"/api/v1/documents/{document['id']}/versions/{version['id']}/download",
+        headers={"X-ReadySet-Organization": organization["id"]},
+    )
+    assert response.status_code == 404
+    assert response.json()["error"]["code"] == "object_not_found"
+
+
+def test_storage_unavailable_download_returns_503_before_streaming(client: TestClient) -> None:
+    class UnavailableStorage(MemoryObjectStorage):
+        def open_stream(self, key: str):
+            raise StorageUnavailable("sensitive internal endpoint detail")
+
+    register(client, "unavailable-object@example.com")
+    organization = create_org(client, "Unavailable object")
+    document = upload(client, organization["id"]).json()
+    version = client.get(
+        f"/api/v1/documents/{document['id']}/versions",
+        headers={"X-ReadySet-Organization": organization["id"]},
+    ).json()[0]
+    client.app.state.storage = UnavailableStorage()
+
+    response = client.get(
+        f"/api/v1/documents/{document['id']}/versions/{version['id']}/download",
+        headers={"X-ReadySet-Organization": organization["id"]},
+    )
+    assert response.status_code == 503
+    assert response.json()["error"]["code"] == "storage_unavailable"
+    assert "sensitive" not in response.text
 
 
 def test_upload_rate_limit_uses_user_organization_and_address_dimensions(

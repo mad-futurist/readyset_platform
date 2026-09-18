@@ -379,19 +379,24 @@ def download_version(
     version = DocumentRepository(db, context).get_version(document_id, version_id)
     if not version:
         raise HTTPException(status_code=404, detail="Document version not found")
-    record_audit(
-        db,
-        action="document.downloaded",
-        resource_type="document_version",
-        resource_id=version.id,
-        organization_id=context.organization.id,
-        actor_user_id=context.user.id,
-        metadata={"document_id": str(document_id)},
-    )
-    db.commit()
+    opened = storage.open_stream(version.storage_key)
+    try:
+        record_audit(
+            db,
+            action="document.downloaded",
+            resource_type="document_version",
+            resource_id=version.id,
+            organization_id=context.organization.id,
+            actor_user_id=context.user.id,
+            metadata={"document_id": str(document_id)},
+        )
+        db.commit()
+    except Exception:
+        opened.close()
+        raise
     safe_ascii = re.sub(r"[^A-Za-z0-9._-]+", "_", version.original_filename)
     return StreamingResponse(
-        storage.iter_bytes(version.storage_key),
+        opened.iter_bytes(),
         media_type=version.mime_type,
         headers={
             "Content-Disposition": f'attachment; filename="{safe_ascii}"',

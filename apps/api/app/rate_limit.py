@@ -1,4 +1,5 @@
 import hashlib
+import ipaddress
 import threading
 import time
 from collections import defaultdict, deque
@@ -91,9 +92,37 @@ def _digest(value: str) -> str:
     return hashlib.sha256(value.encode()).hexdigest()
 
 
+def client_address(request: Request) -> str:
+    """Resolve a client address only through explicitly trusted proxy hops."""
+    peer = request.client.host if request.client else "unknown"
+    settings: Settings = request.app.state.settings
+    if not settings.trust_proxy_headers:
+        return peer
+    try:
+        peer_ip = ipaddress.ip_address(peer)
+        trusted = [ipaddress.ip_network(cidr, strict=False) for cidr in settings.trusted_proxy_cidrs]
+    except ValueError:
+        return peer
+    if not any(peer_ip in network for network in trusted):
+        return peer
+
+    forwarded = request.headers.get("X-Forwarded-For")
+    if not forwarded:
+        return peer
+    try:
+        chain = [ipaddress.ip_address(value.strip()) for value in forwarded.split(",")]
+    except ValueError:
+        return peer
+    if not chain:
+        return peer
+    for candidate in reversed(chain):
+        if not any(candidate in network for network in trusted):
+            return str(candidate)
+    return str(chain[0])
+
+
 def _address(request: Request) -> str:
-    # The ASGI peer is authoritative; do not trust arbitrary forwarding headers.
-    return _digest(request.client.host if request.client else "unknown")
+    return _digest(client_address(request))
 
 
 def check_auth_rate(

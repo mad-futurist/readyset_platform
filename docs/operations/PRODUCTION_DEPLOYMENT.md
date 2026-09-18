@@ -34,13 +34,14 @@ The API image starts only Uvicorn. Docker Compose models the migration job separ
 
 - **PostgreSQL:** supported version, TLS in transit, encrypted storage, connection limits, monitoring, automated backups, point-in-time recovery, and a least-privilege runtime role.
 - **Object storage:** private pre-created bucket. Runtime credentials need object read/write/delete and bucket access checks, not bucket creation. Prefer workload identity/IAM roles; static key pairs are optional. Configure `AES256` or `aws:kms` (and its key ID) and enforce compatible bucket encryption. Block public access and lifecycle changes outside controlled infrastructure.
-- **Redis:** shared, authenticated/TLS endpoint for application rate limiting. `RATE_LIMIT_BACKEND=redis` is mandatory. The reverse proxy must supply a trustworthy peer connection; the app deliberately ignores arbitrary `X-Forwarded-For`.
+- **Redis:** shared, authenticated/TLS endpoint for application rate limiting. `RATE_LIMIT_BACKEND=redis` and a `rediss://` `REDIS_URL` are mandatory in staging and production. Plain `redis://` is a development/test-only transport.
+- **Trusted proxy:** leave `TRUST_PROXY_HEADERS=false` when FastAPI receives direct client connections. When a reverse proxy or load balancer is the immediate peer, set `TRUST_PROXY_HEADERS=true` and list only its exact network ranges in `TRUSTED_PROXY_CIDRS`. The API accepts `X-Forwarded-For` only from those peers and walks the chain right-to-left past trusted hops. Untrusted or malformed forwarding data falls back to the immediate peer. Keep the proxy's overwrite/append behavior and these CIDRs aligned.
 - **Malware scanning:** maintained ClamAV/clamd reachable only from the API network. `SCANNER_BACKEND=clamav` is mandatory while uploads are enabled. Scanner outage makes uploads fail closed and readiness fail.
 - **Email:** TLS-capable SMTP account and routable sender. Committed account/invitation state remains authoritative if delivery fails; users retry verification and administrators reissue invitations. Reset responses never disclose account or SMTP state.
 - **Google OAuth:** separate production client, exact HTTPS `${PUBLIC_WEB_URL}/api/v1/auth/google/callback`, secret-manager client secret, and tested consent-screen/domain configuration.
 - **TLS and edge:** terminate modern TLS, preserve the same public origin for `/api/*`, enforce request/body limits compatible with `MAX_UPLOAD_BYTES`, and do not cache authenticated responses. HSTS is emitted by Next.js in production.
 
-Hardened configuration fails validation for HTTP origins, insecure cookies, development token exposure, capture email where delivery is required, memory limiting, absent malware scanning, bucket auto-creation, absent storage encryption, local/default credentials, wildcard CORS, and callback mismatch.
+Hardened configuration fails validation for HTTP origins, insecure cookies, development token exposure, capture email where delivery is required, memory limiting, non-TLS Redis, trusted-proxy mode without explicit CIDRs, absent malware scanning, bucket auto-creation, absent storage encryption, local/default credentials, wildcard CORS, and callback mismatch.
 
 ## Health, logs, and monitoring
 

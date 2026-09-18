@@ -56,7 +56,6 @@ def get_current_user(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Authentication required"
         )
     session, user, identity = row
-    session.last_seen_at = datetime.now(UTC)
     request.state.user_id = user.id
     return AuthenticatedUser(user=user, session_id=session.id, auth_identity_id=identity.id)
 

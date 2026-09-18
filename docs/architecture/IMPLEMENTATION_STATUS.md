@@ -16,8 +16,8 @@ Status words are evidence labels, not a general claim that a deployment is safe 
 | ACL | Reusable server-side user/team predicate | Cross-tenant/restricted tests | PostgreSQL | TESTED |
 | File content validation | PDF signature/EOF, DOCX structure, UTF-8 text checks and MIME match | Valid/invalid/mismatch tests | Bounded API upload | TESTED |
 | Malware scan | Synchronous scanner port and clamd adapter; development/test fake/no-op | Clean/infected/unavailable tests | Reachable maintained ClamAV service | TESTED |
-| Object storage | Typed S3 adapter, least-privilege access check, optional SSE/KMS, explicit local bucket creation | Memory tests pass; MinIO-marked test awaits service execution | Private pre-created bucket, IAM/workload identity | IMPLEMENTED |
-| Rate limiting | In-memory local adapter; atomic Redis fixed-window production adapter; auth/upload dimensions | Unit tests pass; Redis-marked test awaits service execution | Redis; trusted edge peer normalization | IMPLEMENTED |
+| Object storage | Typed S3 adapter, eager stream open, least-privilege access check, optional SSE/KMS, explicit local bucket creation | Route tests prove pre-header 404/503; MinIO-marked tests await final service run | Private pre-created bucket, IAM/workload identity | IMPLEMENTED |
+| Rate limiting | In-memory local adapter; atomic Redis fixed-window production adapter; auth/upload dimensions; explicit trusted-proxy resolution | Unit/config/proxy tests pass; Redis-marked test awaits final service run | TLS Redis; exact proxy CIDRs/topology | IMPLEMENTED |
 | Email | Capture and SMTP; committed state is authoritative; delivery status where disclosure is safe | Sender and failure-semantics tests | TLS SMTP provider | TESTED |
 | Audit | Append-oriented API behavior through `record_audit` | Event assertions | Log retention and DB access controls | IMPLEMENTED |
 | PostgreSQL | Alembic schema, relational invariants, JSONB metadata | Baseline integrity suite passed; new migration/drift execution awaits service availability | Managed/operated PostgreSQL | IMPLEMENTED |

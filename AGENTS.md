@@ -41,3 +41,8 @@ Ideas may be reimplemented in the production codebase, but no build-time or runt
 
 - Hardened configuration fails closed. Production containers run non-root; API replicas do not run migrations; one release step does. Production dependencies use committed locks.
 - Readiness checks required dependencies. Secrets never enter frontend bundles, logs, generated artifacts, or repository history.
+
+### Proxy and streaming boundaries
+
+- Never trust forwarding headers from arbitrary peers. Client-address security decisions may use forwarded addresses only when the immediate peer matches configured trusted proxy networks.
+- Open external streams before starting an HTTP response when open-time failures must map to controlled status codes. Keep response bodies streamed and close their underlying resources reliably.
