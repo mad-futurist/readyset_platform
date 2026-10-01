@@ -1,6 +1,6 @@
 # M2 verification and security review
 
-Status: IMPLEMENTED and TESTED; M2 implementation closed by fully green remote CI run 36876978380 on c3e859082bc31cc0f1e51f72b471135d218360ea. A final documentation-only head is also required to pass CI before delivery. This ledger never treats mocked providers as live-provider validation.
+Status: IMPLEMENTED and TESTED; M2 implementation closed by fully green remote CI run 36876978380 on c3e859082bc31cc0f1e51f72b471135d218360ea. The final delivery head is also required to pass CI before delivery. This ledger never treats mocked providers as live-provider validation.
 
 ## Architecture implemented
 
@@ -66,7 +66,7 @@ Knowledge status polling, safe failure/retry, current/history metadata, Ask AI, 
 
 ## Exact CI results
 
-Initial remote run [36875964405](https://github.com/mad-futurist/readyset_platform/actions/runs/36875964405) on `b9632a994341b43b815b0b7f525b16884c81b68f`: api-core, worker, vector-retrieval-integration, redis-integration, web and security passed. Storage/container jobs failed before application acceptance because the existing official MinIO image now returns registry authorization errors. Corrected local/CI packaging builds a SHA256-verified official security-release source archive with upstream locked Go modules; production storage remains externally operated. 
+Initial remote run [36875964405](https://github.com/mad-futurist/readyset_platform/actions/runs/36875964405) on `b9632a994341b43b815b0b7f525b16884c81b68f`: api-core, worker, vector-retrieval-integration, redis-integration, web and security passed. Storage/container jobs failed before application acceptance because the existing official MinIO image now returns registry authorization errors. Corrected local/CI packaging builds a SHA256-verified official security-release source archive with upstream locked Go modules; production storage remains externally operated.
 
 Closure implementation run [36876978380](https://github.com/mad-futurist/readyset_platform/actions/runs/36876978380), PR #1, head `c3e859082bc31cc0f1e51f72b471135d218360ea`: completed SUCCESS, all eight jobs green.
 
@@ -81,7 +81,7 @@ Closure implementation run [36876978380](https://github.com/mad-futurist/readyse
 | containers | SUCCESS: API/web/worker/MinIO images, non-root users, one release migration, live upload-to-answer/ACL/retry acceptance and worker health |
 | security | SUCCESS: pip-audit, npm audit and full-history redacted Gitleaks |
 
-No application checks were relaxed to resolve the initial registry failure. The final delivery response links the run for the documentation-only final head, avoiding a self-referential commit/run assertion.
+No application checks were relaxed to resolve the initial registry failure. The final delivery response links the run for the final delivery head, avoiding a self-referential commit/run assertion.
 
 ## Local web/runtime/security evidence
 
@@ -98,3 +98,5 @@ Approve vendor retention/training/region/contractual terms and permitted tenant 
 ## Explicitly deferred M3+ work
 
 Learning/course/onboarding/task models, agents/tools/actions, signals, connectors/sync, long-term memory, billing, external queues/search engines and generic pipelines remain deferred.
+
+Local development TLS proxy: MinIO Go module downloads initially failed certificate verification inside the builder, while standard-network CI passed. The builder accepts an optional public-CA BuildKit secret for enterprise proxy trust; TLS/checksum verification stays enabled and the CA is not copied into the runtime image.

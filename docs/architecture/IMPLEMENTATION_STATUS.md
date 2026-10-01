@@ -61,4 +61,4 @@ Status words are evidence labels, not a general claim that a deployment is safe 
 
 M2 closure and exact CI results are tracked in `docs/review/M2_VERIFICATION.md`; no live provider validation is claimed from fake tests.
 
-M2 IMPLEMENTED and TESTED closure: remote CI run `36876978380`, implementation head `c3e859082bc31cc0f1e51f72b471135d218360ea`, all eight jobs green including packaged fake-provider acceptance. The final documentation head is rechecked remotely before delivery.
+M2 IMPLEMENTED and TESTED closure: remote CI run `36876978380`, implementation head `c3e859082bc31cc0f1e51f72b471135d218360ea`, all eight jobs green including packaged fake-provider acceptance. The final delivery head is rechecked remotely before delivery.
