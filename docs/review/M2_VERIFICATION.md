@@ -1,6 +1,6 @@
 # M2 verification and security review
 
-Status: IMPLEMENTED, local core behavior TESTED; final remote closure pending. This ledger never treats mocked providers as live-provider validation.
+Status: IMPLEMENTED and TESTED; M2 implementation closed by fully green remote CI run 36876978380 on c3e859082bc31cc0f1e51f72b471135d218360ea. A final documentation-only head is also required to pass CI before delivery. This ledger never treats mocked providers as live-provider validation.
 
 ## Architecture implemented
 
@@ -66,7 +66,22 @@ Knowledge status polling, safe failure/retry, current/history metadata, Ask AI, 
 
 ## Exact CI results
 
-Initial remote run [36875964405](https://github.com/mad-futurist/readyset_platform/actions/runs/36875964405) on `b9632a994341b43b815b0b7f525b16884c81b68f`: api-core, worker, vector-retrieval-integration, redis-integration, web and security passed. Storage/container jobs failed before application acceptance because the existing official MinIO image now returns registry authorization errors. Corrected local/CI packaging builds a SHA256-verified official security-release source archive with upstream locked Go modules; production storage remains externally operated. Final remote run pending. Required jobs: api-core, worker, vector-retrieval-integration, storage-integration, redis-integration, web, containers, security. M2 is not called closed until the final remote run is fully green.
+Initial remote run [36875964405](https://github.com/mad-futurist/readyset_platform/actions/runs/36875964405) on `b9632a994341b43b815b0b7f525b16884c81b68f`: api-core, worker, vector-retrieval-integration, redis-integration, web and security passed. Storage/container jobs failed before application acceptance because the existing official MinIO image now returns registry authorization errors. Corrected local/CI packaging builds a SHA256-verified official security-release source archive with upstream locked Go modules; production storage remains externally operated. 
+
+Closure implementation run [36876978380](https://github.com/mad-futurist/readyset_platform/actions/runs/36876978380), PR #1, head `c3e859082bc31cc0f1e51f72b471135d218360ea`: completed SUCCESS, all eight jobs green.
+
+| Job | Observed result |
+|---|---|
+| api-core | SUCCESS: frozen sync, Ruff, strict mypy (34 files), empty-DB migration, clean Alembic drift, 108 tests, 88% coverage (4 service tests deselected) |
+| worker | SUCCESS: 16 tests |
+| vector-retrieval-integration | SUCCESS: migration/drift and 10 real PostgreSQL/pgvector tests |
+| storage-integration | SUCCESS: pinned official source image, 3 MinIO integration tests |
+| redis-integration | SUCCESS: 1 Redis integration test |
+| web | SUCCESS: OpenAPI/TypeScript drift, lint/typecheck, 12 tests and production build |
+| containers | SUCCESS: API/web/worker/MinIO images, non-root users, one release migration, live upload-to-answer/ACL/retry acceptance and worker health |
+| security | SUCCESS: pip-audit, npm audit and full-history redacted Gitleaks |
+
+No application checks were relaxed to resolve the initial registry failure. The final delivery response links the run for the documentation-only final head, avoiding a self-referential commit/run assertion.
 
 ## Local web/runtime/security evidence
 
@@ -74,7 +89,7 @@ After audited dependency updates: frontend lint/typecheck, 12 tests and Next 16.
 
 ## Remaining known limitations
 
-Exact authorized-subset ranking scales with accessible corpus; indexed ANN acceleration is not claimed. No OCR/complete PDF layout or complete DOCX peripheral content. Fake chat is a local extractive preview; semantic answer accuracy and citation entailment require real-model evaluation. At least once processing can duplicate provider cost. Worker heartbeat is liveness, not progress. PostgreSQL RLS and privileged-role immutability remain M1 limitations.
+Exact authorized-subset ranking scales with accessible corpus; indexed ANN acceleration is not claimed. No OCR/complete PDF layout or complete DOCX peripheral content. Fake chat is a local extractive preview; semantic answer accuracy and citation entailment require real-model evaluation. At least once processing can duplicate provider cost. Local/CI MinIO uses an archived upstream security-release source build; select and maintain production S3 separately. Worker heartbeat is liveness, not progress. PostgreSQL RLS and privileged-role immutability remain M1 limitations.
 
 ## Operational AI-provider decisions
 

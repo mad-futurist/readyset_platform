@@ -11,4 +11,4 @@ This file was absent at M2 planning time. An untracked historical transition doc
 | Courses/onboarding/learning/tasks | DEFERRED | DEFERRED M3+; no entities added |
 | Agents/signals/connectors/memory | DEFERRED | DEFERRED M3+; Ask AI has no actions/tools |
 
-M2 closure requires the verification ledger's final green remote CI record. Provider/vendor approval remains operational.
+M2 implementation is closed by green remote CI run `36876978380` on `c3e859082bc31cc0f1e51f72b471135d218360ea`; the verification ledger records every gate. Provider/vendor approval remains operational.
