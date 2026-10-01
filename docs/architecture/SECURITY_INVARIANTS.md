@@ -50,7 +50,7 @@ This is a traceability spec. “Enforced by” names code/schema boundaries; “
 
 **Verified by:** `test_restricted_document_requires_grant_and_team_grant_works`, cross-tenant and unauthorized-storage tests.
 
-**Operational dependency:** future retrieval/RAG must call the same policy boundary; it is not implemented in M1.
+**Operational dependency:** M2 retrieval calls the same live SQL policy boundary before ranking/context; see DOCUMENT_INTELLIGENCE.md and PostgreSQL retrieval tests.
 
 ## Storage access and source identity
 
@@ -131,3 +131,13 @@ This is a traceability spec. “Enforced by” names code/schema boundaries; “
 **Verified by:** security-event assertions in auth/document/organization tests.
 
 **Operational dependency:** privileged database and migration roles can still modify rows; access control, retention and external log integrity remain operational controls.
+
+## Derived knowledge and citations (M2)
+
+**Invariant:** derived rows carry exact tenant/version lineage; only current READY active documents authorized by live membership/grants enter ranking/context. Untrusted model labels cannot manufacture citations. Stale worker leases cannot publish derived results.
+
+**Enforced by:** composite FKs, materialized SQL authorization boundary, current/READY predicates, server label mapping, post-generation eligibility check, SKIP LOCKED leases and ownership/expiry fencing.
+
+**Verified by:** test_postgres_knowledge.py plus parser/job/security/provider suites; exact results in docs/review/M2_VERIFICATION.md.
+
+**Operational dependency:** pgvector, worker CPU/memory/heartbeat supervision, AI vendor data-handling approval; enterprise text/embeddings/questions/answers remain confidential.

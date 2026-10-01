@@ -75,4 +75,4 @@ Document version creation locks the parent document row with `FOR UPDATE` before
 
 ## Intentionally deferred fields and M2 extensions
 
-No salary, address, HRIS payload, custom role engine, connector, chunk, embedding, parser configuration, or vector column is included. M2 can add `ingestion_jobs`, `extracted_artifacts`, `document_chunks(document_version_id, ...)`, index records, connector/source bindings, and external ACL principals. Citations store `document_version_id` and chunk identifiers.
+M2 migration `b17a9d2e6c40` adds ingestion_jobs, bounded JSONB extracted_artifacts, exact-version document_chunks and 1536-dimensional pgvector chunk_embeddings with composite tenant FKs, unique identities and lexical/vector indexes. See DOCUMENT_INTELLIGENCE.md and ADRs 009–012. Salary, HRIS, custom role engines, connectors/source bindings and external principals remain DEFERRED.

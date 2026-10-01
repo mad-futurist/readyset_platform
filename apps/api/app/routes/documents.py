@@ -14,6 +14,7 @@ from app.config import Settings, get_settings
 from app.dependencies import Csrf, Db, OrgContext
 from app.file_security import FileSecurityScanner, ScanResult
 from app.file_validation import InvalidFileContent, validate_content
+from app.knowledge.jobs import enqueue, retry
 from app.models import (
     Document,
     DocumentStatus,
@@ -171,7 +172,9 @@ def upload_document(
         version.ingestion_status = IngestionStatus.UPLOADED
         db.add_all([document, version])
         db.flush()
+        enqueue(db, version, settings)
         document.current_version_id = version.id
+        document.current_version = version
         record_audit(
             db,
             action="document.created",
@@ -341,7 +344,9 @@ def upload_version(
         version.ingestion_status = IngestionStatus.UPLOADED
         db.add(version)
         db.flush()
+        enqueue(db, version, settings)
         document.current_version_id = version.id
+        document.current_version = version
         record_audit(
             db,
             action="document.version_uploaded",
@@ -403,6 +408,24 @@ def download_version(
             "X-Content-Type-Options": "nosniff",
         },
     )
+
+
+@router.post("/{document_id}/versions/{version_id}/ingestion/retry", response_model=DocumentVersionRead)
+def retry_ingestion(document_id: uuid.UUID, version_id: uuid.UUID, db: Db, context: OrgContext,
+                    csrf: Csrf, settings: Settings = Depends(get_settings)) -> DocumentVersion:
+    _managed_document(db, context, document_id)
+    # Serialize retry requests including legacy sources that have no job yet.
+    db.scalar(select(Document).where(Document.organization_id == context.organization.id,
+                                    Document.id == document_id).with_for_update())
+    version = DocumentRepository(db, context).get_version(document_id, version_id)
+    if not version:
+        raise HTTPException(status_code=404, detail="Document version not found")
+    try:
+        retry(db, version, settings, context.user.id)
+    except ValueError:
+        raise HTTPException(status_code=409, detail="This version cannot be retried") from None
+    db.commit()
+    return version
 
 
 @router.get("/{document_id}/access", response_model=DocumentGrantRead)

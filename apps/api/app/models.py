@@ -383,6 +383,16 @@ class Document(Base):
     )
 
 
+    current_version: Mapped["DocumentVersion | None"] = relationship(
+        "DocumentVersion", primaryjoin="Document.current_version_id == DocumentVersion.id",
+        foreign_keys="Document.current_version_id", viewonly=True, lazy="selectin",
+    )
+
+    @property
+    def current_ingestion_status(self) -> IngestionStatus | None:
+        return self.current_version.ingestion_status if self.current_version else None
+
+
 class DocumentVersion(Base):
     __tablename__ = "document_versions"
     __table_args__ = (
@@ -417,6 +427,8 @@ class DocumentVersion(Base):
     ingestion_status: Mapped[IngestionStatus] = mapped_column(
         Enum(IngestionStatus), default=IngestionStatus.PENDING_UPLOAD, index=True
     )
+    ingestion_error_code: Mapped[str | None] = mapped_column(String(64))
+    ingestion_retryable: Mapped[bool] = mapped_column(default=False)
     created_by_user_id: Mapped[uuid.UUID] = mapped_column(
         Uuid, ForeignKey("users.id"), nullable=False
     )
@@ -529,3 +541,6 @@ Document.__table__.append_constraint(  # type: ignore[attr-defined]
         ondelete="RESTRICT",
     )
 )
+
+# Register shared derived-knowledge metadata for Alembic and fast test schemas.
+from app.knowledge import models as knowledge_models  # noqa: E402, F401

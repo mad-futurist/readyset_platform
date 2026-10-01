@@ -11,6 +11,8 @@ from app.models import (
     DocumentUserGrant,
     DocumentVisibility,
     EmployeeProfile,
+    EmployeeStatus,
+    MembershipStatus,
     Organization,
     OrganizationMembership,
     OrganizationRole,
@@ -60,8 +62,17 @@ def require_capability(context: OrganizationContext, capability: Capability) -> 
 
 
 def document_access_predicate(context: OrganizationContext):  # type: ignore[no-untyped-def]
-    if context.membership.role in {OrganizationRole.OWNER, OrganizationRole.ADMIN}:
-        return Document.organization_id == context.organization.id
+    active_membership = exists(select(OrganizationMembership.id).where(
+        OrganizationMembership.organization_id == context.organization.id,
+        OrganizationMembership.user_id == context.user.id,
+        OrganizationMembership.status == MembershipStatus.ACTIVE,
+    ))
+    administrator = exists(select(OrganizationMembership.id).where(
+        OrganizationMembership.organization_id == context.organization.id,
+        OrganizationMembership.user_id == context.user.id,
+        OrganizationMembership.status == MembershipStatus.ACTIVE,
+        OrganizationMembership.role.in_([OrganizationRole.OWNER, OrganizationRole.ADMIN]),
+    ))
     explicit_user = exists(
         select(DocumentUserGrant.id).where(
             DocumentUserGrant.organization_id == context.organization.id,
@@ -89,11 +100,14 @@ def document_access_predicate(context: OrganizationContext):  # type: ignore[no-
             DocumentTeamGrant.organization_id == context.organization.id,
             DocumentTeamGrant.document_id == Document.id,
             EmployeeProfile.user_id == context.user.id,
+            EmployeeProfile.status == EmployeeStatus.ACTIVE,
         )
     )
     return and_(
         Document.organization_id == context.organization.id,
+        active_membership,
         or_(
+            administrator,
             Document.visibility == DocumentVisibility.ORGANIZATION,
             Document.owner_user_id == context.user.id,
             explicit_user,

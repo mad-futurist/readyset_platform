@@ -18,8 +18,9 @@ from app.config import get_settings
 from app.database import engine
 from app.email import create_email_sender
 from app.file_security import create_file_scanner
+from app.knowledge.providers import create_chat_provider, create_embedding_provider
 from app.rate_limit import create_rate_limiter
-from app.routes import audit, auth, documents, organizations, people
+from app.routes import audit, auth, documents, knowledge, organizations, people
 from app.storage import ObjectNotFound, S3ObjectStorage, StorageError
 
 
@@ -70,6 +71,8 @@ def create_app() -> FastAPI:
     app.state.rate_limiter = create_rate_limiter(settings)
     app.state.file_scanner = create_file_scanner(settings)
     app.state.database_engine = engine
+    app.state.embedding_provider = create_embedding_provider(settings)
+    app.state.chat_provider = create_chat_provider(settings)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins,
@@ -171,7 +174,8 @@ def create_app() -> FastAPI:
     @app.exception_handler(Exception)
     async def unexpected_error(request: Request, exc: Exception) -> JSONResponse:
         request_id_value = getattr(request.state, "request_id", str(uuid.uuid4()))
-        logger.exception("Unhandled request failure request_id=%s", request_id_value, exc_info=exc)
+        # SQL/provider/parser exceptions can contain enterprise text or secrets.
+        logger.error("Unhandled request failure request_id=%s category=%s", request_id_value, type(exc).__name__)
         return JSONResponse(
             status_code=500,
             content={
@@ -198,6 +202,10 @@ def create_app() -> FastAPI:
         try:
             with request.app.state.database_engine.connect() as connection:
                 connection.execute(text("SELECT 1"))
+                if settings.ai_enabled and connection.dialect.name == "postgresql":
+                    if not connection.scalar(text("SELECT 1 FROM pg_extension WHERE extname = 'vector'")):
+                        raise RuntimeError("Knowledge schema is unavailable")
+                    connection.execute(text("SELECT id FROM ingestion_jobs LIMIT 1"))
             request.app.state.storage.check_access()
             request.app.state.rate_limiter.check_available()
             if settings.uploads_enabled:
@@ -211,6 +219,7 @@ def create_app() -> FastAPI:
         organizations.router,
         people.router,
         documents.router,
+        knowledge.router,
         audit.router,
     ):
         app.include_router(router, prefix="/api/v1")

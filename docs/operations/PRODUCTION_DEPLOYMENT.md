@@ -20,12 +20,12 @@ Deploy staging and production with separate accounts/projects, networks, databas
 
 ## Release order
 
-1. Build immutable API and web images from the committed lockfiles.
+1. Build immutable API, worker and web images from the committed lockfiles.
 2. Back up the database and verify dependency health.
 3. Run exactly one API image as a release job with `alembic upgrade head` using a migration role.
 4. Stop if migration fails. Do not start new API replicas against a partial schema.
 5. Roll out API replicas as the non-root runtime user; their normal database role should not have schema-migration privileges where the platform permits separation.
-6. Wait for `/readyz`; then roll out the non-root Next.js image.
+6. Wait for `/readyz`; then roll out the non-root worker and Next.js images. The worker never runs migrations.
 7. Exercise sign-in, upload/scan/download, and tenant isolation smoke tests.
 
 The API image starts only Uvicorn. Docker Compose models the migration job separately. Rollback means restoring the prior application images when the migration is backward-compatible. A data/schema rollback requires an explicitly reviewed downgrade or restore; never assume every Alembic downgrade is lossless.
@@ -57,3 +57,11 @@ PostgreSQL requires automated encrypted backups, point-in-time recovery, a docum
 ## Preflight and human decisions
 
 Before public production, decide and record: runtime/cloud provider, managed-auth versus the self-managed M1 core, ClamAV deployment/maintenance owner, email provider, backup retention/RPO/RTO, public Apache-2.0 licensing intent, data residency, and incident response ownership. Run all CI gates plus platform-specific migration, restore, rollback, load, and security tests in staging.
+
+## M2 AI and worker requirements
+
+Provision PostgreSQL vector extension with the release role (or pre-provision on managed services); run migration b17a9d2e6c40 once. The worker uses the same DB/private-storage scope and backend package, without a public HTTP API. Set CPU/memory limits for hostile parsers, a termination grace period and health/queue-age alerts. Readiness checks vector availability and the queue table when AI is enabled; health does not call a paid provider.
+
+AI_ENABLED defaults false. Local Compose explicitly chooses fake providers. For enabled hardened AI configure EMBEDDING_PROVIDER=openai, a supported text-embedding-3 model, 1536 dimensions, CHAT_PROVIDER=openai, an explicit approved CHAT_MODEL and matching CHAT_TOKENIZER (o200k_base for the corresponding model family), and OPENAI_API_KEY from a secret manager. Validate actual vendor retention/training/region/contractual controls before confidential documents are sent. Mocked adapter tests do not prove the production account or chosen model works. Perform real-provider staging acceptance with approved synthetic documents.
+
+Extracted text/chunks/embeddings/questions/answers are confidential. Ordinary logs must exclude them and provider exception payloads. Monitor structured stage timings, queue counts, attempts, failures, usage and safe audit events; raw questions/answers are not analytics. Current processing/failed versions are absent from search rather than silently falling back to obsolete sources. See DOCUMENT_INTELLIGENCE.md and docs/review/M2_VERIFICATION.md.

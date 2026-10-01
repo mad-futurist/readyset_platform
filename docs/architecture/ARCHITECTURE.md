@@ -1,8 +1,8 @@
-# ReadySet M1 architecture
+# ReadySet architecture (M1 foundation, M2 intelligence)
 
 ## System shape
 
-ReadySet is a modular monolith in a monorepo. `apps/api` is the sole owner of business rules and PostgreSQL. `apps/web` is an independently deployable Next.js client. `apps/worker` records the intended M2 deployment boundary but contains no premature queue runtime. Object bytes are accessed only through the API's storage port.
+ReadySet is a modular monolith in a monorepo. `apps/api` is the sole owner of business rules and PostgreSQL. `apps/web` is an independently deployable Next.js client. `apps/worker` independently runs leased version-scoped ingestion using the backend package. API and worker access object bytes through the shared storage port. See `DOCUMENT_INTELLIGENCE.md` for the M2 execution and retrieval boundary.
 
 ```mermaid
 flowchart LR
@@ -13,8 +13,8 @@ flowchart LR
   API --> Redis[(Redis rate limiter)]
   API --> Scanner[ClamAV scanner]
   API --> Google[Google OIDC]
-  Worker[M2 worker] -. version jobs .-> DB
-  Worker -. source bytes .-> Store
+  Worker[Ingestion worker] -->|leased version jobs| DB
+  Worker -->|source bytes| Store
 ```
 
 ## Backend modules
@@ -41,8 +41,8 @@ This is deliberately a small modular monolith, not a ceremonial service/reposito
 
 The API and web build separately. The public topology is one host: `https://app.readyset.example` serves Next.js and proxies `/api/*` to the private FastAPI origin. The public Google callback is therefore `https://app.readyset.example/api/v1/auth/google/callback`. Session, CSRF, and OAuth-binding cookies are host-only; no broad cookie domain is configured. `PUBLIC_WEB_URL` is public, while `API_INTERNAL_URL` is a build-time/server-side Next.js proxy target and is never exposed to the browser.
 
-PostgreSQL, private S3-compatible storage, Redis, malware scanning while uploads are enabled, and SMTP for password/invitation delivery are required production dependencies. Docker Compose supplies PostgreSQL, MinIO, and Redis locally; development uses an explicit no-op scanner. One release job runs Alembic before non-root API replicas start. M2 may deploy `apps/worker` from the same codebase and add version-scoped ingestion jobs without splitting services or changing the document identity model.
+PostgreSQL, private S3-compatible storage, Redis, malware scanning while uploads are enabled, and SMTP for password/invitation delivery are required production dependencies. Docker Compose supplies PostgreSQL, MinIO, and Redis locally; development uses an explicit no-op scanner. One release job runs Alembic before non-root API replicas start. M2 deploys `apps/worker` from the same backend package with PostgreSQL leases, pgvector and version-scoped artifacts. The worker has no public HTTP API; local AI providers are explicitly fake.
 
 ## Explicit non-goals
 
-M1 has no RAG, embeddings, chunks, connector sync, courses, onboarding enrollment/plans/tasks, AI conversations, Kafka, Temporal, Kubernetes, or microservices.
+M2 adds document ingestion, chunks, embeddings, hybrid retrieval and stateless evidence-backed Ask AI. Connector sync, courses, onboarding enrollment/plans/tasks, conversation memory, actions/agents, Kafka, Temporal, Kubernetes and microservices remain DEFERRED.
