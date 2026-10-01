@@ -66,7 +66,7 @@ Knowledge status polling, safe failure/retry, current/history metadata, Ask AI, 
 
 ## Exact CI results
 
-Remote run pending publication. Required jobs: api-core, worker, vector-retrieval-integration, storage-integration, redis-integration, web, containers, security. M2 is not called closed until the final remote run is fully green.
+Initial remote run [36875964405](https://github.com/mad-futurist/readyset_platform/actions/runs/36875964405) on `b9632a994341b43b815b0b7f525b16884c81b68f`: api-core, worker, vector-retrieval-integration, redis-integration, web and security passed. Storage/container jobs failed before application acceptance because the existing official MinIO image now returns registry authorization errors. Corrected local/CI packaging builds a SHA256-verified official security-release source archive with upstream locked Go modules; production storage remains externally operated. Final remote run pending. Required jobs: api-core, worker, vector-retrieval-integration, storage-integration, redis-integration, web, containers, security. M2 is not called closed until the final remote run is fully green.
 
 ## Local web/runtime/security evidence
 

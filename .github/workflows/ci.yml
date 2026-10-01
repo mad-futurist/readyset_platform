@@ -93,11 +93,13 @@ jobs:
       - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
         with: { version: "0.12.16", python-version: "3.13" }
       - run: uv sync --frozen --extra dev
+      - name: Build official pinned MinIO source
+        run: docker build -t readyset-minio:ci ../../infra/minio
       - name: Start pinned MinIO
         run: >-
           docker run -d --name readyset-minio -p 9000:9000
           -e MINIO_ROOT_USER=readyset -e MINIO_ROOT_PASSWORD=readyset-local-only
-          quay.io/minio/minio:RELEASE.2025-07-23T15-54-02Z server /data
+          readyset-minio:ci server /data
       - name: Wait for MinIO
         run: |
           for attempt in {1..30}; do
@@ -155,11 +157,13 @@ jobs:
       - run: docker build -t readyset-api:ci apps/api
       - run: docker build -t readyset-web:ci -f apps/web/Dockerfile .
       - run: docker build -t readyset-worker:ci -f apps/worker/Dockerfile .
+      - run: docker build -t readyset-minio:ci infra/minio
       - name: Verify non-root runtime users
         run: |
           test "$(docker image inspect --format '{{.Config.User}}' readyset-api:ci)" = "readyset"
           test "$(docker image inspect --format '{{.Config.User}}' readyset-web:ci)" = "node"
           test "$(docker image inspect --format '{{.Config.User}}' readyset-worker:ci)" = "readyset"
+          test "$(docker image inspect --format '{{.Config.User}}' readyset-minio:ci)" = "10001:10001"
       - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
         with: { version: "0.12.16", python-version: "3.13" }
       - run: uv sync --project apps/api --frozen
@@ -171,7 +175,7 @@ jobs:
             pgvector/pgvector:0.8.2-pg17
           docker run -d --name acceptance-minio --network readyset-acceptance \
             -e MINIO_ROOT_USER=readyset -e MINIO_ROOT_PASSWORD=readyset-local-only \
-            quay.io/minio/minio:RELEASE.2025-07-23T15-54-02Z server /data
+            readyset-minio:ci server /data
           for attempt in {1..30}; do
             docker exec acceptance-postgres pg_isready -U readyset && break
             sleep 1
