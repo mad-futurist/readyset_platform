@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.config import Settings
 from app.knowledge.chunking import TokenCounter
 from app.knowledge.contracts import RetrievedEvidence
+from app.knowledge.lexical import significant_query
 from app.knowledge.models import ChunkEmbedding, DocumentChunk
 from app.knowledge.providers import EmbeddingProvider, validate_vectors
 from app.models import Document, DocumentStatus, DocumentVersion, IngestionStatus
@@ -64,10 +65,10 @@ class KnowledgeRetriever:
         distance = authorized.c.embedding.cosine_distance(vector[0])
         columns = [column for column in authorized.c if column.key != "embedding"]
         semantic = db.execute(select(*columns).order_by(distance, authorized.c.chunk_id).limit(limit * 3)).mappings().all()
-        lexical_vector = func.to_tsvector("simple", authorized.c.excerpt)
-        lexical_query = func.plainto_tsquery("simple", query)
+        lexical_vector = func.to_tsvector("english", authorized.c.excerpt)
+        lexical_query = func.websearch_to_tsquery("english", significant_query(query))
         lexical = db.execute(select(*columns).where(lexical_vector.op("@@")(lexical_query)).order_by(
-            func.ts_rank_cd(lexical_vector, lexical_query).desc(), authorized.c.chunk_id
+            func.ts_rank_cd(lexical_vector, lexical_query, 32).desc(), authorized.c.chunk_id
         ).limit(limit * 3)).mappings().all()
         scores: dict[uuid.UUID, float] = {}
         evidence: dict[uuid.UUID, dict[str, Any]] = {}

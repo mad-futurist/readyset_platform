@@ -45,10 +45,30 @@ def test_chat_structured_contract_and_usage_no_provider_dtos() -> None:
         assert data["store"] is False and "tools" not in data
         assert data["max_completion_tokens"] == 100
         assert data["response_format"]["json_schema"]["strict"] is True
-        return httpx.Response(200, json={"choices": [{"finish_reason": "stop", "message": {"content": json.dumps({"answer": "Evidence [S1]", "labels": ["S1"]})}}], "usage": {"prompt_tokens": 10, "completion_tokens": 5}})
+        schema = data["response_format"]["json_schema"]["schema"]
+        assert schema["required"] == ["sufficient", "claims"]
+        assert schema["properties"]["claims"]["maxItems"] == 12
+        assert schema["properties"]["claims"]["items"]["additionalProperties"] is False
+        return httpx.Response(200, json={"choices": [{"finish_reason": "stop", "message": {"content": json.dumps({"sufficient": True, "claims": [{"passage_id": "P1", "label": "S1"}]})}}], "usage": {"prompt_tokens": 10, "completion_tokens": 5}})
     settings = provider_settings()
     result = OpenAIChatProvider(settings, OpenAIClient(settings, httpx.MockTransport(handler))).generate("system", "context", 100)
-    assert result.labels == ["S1"] and result.usage == {"prompt_tokens": 10, "completion_tokens": 5}
+    assert result.sufficient and result.claims[0].label == "S1" and result.usage == {"prompt_tokens": 10, "completion_tokens": 5}
+
+
+@pytest.mark.parametrize("payload", [
+    {"answer": "legacy unverifiable prose", "labels": ["S1"]},
+    {"sufficient": True, "claims": [{"text": "fact"}]},
+    {"sufficient": True, "claims": [{"text": "fact", "label": "S1", "reasoning": "hidden"}]},
+    {"sufficient": True, "claims": [{"text": "", "label": "S1"}]},
+    {"sufficient": True, "claims": [{"passage_id": "P1", "label": "S1", "text": "Preparation; detection and analysis"}]},
+])
+def test_chat_rejects_legacy_or_malformed_claim_schema(payload: dict) -> None:
+    settings = provider_settings()
+    client = OpenAIClient(settings, httpx.MockTransport(lambda _: httpx.Response(200, json={
+        "choices": [{"finish_reason": "stop", "message": {"content": json.dumps(payload)}}],
+    })))
+    with pytest.raises(ProviderError, match="could not process"):
+        OpenAIChatProvider(settings, client).generate("system", "context", 100)
 
 
 def test_missing_credentials_dimensions_bounds_and_hardened_fakes_rejected() -> None:

@@ -62,3 +62,13 @@ Status words are evidence labels, not a general claim that a deployment is safe 
 M2 closure and exact CI results are tracked in `docs/review/M2_VERIFICATION.md`; fake tests do not establish live-provider quality. The separate 2026-10-02 [real-provider evaluation](../evaluation/M2_REAL_PROVIDER_EVALUATION.md) preserves the baseline: 10 documents, 60 questions, 100% citation provenance, 88.5% citation support, 3.67/4 factual correctness. Verdict: **READY WITH TARGETED M2.1 FIXES**. A real-model bare unknown source-label validation defect was fixed; retrieval/citation entailment weaknesses remain KNOWN LIMITATIONS. M3 remains DEFERRED.
 
 M2 IMPLEMENTED and TESTED closure: remote CI run `36876978380`, implementation head `c3e859082bc31cc0f1e51f72b471135d218360ea`, all eight jobs green including packaged fake-provider acceptance. The final delivery head is rechecked remotely before delivery.
+
+## M2.1 measured candidate (2026-10-02)
+
+IMPLEMENTED in the draft: PostgreSQL English literal-term lexical retrieval and one-call structured source-passage selection. No parser/chunk/embedding representation/schema/public DTO change; no M3 features. These are reviewable candidates, not quality-accepted staging behavior.
+
+TESTED: [frozen baseline-versus-M2.1 comparison](../evaluation/m2_1/M2_1_COMPARISON.md), fresh ten-document ingestion and all sixty original questions. Baseline files/source hashes remain unchanged. Hit@5 50/52 → 50/52, PDF 13/15 → 14/15, NIST 3/5 → 4/5, material citation precision 77/87 → 66/68, provenance 100%, absent-question abstention 7/8 → 8/8, false abstentions 0/52. Correctness 3.67 → 3.50/4. Fifteen live security scenarios, four stronger injection/restricted-source supplements and two constrained-evidence grounding supplements passed. All sixty answers received two manual passes by the same assessor; independent human agreement remains unavailable.
+
+KNOWN LIMITATION, acceptance-blocking: Q013 omits phase names despite retrieving the passage, Q016 loses the waiting-period evidence and answers related handling instructions, and Q058 answers Atlas ownership instead of warehouse ownership. Literal quotations cannot establish question-specific sufficiency. Verdict **NOT READY — GROUNDING/RETRIEVAL REGRESSION**. The original M2 verdict above is historical and does not accept the M2.1 candidate. M2.1 quality is not complete; M3 remains DEFERRED.
+
+TESTED engineering/security checks are recorded in [the verification ledger](../review/M2_VERIFICATION.md). Passing CI cannot override the measured quality rejection. OPERATIONAL REQUIREMENTS for provider approval, secrets, scanning, releases, backups and load rehearsal continue to apply.

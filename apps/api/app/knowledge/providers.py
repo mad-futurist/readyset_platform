@@ -25,9 +25,15 @@ class EmbeddingProvider(Protocol):
 
 
 @dataclass(frozen=True)
+class SupportedClaim:
+    passage_id: str
+    label: str
+
+
+@dataclass(frozen=True)
 class ChatResult:
-    answer: str
-    labels: list[str]
+    sufficient: bool
+    claims: list[SupportedClaim]
     usage: dict[str, int] = field(default_factory=dict)
 
 
@@ -66,13 +72,19 @@ class FakeChatProvider:
 
         data = json.loads(context)
         evidence = data["evidence"][0]
-        return ChatResult(f"Local preview: {evidence['text']} [S1]", ["S1"])
+        return ChatResult(True, [SupportedClaim(evidence['passages'][0]['id'], evidence['label'])])
+
+
+class _ClaimPayload(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    passage_id: str = Field(min_length=1, max_length=8)
+    label: str = Field(min_length=1, max_length=8)
 
 
 class _AnswerPayload(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    answer: str = Field(max_length=24000)
-    labels: list[str] = Field(max_length=20)
+    sufficient: bool
+    claims: list[_ClaimPayload] = Field(max_length=12)
 
 
 class OpenAIClient:
@@ -140,8 +152,12 @@ class OpenAIChatProvider:
             "model": self.model, "store": False, "max_completion_tokens": max_tokens,
             "messages": [{"role": "system", "content": system}, {"role": "user", "content": context}],
             "response_format": {"type": "json_schema", "json_schema": {"name": "evidence_answer", "strict": True, "schema": {
-                "type": "object", "properties": {"answer": {"type": "string"}, "labels": {"type": "array", "items": {"type": "string"}}},
-                "required": ["answer", "labels"], "additionalProperties": False}}},
+                "type": "object", "properties": {
+                    "sufficient": {"type": "boolean"},
+                    "claims": {"type": "array", "maxItems": 12, "items": {
+                        "type": "object", "properties": {"passage_id": {"type": "string"}, "label": {"type": "string"}},
+                        "required": ["passage_id", "label"], "additionalProperties": False}},
+                }, "required": ["sufficient", "claims"], "additionalProperties": False}}},
         })
         try:
             choice = data["choices"][0]
@@ -150,7 +166,7 @@ class OpenAIChatProvider:
             answer = _AnswerPayload.model_validate_json(choice["message"]["content"])
             usage = {key: int(value) for key, value in data.get("usage", {}).items()
                      if key in {"prompt_tokens", "completion_tokens"} and isinstance(value, int)}
-            return ChatResult(answer.answer, answer.labels, usage)
+            return ChatResult(answer.sufficient, [SupportedClaim(c.passage_id, c.label) for c in answer.claims], usage)
         except (KeyError, IndexError, TypeError, ValueError, ValidationError):
             raise ProviderError(retryable=False, code="invalid_provider_response") from None
 

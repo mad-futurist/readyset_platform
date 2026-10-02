@@ -1,0 +1,159 @@
+[
+  {
+    "scenario": "public-known-phases-evidence-excluded",
+    "timestamp": "2026-10-02T13:42:17.716715+00:00",
+    "question": "What are the major incident response phases in NIST SP 800-61 Revision 2?",
+    "expected_abstention": true,
+    "passed": true,
+    "answer": "I don't have enough information in the accessible company knowledge.",
+    "insufficient_evidence": true,
+    "citations": [],
+    "supplied_evidence": [
+      {
+        "chunk_id": "48b45b8b-29c3-5b02-b2de-d9dac979f754",
+        "source_locator": {
+          "kind": "pdf",
+          "page": 3,
+          "spans": [
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 6,
+              "character_end": 43,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 7,
+              "character_end": 42,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 8,
+              "character_end": 71,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 9,
+              "character_end": 143,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 10,
+              "character_end": 126,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 11,
+              "character_end": 139,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 12,
+              "character_end": 38,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 13,
+              "character_end": 63,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 14,
+              "character_end": 60,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 15,
+              "character_end": 149,
+              "character_start": 0
+            }
+          ],
+          "block_order": 6,
+          "character_end": 43,
+          "character_start": 0
+        },
+        "excerpt_sha256": "a3ef205079667299ce32e5e86f69ecf07dd6b030cd105c4373353cf080e17378",
+        "preview": "NIST Special Publication 800-61 Revision 2 Computer Security Incident Handling Guide Recommendations of the National Institute of Standards and Technology"
+      }
+    ]
+  },
+  {
+    "scenario": "exact-siem-global-negative-partial-evidence",
+    "timestamp": "2026-10-02T13:42:18.711160+00:00",
+    "question": "Which exact SIEM product and version does NIST SP 800-61 Revision 2 mandate buying?",
+    "expected_abstention": true,
+    "passed": true,
+    "answer": "I don't have enough information in the accessible company knowledge.",
+    "insufficient_evidence": true,
+    "citations": [],
+    "supplied_evidence": [
+      {
+        "chunk_id": "a24ab701-4e61-515e-babf-39b4e5aaf608",
+        "source_locator": {
+          "kind": "pdf",
+          "page": 37,
+          "spans": [
+            {
+              "kind": "pdf",
+              "page": 37,
+              "block_order": 72,
+              "character_end": 4083,
+              "character_start": 0
+            }
+          ],
+          "block_order": 72,
+          "character_end": 4083,
+          "character_start": 0
+        },
+        "excerpt_sha256": "8df0239840cab9053fb2c55ee6492a95b33fc68dd3cd715db221266fbb3215b8",
+        "preview": "COMPUTER SECURITY INCIDENT HANDLING GUIDE 27  An application logs multiple failed login attempts from an unfamiliar remote system. "
+      },
+      {
+        "chunk_id": "0b46e2b9-a3cb-5e47-8a59-a43023fcf888",
+        "source_locator": {
+          "kind": "pdf",
+          "page": 37,
+          "spans": [
+            {
+              "kind": "pdf",
+              "page": 37,
+              "block_order": 72,
+              "character_end": 4109,
+              "character_start": 4083
+            },
+            {
+              "kind": "pdf",
+              "page": 37,
+              "block_order": 73,
+              "character_end": 196,
+              "character_start": 0
+            }
+          ],
+          "block_order": 72,
+          "character_end": 4109,
+          "character_start": 4083
+        },
+        "excerpt_sha256": "c4282f9177bdae3777943ff4d1fb85374d887c27ac149d257d63444645cb89a8",
+        "preview": "detected by other devices. 31 See NIST SP 800-94, Guide to Intrusion Detection and Prevention Systems, for additional information on"
+      }
+    ]
+  }
+]

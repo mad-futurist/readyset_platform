@@ -75,6 +75,9 @@ def seeded_job(factory: sessionmaker[Session], *, attempts: int = 3) -> tuple[uu
         assert document
         document.current_version_id = version.id
         job = enqueue(db, version, Settings(ingestion_max_attempts=attempts))
+        # Queue tests require an already-due job, regardless of small host/DB
+        # clock differences. Lease and eligibility decisions use the DB clock.
+        job.available_at = db.scalar(select(func.clock_timestamp())) - timedelta(seconds=1)
         db.commit()
         return org_id, version.id, job.id
 
@@ -242,3 +245,17 @@ def test_stale_admin_context_cannot_bypass_live_role_or_revocation(vector_factor
         # Predicate itself also fails closed even for a cached owner context.
         from app.policy import document_access_predicate
         assert db.scalar(select(func.count(Document.id)).where(Document.id == document_id, document_access_predicate(context))) == 0
+
+
+def test_significant_lexical_query_uses_pg_stemming_stopwords_and_phrase_positions(vector_factory: sessionmaker[Session]) -> None:
+    from app.knowledge.lexical import significant_query
+    with vector_factory() as db:
+        query = "What are the incident response phases in the guide?"
+        source = "Preparation is one phase."
+        old_match = func.to_tsvector("simple", source).op("@@")(func.plainto_tsquery("simple", query))
+        new_match = func.to_tsvector("english", source).op("@@")(func.websearch_to_tsquery("english", significant_query(query)))
+        assert db.scalar(select(old_match)) is False
+        assert db.scalar(select(new_match)) is True
+        phrase = func.websearch_to_tsquery("english", significant_query('"least privilege"'))
+        assert db.scalar(select(func.to_tsvector("english", "least privilege access").op("@@")(phrase))) is True
+        assert db.scalar(select(func.to_tsvector("english", "least access privilege").op("@@")(phrase))) is False

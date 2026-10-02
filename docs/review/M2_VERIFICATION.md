@@ -101,6 +101,30 @@ TESTED: [frozen report and machine-readable evidence](../evaluation/M2_REAL_PROV
 
 KNOWN LIMITATION: source-support entailment remains weaker than identifier provenance; the evaluation verdict is READY WITH TARGETED M2.1 FIXES. No prompt/ranking/model tuning was merged, and the pre-fix baseline is preserved. Production provider contracts, load, malware-scanner deployment and restore drills remain OPERATIONAL REQUIREMENTS.
 
+## M2.1 candidate verification (2026-10-02)
+
+IMPLEMENTED in the draft: bounded English literal-term lexical search inside the existing authorized SQL subset; structured `sufficient` plus source-label/passage-ID selections; exact original-source reconstruction and selected-only citations. Maximum twelve selections is enforced in both the provider schema and server. Stored extraction/chunks/embedding inputs, models, schema, ACL/current-version/lease rules and public DTOs are unchanged. Production containers do not include evaluation scripts or artifacts; demo/references isolation is preserved.
+
+TESTED locally: final full backend with real PostgreSQL/pgvector, MinIO and Redis: 145 passed, two warnings, no skips (57.28 seconds), including the final provider-schema bound. A preceding rerun failed the preexisting locked-job test once; isolated rerun passed, and its shared queue fixture now makes jobs already due relative to the database clock, independent of host/DB clock differences. Production scheduling is unchanged. Provider suite passed 12 tests. Focused grounding/security/lexical tests passed 45; PostgreSQL/vector/lexical tests passed 13. Ruff and strict mypy (35 source files) passed. Empty-database migration and clean Alembic drift passed; published migrations are unchanged. OpenAPI/TypeScript generation drift is clean. Frontend lint/typecheck, twelve tests and Next 16.3.8 production build passed. Local API and worker images built with non-root `readyset`; API tokenization succeeded without network. The final delivery head must pass all eight existing CI jobs; its observed run is linked in the delivery response rather than asserted in its own commit. CI makes no live paid provider calls.
+
+TESTED real providers: [comparison and complete evidence](../evaluation/m2_1/M2_1_COMPARISON.md), unchanged frozen 60-question hash and ten source hashes, fresh database/bucket/organization/users/worker/embeddings. Ten uploads reached READY, 260 chunks and 68,000 embedding tokens; extraction blocks/locators match M2. Two incomplete trials, a partial security run and transport-only retries are disclosed separately; no low-quality 200 response was retried or replaced. Fifteen full live security scenarios, four stronger injection/restricted/S999 supplements and two real-product constrained-evidence supplements passed. Primary metrics exclude supplements/trials. The exact supplied credential was absent from workspace/build/log files and Git history; original twenty evaluation artifacts remained byte-identical.
+
+| Quality measure | M2 baseline | M2.1 candidate |
+|---|---:|---:|
+| Overall Hit@5 | 50/52 | 50/52 |
+| PDF Hit@5 | 13/15 | 14/15 |
+| NIST Hit@5 | 3/5 | 4/5 |
+| Correctness /4 | 3.67 | 3.50 |
+| Material citation precision | 77/87 (88.5%) | 66/68 (97.1%) |
+| Claim coverage | 166/173 (96.0%) | 150/154 (97.4%) |
+| Technical provenance | 87/87 | 68/68 |
+| Absent-question abstention | 7/8 | 8/8 |
+| False abstention | 0/52 | 0/52 |
+
+KNOWN LIMITATION, acceptance-blocking: valid but irrelevant passage selections are not mechanically rejected. Q013 selects an introduction rather than phase names, Q016 loses the required waiting-period passage, and Q058 selects Atlas rather than warehouse ownership. The quote-construction tests prove source containment and unknown-reference rejection, not universal semantic relevance. Verdict **NOT READY — GROUNDING/RETRIEVAL REGRESSION**; engineering/security success does not establish M2.1 quality acceptance. Both changes remain independently reviewable in the draft. All sixty answers were manually reviewed twice by the same assessor, with the Q008 score disagreement and Q016 source-audit correction recorded; independent human agreement is unavailable.
+
+KNOWN LIMITATION: the primary persistence-only worker timing was lost when a security restart reused its log path. It is explicitly unavailable; DB stage/job totals remain measured. The collector now separates security logs. Local sequential latency samples are not production SLAs. Provider/data approval, private storage/scanning, release migration/backup/load rehearsal remain OPERATIONAL REQUIREMENTS.
+
 ## Explicitly deferred M3+ work
 
 Learning/course/onboarding/task models, agents/tools/actions, signals, connectors/sync, long-term memory, billing, external queues/search engines and generic pipelines remain deferred.

@@ -1,0 +1,41 @@
+# M2.1 selected quality pass
+
+IMPLEMENTED: exactly one production retrieval variant, B (literal significant-term alternatives through PostgreSQL English `websearch_to_tsquery`, normalized `ts_rank_cd` 32). Original query is unchanged for semantic embeddings and generation. Quoted phrases remain phrases; unquoted tokens are literal OR alternatives, capped at 64. English removes function words and stems inflections. SQL materializes the live authorized current READY subset before both rankings. Cosine candidate depth 24, lexical depth 24, RRF constant 60 and top eight remain fixed.
+
+TESTED retrieval-only candidates: control; A document/title/heading/page prefix with old lexical; B old embeddings with improved lexical; C prefix plus improved lexical. No chat calls, direct derived DB writes, document filters, or additional parameter sweep. See `M2_1_RETRIEVAL_CANDIDATES.json`. B reaches 51/52 overall Hit@5, 15/15 PDF and 5/5 DOC03. A improves PDF but loses overall Hit@8; C regresses overall Hit@5. Select B before primary generation. Structural vectors are separate temporary experimental data, never stored as product embeddings.
+
+DEFERRED based on experiment: structural embedding representation. Production keeps exactly original chunk-text input, provider/model/dimensions identity and ingestion schema. No incompatible new representation can silently reuse old embeddings because no new representation is deployed. Additive representation migration will be mandatory if that changes later. Prefix identity in experiment: `offline-document-heading-page-v1`; experiment is never a product index.
+
+DEFERRED: PDF chrome normalization. Required body/table passages survive unchanged. B meets PDF retrieval targets without parser changes; removing uncertain chrome adds source-integrity risk without demonstrated incremental benefit. Ten fresh artifacts are compared block-for-block, including original physical-page locators, with preserved baseline extraction. No chunking change or OCR.
+
+IMPLEMENTED: single-call source-contained claim contract. Provider returns `sufficient: bool` and `claims: [{passage_id, label}]`. The server splits bounded context into deterministic original-source passages (160 chat tokens each, at sentence/whitespace boundaries), assigns passage IDs scoped to each label, and supplies those IDs with original text. Server rejects missing/unknown labels or passage IDs, empty output, false sufficiency and over-budget answers; builds quoted answers directly from selected source passages and returns only used citations. Retains post-generation live ACL/version checks and bare/bracketed unknown-label rejection. No free-form answer field, hidden reasoning or second model call. It prevents source-absent prior-knowledge facts and invented qualifiers from escaping as answer prose. Passage segmentation is request context construction, not persisted extraction/chunking/indexing.
+
+KNOWN LIMITATION: passage selection establishes source containment, not question relevance or whole-document truth. Source selection and sufficiency still depend on the model; wrong but genuine excerpts can produce incomplete/irrelevant answers. Citation materiality and false abstentions require manual real-provider scoring. Extractive presentation can be less fluent, especially for PDF tables. Global absence is allowed only with an explicit source statement; silence in partial context must abstain.
+
+| Setting | M2 baseline and M2.1 |
+|---|---|
+| Frozen dataset | 60 questions in original order; SHA-256 `5acef85bd33f943145cf21c33a95e357fdf2d5666e86dadb416dba59f5ea6741` |
+| Corpus | Exact same ten original source byte hashes; whole authorized corpus, no question filters |
+| Embeddings | OpenAI text-embedding-3-small, 1536 dimensions, chunk text only, cl100k_base, batch 32 |
+| Chat | OpenAI gpt-4.1-mini-2025-04-14, unchanged adapter generation defaults, o200k_base |
+| Chunks | target 400, max 800, overlap 0; structure-v1 unchanged |
+| Context / per chunk / answer | 6000 / 800 / 1000 tokens; framing reserve 32 |
+| Runtime | Fresh readyset_m21_final2 PostgreSQL 17 / pgvector 0.8.2; fresh readyset-m21-final2 private bucket; new synthetic owner/org/users; independent real worker |
+| Credential | Existing explicitly authorized key in process environment only; TLS certificate validation retained |
+| Measurement | Separate `.git/m2-1-evaluation` cache, numeric usage/timings observers around production adapters; original M2 cache/artifacts never overwritten |
+
+OPERATIONAL REQUIREMENT: explicit manual paid invocation, never CI. Apply Alembic once to the disposable DB, run `run_m2_1_evaluation.py baseline`, independently inspect extraction, run the three-candidate retrieval-only comparison, select/freeze config, then release the extraction-reviewed gate. API restarts to load the selected implementation before the only 60-question Ask run. Scorer makes no model calls. Supplemental restricted-evidence public-document and global-negative tests remain outside the 60-question denominator.
+
+TESTED rejected pilot: the initial text-substring quote contract was stopped after 37 questions because PDF spacing repairs and generation changes caused false abstentions. Its untouched raw capture is preserved in `.git/m2-1-pilot`, with public integrity metadata under `pilot/`; it is excluded from primary metrics and included separately in experimental cost. Retrieval B was not changed. The final passage-ID contract passed real product probes for Q001, Q008, Q013 and both evidence-excluded/global-negative supplements before primary generation. The final primary corpus was independently re-uploaded into another fresh DB/bucket with fresh real embeddings; pilot derived rows were not reused. No ground truth or source bytes were changed.
+
+TESTED contract repair: a subsequent incomplete nine-row trial stopped at Q010 when the model returned 17 selections, exceeding the already-enforced server limit of 12. The strict provider request now also declares `maxItems=12`; the accepted server contract is unchanged. `contract_pilot/` records the preserved capture/probes and hashes. Another fresh DB, bucket, organization, worker and embeddings were created for the one complete 60-row primary run. Neither incomplete trial contributes to primary metrics; their paid calls are included in experimental cost.
+
+TESTED primary capture: 60 first successful responses in frozen order, with no answer-quality retries or repairs. The independent security run encountered one controlled provider failure after its first six scenarios; those captures were retained and all fifteen security scenarios rerun independently. The collector now retries only HTTP 503 service failures (at most three attempts), records them and never retries a bad-quality HTTP 200 answer. It uses separate security log files. All measured calls and partial runs remain retained locally.
+
+KNOWN LIMITATION: original primary worker persistence-only log was accidentally replaced during security restart. The ten persisted per-stage download/extract/chunk/embed measurements and database job total/upload-to-ready durations remain intact. Persistence-only timing is explicitly unavailable, not inferred or fabricated. The collector is corrected for subsequent runs.
+
+Verdict: **NOT READY — GROUNDING/RETRIEVAL REGRESSION**. This is a measured rejected production candidate, not a quality acceptance or rollout authorization. Final primary results, rather than the more favorable retrieval-only screening, control the decision.
+
+Official contract references: [OpenAI strict structured output](https://developers.openai.com/api/docs/guides/structured-outputs), [PostgreSQL text search controls](https://www.postgresql.org/docs/17/textsearch-controls.html). Model/pricing remain as the original config and are rechecked when costing the new measured run.
+
+Baseline diagnostic discrepancy: Q019's actual Installation passage is rank 7. Frozen anchor-based metric is rank 5 because Docker text also contains the loose `13` anchor. Preserve original metric and use identical matching for primary comparison; disclose material exact-passage rank separately. Fresh UUID tie-breaking/single-vs-batched query observations can slightly change a control MRR; the canonical baseline remains 0.825, never replaced by offline control results.

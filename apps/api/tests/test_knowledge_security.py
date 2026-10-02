@@ -12,7 +12,12 @@ from app.knowledge.chunking import TokenCounter
 from app.knowledge.ingestion import IngestionProcessor
 from app.knowledge.jobs import claim
 from app.knowledge.models import IngestionJob
-from app.knowledge.providers import ChatResult, FakeChatProvider, FakeEmbeddingProvider
+from app.knowledge.providers import (
+    ChatResult,
+    FakeChatProvider,
+    FakeEmbeddingProvider,
+    SupportedClaim,
+)
 from app.models import (
     Document,
     DocumentVersion,
@@ -135,7 +140,7 @@ def test_ask_authorized_context_unknown_citations_injection_and_no_evidence(clie
     class CapturingChat(FakeChatProvider):
         def generate(self, system: str, context: str, max_tokens: int) -> ChatResult:
             captured.append((system, context))
-            return ChatResult("Allowed evidence [S1]", ["S1"])
+            return ChatResult(True, [SupportedClaim("P1", "S1")])
     client.app.state.chat_provider = CapturingChat()
     response = member.post("/api/v1/knowledge/ask", json={"query": "unicorn"}, headers=auth_headers(member, org))
     assert response.status_code == 200, response.text
@@ -146,7 +151,7 @@ def test_ask_authorized_context_unknown_citations_injection_and_no_evidence(clie
     assert all(entry["label"].startswith("S") for entry in json.loads(captured[0][1])["evidence"])
     class UnknownChat(FakeChatProvider):
         def generate(self, system: str, context: str, max_tokens: int) -> ChatResult:
-            return ChatResult("Invented evidence [S999]", ["S999"])
+            return ChatResult(True, [SupportedClaim("P1", "S999")])
     client.app.state.chat_provider = UnknownChat()
     response = member.post("/api/v1/knowledge/ask", json={"query": "unicorn"}, headers=auth_headers(member, org)).json()
     assert response["citations"] == [] and response["insufficient_evidence"] is True
@@ -169,7 +174,7 @@ def test_access_revoked_during_generation_invalidates_answer(client: TestClient,
                 assert source
                 source.current_version_id = None
                 db.commit()
-            return ChatResult("unicorn policy [S1]", ["S1"])
+            return ChatResult(True, [SupportedClaim("P1", "S1")])
     client.app.state.chat_provider = SwitchingChat()
     response = client.post("/api/v1/knowledge/ask", json={"query": "unicorn"}, headers=auth_headers(client, org)).json()
     assert response["citations"] == [] and response["insufficient_evidence"] is True
@@ -196,12 +201,12 @@ def test_unknown_source_labels_in_prose_fail_closed(
     configure(client)
     register(client, f"label-prose-{uuid.uuid4().hex}@example.com")
     org = create_org(client, "Reserved source labels")["id"]
-    document = upload_source(client, org, "unicorn factual passage")
+    document = upload_source(client, org, answer)
     process_all(client, db_factory)
 
     class LabelChat(FakeChatProvider):
         def generate(self, system: str, context: str, max_tokens: int) -> ChatResult:
-            return ChatResult(answer, labels)
+            return ChatResult(True, [SupportedClaim("P1", labels[0] if labels else "S1")])
 
     client.app.state.chat_provider = LabelChat()
     response = client.post("/api/v1/knowledge/ask", json={"query": "unicorn"},
@@ -212,7 +217,7 @@ def test_unknown_source_labels_in_prose_fail_closed(
     if expected_abstention:
         assert result["citations"] == [] and "999" not in result["answer"]
     else:
-        assert result["answer"] == answer
+        assert result["answer"] == f'“{answer}” [S1]'
         assert len(result["citations"]) == 1
         assert result["citations"][0]["document_id"] == document["id"]
 
@@ -242,9 +247,9 @@ def test_complete_prompt_and_answer_token_bounds(client: TestClient, db_factory:
         def generate(self, system: str, context: str, max_tokens: int) -> ChatResult:
             assert tokens.count(system + context) + 32 <= 512
             assert max_tokens == 64
-            assert all(tokens.count(row["text"]) <= 32 for row in json.loads(context)["evidence"])
+            assert all(tokens.count(passage["text"]) <= 32 for row in json.loads(context)["evidence"] for passage in row["passages"])
             captured.append(context)
-            return ChatResult("[S1] " + "café 東京 " * 100, ["S1"])
+            return ChatResult(True, [SupportedClaim("P1", "S1")])
 
     client.app.state.chat_provider = BoundedChat()
     response = client.post("/api/v1/knowledge/ask", json={"query": "unicorn"}, headers=auth_headers(client, org)).json()
