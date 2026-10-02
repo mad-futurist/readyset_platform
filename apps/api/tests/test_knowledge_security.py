@@ -1,6 +1,7 @@
 import json
 import uuid
 
+import pytest
 from conftest import auth_headers, create_org, register
 from fastapi.testclient import TestClient
 from sqlalchemy import select
@@ -172,6 +173,48 @@ def test_access_revoked_during_generation_invalidates_answer(client: TestClient,
     client.app.state.chat_provider = SwitchingChat()
     response = client.post("/api/v1/knowledge/ask", json={"query": "unicorn"}, headers=auth_headers(client, org)).json()
     assert response["citations"] == [] and response["insufficient_evidence"] is True
+
+
+@pytest.mark.parametrize("answer,labels,expected_abstention", [
+    ("unicorn fact attributed to source S999.", ["S1"], True),
+    ("unicorn fact [S1], also source S999.", ["S1"], True),
+    ("unicorn fact attributed to source s999.", ["S1"], True),
+    ("unicorn fact [s999].", ["S1"], True),
+    ("unicorn fact [S999].", ["S1"], True),
+    ("unicorn fact according to S999.", ["S1"], True),
+    ("unicorn fact from sources S1, S999.", ["S1"], True),
+    ("unicorn fact attributed to source S1.", ["S1"], False),
+    ("unicorn fact [S1].", ["S1"], False),
+    ("unicorn fact attributed to source S1.", [], False),
+    ("unicorn backups use Amazon S3. [S1]", ["S1"], False),
+])
+def test_unknown_source_labels_in_prose_fail_closed(
+    client: TestClient, db_factory: sessionmaker[Session], answer: str,
+    labels: list[str], expected_abstention: bool,
+) -> None:
+    """Real-provider evaluation found a bare unknown label beside valid citations."""
+    configure(client)
+    register(client, f"label-prose-{uuid.uuid4().hex}@example.com")
+    org = create_org(client, "Reserved source labels")["id"]
+    document = upload_source(client, org, "unicorn factual passage")
+    process_all(client, db_factory)
+
+    class LabelChat(FakeChatProvider):
+        def generate(self, system: str, context: str, max_tokens: int) -> ChatResult:
+            return ChatResult(answer, labels)
+
+    client.app.state.chat_provider = LabelChat()
+    response = client.post("/api/v1/knowledge/ask", json={"query": "unicorn"},
+                           headers=auth_headers(client, org))
+    assert response.status_code == 200
+    result = response.json()
+    assert result["insufficient_evidence"] is expected_abstention
+    if expected_abstention:
+        assert result["citations"] == [] and "999" not in result["answer"]
+    else:
+        assert result["answer"] == answer
+        assert len(result["citations"]) == 1
+        assert result["citations"][0]["document_id"] == document["id"]
 
 
 def test_csrf_disabled_ai_and_blank_queries(client: TestClient) -> None:

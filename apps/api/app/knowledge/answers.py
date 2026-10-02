@@ -56,7 +56,17 @@ class EvidenceAnswerer:
         self.last_usage = result.usage
         if not self.retriever.still_authorized(db, context, list(evidence.values())):
             return insufficient()
-        embedded_labels = re.findall(r"\[(S\d+)\]", result.answer)
+        # Validate explicit source references when the model omits brackets,
+        # too. Do not interpret ordinary product names such as Amazon S3 as
+        # citations merely because they resemble a generated source label.
+        embedded_labels = re.findall(r"\[(S\d+)\]", result.answer, flags=re.IGNORECASE)
+        for match in re.finditer(
+            r"\b(?:sources?|citations?|evidence|according\s+to|attributed\s+to)\s*"
+            r"(?:labels?\s*)?[:#]?\s*[`'\"]?"
+            r"(S\d+\b(?:(?:\s*,\s*|\s+(?:and\s+)?)S\d+\b)*)",
+            result.answer, flags=re.IGNORECASE,
+        ):
+            embedded_labels.extend(re.findall(r"S\d+", match[1], flags=re.IGNORECASE))
         labels = list(dict.fromkeys([*result.labels, *embedded_labels]))
         # Unknown labels invalidate the answer, rather than leaving fabricated markers in text.
         if not labels or any(label not in evidence for label in labels) or not result.answer.strip():

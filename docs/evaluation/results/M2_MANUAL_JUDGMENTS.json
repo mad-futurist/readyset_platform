@@ -1,0 +1,1057 @@
+[
+  {
+    "question_id": "Q001",
+    "correctness": 3,
+    "claim_count": 6,
+    "supported_claim_count": 6,
+    "citations": [
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q002",
+    "correctness": 3,
+    "claim_count": 6,
+    "supported_claim_count": 6,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q003",
+    "correctness": 3,
+    "claim_count": 7,
+    "supported_claim_count": 7,
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S4",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q004",
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q005",
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q006",
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citations": [],
+    "notes": ""
+  },
+  {
+    "question_id": "Q007",
+    "correctness": 3,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q008",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "S2 contains preceding BJ context but not the duration or bank-rule claim; redundant citation is not credited."
+      },
+      {
+        "label": "S2",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "S2 contains preceding BJ context but not the duration or bank-rule claim; redundant citation is not credited."
+      }
+    ],
+    "notes": "S2 contains preceding BJ context but not the duration or bank-rule claim; redundant citation is not credited."
+  },
+  {
+    "question_id": "Q009",
+    "correctness": 3,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q010",
+    "correctness": 2,
+    "claim_count": 7,
+    "supported_claim_count": 7,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Expected staff job-need passage absent. Model substitutes network least privilege. Monitoring evidence is present. Retrieval-driven incomplete answer."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Expected staff job-need passage absent. Model substitutes network least privilege. Monitoring evidence is present. Retrieval-driven incomplete answer."
+      }
+    ],
+    "notes": "Expected staff job-need passage absent. Model substitutes network least privilege. Monitoring evidence is present. Retrieval-driven incomplete answer."
+  },
+  {
+    "question_id": "Q011",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q012",
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citations": [],
+    "notes": ""
+  },
+  {
+    "question_id": "Q013",
+    "correctness": 3,
+    "claim_count": 5,
+    "supported_claim_count": 0,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "Required phase passage absent at K=8. Four phase names happen to match the original, but the cover/executive-summary citations contain no phase list. Retrieval miss plus generation beyond supplied evidence."
+      },
+      {
+        "label": "S8",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "Required phase passage absent at K=8. Four phase names happen to match the original, but the cover/executive-summary citations contain no phase list. Retrieval miss plus generation beyond supplied evidence."
+      }
+    ],
+    "notes": "Required phase passage absent at K=8. Four phase names happen to match the original, but the cover/executive-summary citations contain no phase list. Retrieval miss plus generation beyond supplied evidence."
+  },
+  {
+    "question_id": "Q014",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S5",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q015",
+    "correctness": 2,
+    "claim_count": 4,
+    "supported_claim_count": 3,
+    "citations": [
+      {
+        "label": "S6",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Source says additional resources, not only internal resources. Last sentence adds an unsupported restriction despite correct evidence at rank 6."
+      }
+    ],
+    "notes": "Source says additional resources, not only internal resources. Last sentence adds an unsupported restriction despite correct evidence at rank 6."
+  },
+  {
+    "question_id": "Q016",
+    "correctness": 3,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q017",
+    "correctness": 3,
+    "claim_count": 5,
+    "supported_claim_count": 5,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Frozen evidence includes page 51 as well as page 50, but expected_answer permits an alternative objective assessment from page 50. Correct answer; strict evidence-group Recall remains 0.5 rather than relabeling after observing output."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Frozen evidence includes page 51 as well as page 50, but expected_answer permits an alternative objective assessment from page 50. Correct answer; strict evidence-group Recall remains 0.5 rather than relabeling after observing output."
+      }
+    ],
+    "notes": "Frozen evidence includes page 51 as well as page 50, but expected_answer permits an alternative objective assessment from page 50. Correct answer; strict evidence-group Recall remains 0.5 rather than relabeling after observing output."
+  },
+  {
+    "question_id": "Q018",
+    "correctness": 2,
+    "claim_count": 2,
+    "supported_claim_count": 1,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "Answer asserts no mandated exact SIEM rather than insufficient evidence. True when independently reviewing the full source, but returned excerpts cannot establish corpus-wide absence. Strict grounding failure, not an invented product/version. Cover and authority citations do not prove the negative claim."
+      },
+      {
+        "label": "S2",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "Answer asserts no mandated exact SIEM rather than insufficient evidence. True when independently reviewing the full source, but returned excerpts cannot establish corpus-wide absence. Strict grounding failure, not an invented product/version. Cover and authority citations do not prove the negative claim."
+      },
+      {
+        "label": "S3",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "Answer asserts no mandated exact SIEM rather than insufficient evidence. True when independently reviewing the full source, but returned excerpts cannot establish corpus-wide absence. Strict grounding failure, not an invented product/version. Cover and authority citations do not prove the negative claim."
+      },
+      {
+        "label": "S8",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "Answer asserts no mandated exact SIEM rather than insufficient evidence. True when independently reviewing the full source, but returned excerpts cannot establish corpus-wide absence. Strict grounding failure, not an invented product/version. Cover and authority citations do not prove the negative claim."
+      }
+    ],
+    "notes": "Answer asserts no mandated exact SIEM rather than insufficient evidence. True when independently reviewing the full source, but returned excerpts cannot establish corpus-wide absence. Strict grounding failure, not an invented product/version. Cover and authority citations do not prove the negative claim."
+  },
+  {
+    "question_id": "Q019",
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citations": [
+      {
+        "label": "S7",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q020",
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q021",
+    "correctness": 3,
+    "claim_count": 7,
+    "supported_claim_count": 7,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S6",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q022",
+    "correctness": 3,
+    "claim_count": 6,
+    "supported_claim_count": 6,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Core limits correct, but hard indexed limit is hedged as about/default. S3 describes mixed-dimensional rows without supporting the stated limits."
+      },
+      {
+        "label": "S3",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "Core limits correct, but hard indexed limit is hedged as about/default. S3 describes mixed-dimensional rows without supporting the stated limits."
+      },
+      {
+        "label": "S5",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Core limits correct, but hard indexed limit is hedged as about/default. S3 describes mixed-dimensional rows without supporting the stated limits."
+      }
+    ],
+    "notes": "Core limits correct, but hard indexed limit is hedged as about/default. S3 describes mixed-dimensional rows without supporting the stated limits."
+  },
+  {
+    "question_id": "Q023",
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q024",
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citations": [],
+    "notes": ""
+  },
+  {
+    "question_id": "Q025",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q026",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q027",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q028",
+    "correctness": 3,
+    "claim_count": 5,
+    "supported_claim_count": 5,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "S1 contains parsing/conversion material, not the writing-capability claims. S2 supports the answer."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "S1 contains parsing/conversion material, not the writing-capability claims. S2 supports the answer."
+      }
+    ],
+    "notes": "S1 contains parsing/conversion material, not the writing-capability claims. S2 supports the answer."
+  },
+  {
+    "question_id": "Q029",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q030",
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citations": [],
+    "notes": ""
+  },
+  {
+    "question_id": "Q031",
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q032",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q033",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q034",
+    "correctness": 3,
+    "claim_count": 9,
+    "supported_claim_count": 9,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S7",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q035",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q036",
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citations": [],
+    "notes": ""
+  },
+  {
+    "question_id": "Q037",
+    "correctness": 4,
+    "claim_count": 5,
+    "supported_claim_count": 5,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q038",
+    "correctness": 4,
+    "claim_count": 4,
+    "supported_claim_count": 4,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q039",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q040",
+    "correctness": 4,
+    "claim_count": 6,
+    "supported_claim_count": 6,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q041",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q042",
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citations": [],
+    "notes": ""
+  },
+  {
+    "question_id": "Q043",
+    "correctness": 3,
+    "claim_count": 6,
+    "supported_claim_count": 6,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q044",
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q045",
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q046",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q047",
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "S2 says keys are issued through a broker; it does not establish storage or runtime injection. S1 does."
+      },
+      {
+        "label": "S2",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "S2 says keys are issued through a broker; it does not establish storage or runtime injection. S1 does."
+      }
+    ],
+    "notes": "S2 says keys are issued through a broker; it does not establish storage or runtime injection. S1 does."
+  },
+  {
+    "question_id": "Q048",
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citations": [],
+    "notes": ""
+  },
+  {
+    "question_id": "Q049",
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q050",
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q051",
+    "correctness": 3,
+    "claim_count": 6,
+    "supported_claim_count": 6,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q052",
+    "correctness": 4,
+    "claim_count": 4,
+    "supported_claim_count": 4,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q053",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q054",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q055",
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q056",
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q057",
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q058",
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q059",
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  },
+  {
+    "question_id": "Q060",
+    "correctness": 4,
+    "claim_count": 4,
+    "supported_claim_count": 4,
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Materially supports at least one answer claim; source and excerpt reviewed."
+      }
+    ],
+    "notes": ""
+  }
+]

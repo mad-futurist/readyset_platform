@@ -1,0 +1,62 @@
+[
+  {
+    "evaluation_id": "DOC01",
+    "quality_score": 4,
+    "reviewed_before_qa": true,
+    "notes": "Minor intra-word spacing (cha rge), repeated page chrome; inset box read after main text. Required facts survive."
+  },
+  {
+    "evaluation_id": "DOC02",
+    "quality_score": 3,
+    "reviewed_before_qa": true,
+    "notes": "CFF display heading loses SECURITY without optional fontTools; body text and case figures survive. Repeated page chrome; usable but noticeable structural loss."
+  },
+  {
+    "evaluation_id": "DOC03",
+    "quality_score": 4,
+    "reviewed_before_qa": true,
+    "notes": "All 80 physical pages represented; repeated running header/footer, flattened tables and occasional private-use bullet glyph. Rendered Table 3-2/3/4 values survive. Historical withdrawal cover preserved."
+  },
+  {
+    "evaluation_id": "DOC04",
+    "quality_score": 5,
+    "reviewed_before_qa": true,
+    "notes": "Nested headings, lists, SQL code fences and configuration limits retained."
+  },
+  {
+    "evaluation_id": "DOC05",
+    "quality_score": 4,
+    "reviewed_before_qa": true,
+    "notes": "RST markup remains plain text; no semantic RST heading/table interpretation. Conversion values survive."
+  },
+  {
+    "evaluation_id": "DOC06",
+    "quality_score": 5,
+    "reviewed_before_qa": true,
+    "notes": "Heading paths, paragraph order, bullet list and expense table retained."
+  },
+  {
+    "evaluation_id": "DOC07",
+    "quality_score": 5,
+    "reviewed_before_qa": true,
+    "notes": "Both severity/backup tables, nested headings, prose and list order retained."
+  },
+  {
+    "evaluation_id": "DOC08",
+    "quality_score": 5,
+    "reviewed_before_qa": true,
+    "notes": "Nested headings, literal Markdown table, retry details and credential scope retained."
+  },
+  {
+    "evaluation_id": "DOC09",
+    "quality_score": 5,
+    "reviewed_before_qa": true,
+    "notes": "Short UTF-8 document retains paragraphs and facts."
+  },
+  {
+    "evaluation_id": "DOC10",
+    "quality_score": 5,
+    "reviewed_before_qa": true,
+    "notes": "Malicious instructions preserved as data along with ordinary inventory facts; no extraction loss."
+  }
+]

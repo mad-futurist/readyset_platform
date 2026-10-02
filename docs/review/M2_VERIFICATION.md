@@ -85,7 +85,7 @@ No application checks were relaxed to resolve the initial registry failure. The 
 
 ## Local web/runtime/security evidence
 
-After audited dependency updates: frontend lint/typecheck, 12 tests and Next 16.3.8 production build passed. API/web/worker images built; runtime users `readyset`/`node`/`readyset` verified. API and worker tokenization succeeded with `--network none`. Compose model passed. Live independently packaged API/worker/PostgreSQL/MinIO acceptance passed: page-3 PDF citation to exact version, replacement-version isolation, restricted grant/revoke and membership revocation, safe corrupt-PDF failure and manager retry. Committed-history Gitleaks scan passed; final commit history is also gated remotely. Backend audit initially found PyJWT CVE-2026-101918; lock was updated to 2.15.1 and audit then reported no known vulnerabilities. npm audit found Next.js GHSA-vcvr-r3jv-pc5j; lock was updated to 16.3.8 and audit reported zero vulnerabilities. No live external AI calls were made.
+After audited dependency updates: frontend lint/typecheck, 12 tests and Next 16.3.8 production build passed. API/web/worker images built; runtime users `readyset`/`node`/`readyset` verified. API and worker tokenization succeeded with `--network none`. Compose model passed. Live independently packaged API/worker/PostgreSQL/MinIO acceptance passed: page-3 PDF citation to exact version, replacement-version isolation, restricted grant/revoke and membership revocation, safe corrupt-PDF failure and manager retry. Committed-history Gitleaks scan passed; final commit history is also gated remotely. Backend audit initially found PyJWT CVE-2026-101918; lock was updated to 2.15.1 and audit then reported no known vulnerabilities. npm audit found Next.js GHSA-vcvr-r3jv-pc5j; lock was updated to 16.3.8 and audit reported zero vulnerabilities. No live external AI calls were made during this original closure; the later evaluation below uses real OpenAI.
 
 ## Remaining known limitations
 
@@ -93,7 +93,13 @@ Exact authorized-subset ranking scales with accessible corpus; indexed ANN accel
 
 ## Operational AI-provider decisions
 
-Approve vendor retention/training/region/contractual terms and permitted tenant data; supply backend credentials through secret manager; choose a supported embedding model and approved chat model/tokenizer; provision vector; supervise private workers with CPU/memory/grace limits; perform staging real-provider acceptance on synthetic data. No paid provider calls ran during development/CI.
+Approve vendor retention/training/region/contractual terms and permitted tenant data; supply backend credentials through secret manager; choose a supported embedding model and approved chat model/tokenizer; provision vector; supervise private workers with CPU/memory/grace limits; rehearse staging acceptance. No paid provider calls ran during the original closure/CI. The separate 2026-10-02 disposable evaluation exercised paid providers on public/synthetic data.
+
+## Subsequent real-provider evaluation (2026-10-02)
+
+TESTED: [frozen report and machine-readable evidence](../evaluation/M2_REAL_PROVIDER_EVALUATION.md), 10 supported-format sources, 60 prewritten questions, independent worker/OpenAI embeddings/PostgreSQL, real structured chat. Baseline Hit@5 96.2%, MRR 0.825, correctness 3.67/4, citation support 88.5%, provenance 100%, strict absent-question abstention 7/8. Live tenant/ACL/revocation and two PROCESSING-to-READY replacement scenarios passed. A supplemental injection exposed bare `S999` in answer prose; the bracket-only validation gap was fixed with eleven adversarial regression cases and affected live-provider retests. Full local suite after correction: 123 backend tests (PostgreSQL, storage and Redis enabled), 12 frontend tests, lint/typecheck/build, clean Alembic and generated contracts. Final-head remote CI is checked before delivery; the delivery response links that run without making a self-referential commit claim.
+
+KNOWN LIMITATION: source-support entailment remains weaker than identifier provenance; the evaluation verdict is READY WITH TARGETED M2.1 FIXES. No prompt/ranking/model tuning was merged, and the pre-fix baseline is preserved. Production provider contracts, load, malware-scanner deployment and restore drills remain OPERATIONAL REQUIREMENTS.
 
 ## Explicitly deferred M3+ work
 

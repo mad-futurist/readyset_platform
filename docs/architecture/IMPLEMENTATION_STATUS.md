@@ -49,16 +49,16 @@ Status words are evidence labels, not a general claim that a deployment is safe 
 | Ingestion jobs | Transactional upload enqueue, unique version job, SKIP LOCKED, renewable fenced leases, backoff/reclaim/manual retry | TESTED on PostgreSQL |
 | Extraction | Bounded structured PDF/DOCX/Markdown/text with source locators and synthetic corpus | TESTED |
 | Chunking | Deterministic tokenizer bounds, structural/page boundaries and Unicode-safe split spans | TESTED |
-| Embeddings | Fake and OpenAI ports, batched inputs, fixed 1536 dimensions | TESTED with fake and transport mocks; live provider OPERATIONAL REQUIREMENT |
+| Embeddings | Fake and OpenAI ports, batched inputs, fixed 1536 dimensions | TESTED with mocks and 2026-10-02 real OpenAI evaluation; production provider approval remains OPERATIONAL REQUIREMENT |
 | Vector index | Additive pgvector/type/HNSW/GIN migration, composite integrity and clean drift | TESTED on PostgreSQL |
 | Retrieval | SQL ACL before exact vector/lexical ranking, live grants/member role, current READY and archived semantics | TESTED on PostgreSQL |
-| Ask AI | Stateless read-only bounded context, source instructions treated as data, post-generation eligibility check | TESTED with deterministic fake |
+| Ask AI | Stateless read-only bounded context, source instructions treated as data, post-generation eligibility check | TESTED with fake and 60-question real-provider baseline; semantic grounding has measured limitations |
 | Citation provenance | Organization/document/version/chunk/locator, server labels, unknown-label rejection | TESTED |
 | Frontend | Ingestion polling/status/retry, workspace Ask AI, citation source-version metadata | IMPLEMENTED; exact web checks in verification ledger |
 | Provider decisions | Vendor terms/retention/region, key management, real-provider acceptance | OPERATIONAL REQUIREMENT |
 | Scale/OCR | Exact authorized-subset ranking; no OCR or complete PDF/DOCX layout reconstruction | KNOWN LIMITATION |
 | M3+ | LMS, onboarding, agents/actions, connectors, memory, billing and generic pipelines | DEFERRED |
 
-M2 closure and exact CI results are tracked in `docs/review/M2_VERIFICATION.md`; no live provider validation is claimed from fake tests.
+M2 closure and exact CI results are tracked in `docs/review/M2_VERIFICATION.md`; fake tests do not establish live-provider quality. The separate 2026-10-02 [real-provider evaluation](../evaluation/M2_REAL_PROVIDER_EVALUATION.md) preserves the baseline: 10 documents, 60 questions, 100% citation provenance, 88.5% citation support, 3.67/4 factual correctness. Verdict: **READY WITH TARGETED M2.1 FIXES**. A real-model bare unknown source-label validation defect was fixed; retrieval/citation entailment weaknesses remain KNOWN LIMITATIONS. M3 remains DEFERRED.
 
 M2 IMPLEMENTED and TESTED closure: remote CI run `36876978380`, implementation head `c3e859082bc31cc0f1e51f72b471135d218360ea`, all eight jobs green including packaged fake-provider acceptance. The final delivery head is rechecked remotely before delivery.
