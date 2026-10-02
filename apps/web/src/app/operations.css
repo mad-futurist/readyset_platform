@@ -25,6 +25,22 @@
 .grant-grid label { display: flex; gap: 0.5rem; align-items: center; }
 .actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
 .actions select { max-width: 130px; padding: 0.4rem; }
+.ask-ai { margin-bottom: 1rem; }
+.ask-ai form { display: grid; gap: 0.8rem; }
+.ask-ai label { display: grid; gap: 0.5rem; }
+.ask-ai textarea { width: 100%; resize: vertical; padding: 0.8rem; border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+.ask-ai .button { justify-self: start; }
+.answer > p, .citation blockquote { white-space: pre-wrap; overflow-wrap: anywhere; }
+.citation { border-top: 1px solid var(--line); padding: 0.8rem 0; }
+.citation small { display: block; color: var(--muted); margin-top: 0.3rem; }
+.citation blockquote { margin: 0.7rem 0; padding-left: 1rem; border-left: 3px solid var(--line); }
+.citation-detail { border: 1px solid var(--line); border-radius: 8px; padding: 1rem; }
+.ingestion-status { display: inline-block; border-radius: 5px; padding: 0.2rem 0.4rem; font-size: 0.8rem; background: #edf0ee; color: #47564e; }
+.ingestion-ready { background: #e1f4e7; color: #1b6036; }
+.ingestion-failed { background: #fce8e6; color: #96352d; }
+.ingestion-processing { background: #fff1cf; color: #715317; }
+.history > div { grid-template-columns: 1fr 2fr auto auto; align-items: start; }
+.history p { grid-column: 1 / -1; margin: 0; }
 @media (max-width: 600px) {
   .history > div, .grant-grid { grid-template-columns: 1fr; }
 }

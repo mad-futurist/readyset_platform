@@ -1,0 +1,52 @@
+[
+  {
+    "document": "DOC01",
+    "same_blocks_and_locators": true,
+    "blocks": 5
+  },
+  {
+    "document": "DOC02",
+    "same_blocks_and_locators": true,
+    "blocks": 21
+  },
+  {
+    "document": "DOC03",
+    "same_blocks_and_locators": true,
+    "blocks": 162
+  },
+  {
+    "document": "DOC04",
+    "same_blocks_and_locators": true,
+    "blocks": 452
+  },
+  {
+    "document": "DOC05",
+    "same_blocks_and_locators": true,
+    "blocks": 33
+  },
+  {
+    "document": "DOC06",
+    "same_blocks_and_locators": true,
+    "blocks": 17
+  },
+  {
+    "document": "DOC07",
+    "same_blocks_and_locators": true,
+    "blocks": 17
+  },
+  {
+    "document": "DOC08",
+    "same_blocks_and_locators": true,
+    "blocks": 15
+  },
+  {
+    "document": "DOC09",
+    "same_blocks_and_locators": true,
+    "blocks": 4
+  },
+  {
+    "document": "DOC10",
+    "same_blocks_and_locators": true,
+    "blocks": 7
+  }
+]

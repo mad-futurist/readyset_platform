@@ -215,6 +215,8 @@ class DocumentVersionRead(ORMModel):
     size_bytes: int
     sha256: str
     ingestion_status: IngestionStatus
+    ingestion_error_code: str | None
+    ingestion_retryable: bool
     created_by_user_id: uuid.UUID
     created_at: datetime
 
@@ -230,6 +232,7 @@ class DocumentRead(ORMModel):
     visibility: DocumentVisibility
     status: DocumentStatus
     current_version_id: uuid.UUID | None
+    current_ingestion_status: IngestionStatus | None
     created_at: datetime
     updated_at: datetime
 

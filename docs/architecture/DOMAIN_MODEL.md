@@ -20,7 +20,7 @@
 
 `Document` is the logical, organization-owned knowledge item: title, classification, owner, visibility, lifecycle, and current version pointer.
 
-`DocumentVersion` is an application-immutable uploaded source identity: storage key, safe display filename, validated content type, size, checksum, creator, version number, and ingestion state. There is no update API, keys and bytes are not rewritten, and new bytes create a new version. This is not a claim that a privileged database role is blocked by a trigger. Future extraction, chunks, embeddings, and citations attach to the version that produced them, making AI answers reproducible.
+`DocumentVersion` is an application-immutable uploaded source identity: storage key, safe display filename, validated content type, size, checksum, creator, version number, and ingestion state. There is no update API, keys and bytes are not rewritten, and new bytes create a new version. This is not a claim that a privileged database role is blocked by a trigger. M2 extraction, chunks, embeddings and server-mapped citations attach to the exact version that produced them. Only the active document's current READY source participates in ordinary retrieval.
 
 The file is not extracted text, a chunk, or an indexed representation. These later artifacts have independent lifecycles and can be regenerated without changing source history.
 
@@ -28,4 +28,4 @@ The file is not extracted text, a chunk, or an indexed representation. These lat
 
 Organization-visible documents are readable by every active member. Restricted documents are readable by their owner, organization OWNER/ADMIN, explicitly granted users, or members of explicitly granted teams. Manage access and version upload require a document management capability plus ownership/admin semantics defined by policy. Grants use relational user/team tables rather than opaque JSON.
 
-Future connector ACL mappings can add external principals and source bindings without changing M1 grants. Query-time retrieval must reuse the same effective access predicate.
+Future connector ACL mappings can add external principals and source bindings without changing M1 grants. M2 query-time retrieval reuses the same effective access predicate with live membership/role/grants, before similarity ranking or model context.

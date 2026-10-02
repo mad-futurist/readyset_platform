@@ -1,0 +1,26 @@
+[
+  {
+    "question_id": "Q010",
+    "document": "DOC02",
+    "page": 5,
+    "classification": "EMBEDDING_RELEVANCE",
+    "diagnosis": "Required exact-source evidence survives in persisted chunks but is outside top 8; lexical AND query does not rescue it.",
+    "note": "Expected staff job-need passage absent. Model substitutes network least privilege. Monitoring evidence is present. Retrieval-driven incomplete answer."
+  },
+  {
+    "question_id": "Q013",
+    "document": "DOC03",
+    "page": 31,
+    "classification": "EMBEDDING_RELEVANCE",
+    "diagnosis": "Required exact-source evidence survives in persisted chunks but is outside top 8; lexical AND query does not rescue it.",
+    "note": "Required phase passage absent at K=8. Four phase names happen to match the original, but the cover/executive-summary citations contain no phase list. Retrieval miss plus generation beyond supplied evidence."
+  },
+  {
+    "question_id": "Q017",
+    "document": "DOC03",
+    "page": 51,
+    "classification": "EMBEDDING_RELEVANCE",
+    "diagnosis": "Required exact-source evidence survives in persisted chunks but is outside top 8; lexical AND query does not rescue it.",
+    "note": "Frozen evidence includes page 51 as well as page 50, but expected_answer permits an alternative objective assessment from page 50. Correct answer; strict evidence-group Recall remains 0.5 rather than relabeling after observing output."
+  }
+]

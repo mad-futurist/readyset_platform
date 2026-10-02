@@ -1,0 +1,17 @@
+{
+  "observed_cost_by_capture_usd": {
+    ".git\\m2-1-pilot\\api-usage.jsonl": 0.08089264,
+    ".git\\m2-1-pilot\\offline-usage.jsonl": 0.0014984,
+    ".git\\m2-1-pilot\\worker-usage.jsonl": 0.00136,
+    ".git\\m2-1-contract-pilot\\api-usage.jsonl": 0.02040532,
+    ".git\\m2-1-contract-pilot\\grounding-usage.jsonl": 0.00828398,
+    ".git\\m2-1-contract-pilot\\worker-usage.jsonl": 0.00136,
+    ".git\\m2-1-evaluation\\api-usage.jsonl": 0.13364888,
+    ".git\\m2-1-evaluation\\grounding-usage.jsonl": 0.0006812,
+    ".git\\m2-1-evaluation\\worker-usage.jsonl": 0.00136304
+  },
+  "all_m21_observed_cost_usd": 0.24949346,
+  "primary_60_ask_usd": 0.12368978,
+  "source_embeddings_usd": 0.00136,
+  "note": "All incomplete trials, fresh ingestions, offline structural/query embeddings, probes and repeated security calls included separately. No pilot answer contributes to primary metrics."
+}

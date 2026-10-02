@@ -4,7 +4,7 @@ from ipaddress import ip_network
 from typing import Annotated
 from urllib.parse import urlparse
 
-from pydantic import Field, field_validator, model_validator
+from pydantic import Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
@@ -34,6 +34,11 @@ class StorageEncryption(str, enum.Enum):
     NONE = "none"
     AES256 = "AES256"
     KMS = "aws:kms"
+
+
+class AIProvider(str, enum.Enum):
+    FAKE = "fake"
+    OPENAI = "openai"
 
 
 class Settings(BaseSettings):
@@ -96,6 +101,60 @@ class Settings(BaseSettings):
             "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         ]
     )
+
+    ai_enabled: bool = False
+    worker_poll_seconds: float = Field(default=2, ge=0.1, le=60)
+    worker_lease_seconds: int = Field(default=120, ge=10, le=3600)
+    ingestion_max_attempts: int = Field(default=3, ge=1, le=10)
+    ingestion_retry_base_seconds: int = Field(default=10, ge=1, le=300)
+    extraction_max_characters: int = Field(default=2_000_000, ge=1000, le=10_000_000)
+    extraction_max_blocks: int = Field(default=20_000, ge=10, le=100_000)
+    extraction_max_pages: int = Field(default=1000, ge=1, le=5000)
+    embedding_provider: AIProvider = AIProvider.FAKE
+    embedding_model: str = "fake-hash-v1"
+    embedding_dimensions: int = Field(default=1536, ge=1536, le=1536)
+    embedding_batch_size: int = Field(default=32, ge=1, le=128)
+    embedding_tokenizer: str = "cl100k_base"
+    chunk_target_tokens: int = Field(default=400, ge=16, le=4000)
+    chunk_max_tokens: int = Field(default=800, ge=16, le=8000)
+    retrieval_top_k: int = Field(default=8, ge=1, le=20)
+    retrieval_max_context_tokens: int = Field(default=6000, ge=256, le=24000)
+    retrieval_per_chunk_tokens: int = Field(default=800, ge=16, le=8000)
+    chat_provider: AIProvider = AIProvider.FAKE
+    chat_model: str = "fake-evidence-v1"
+    chat_tokenizer: str = "cl100k_base"
+    chat_answer_tokens: int = Field(default=1000, ge=64, le=4000)
+    ai_provider_timeout_seconds: float = Field(default=30, ge=1, le=120)
+    openai_api_key: SecretStr | None = None
+
+    @model_validator(mode="after")
+    def validate_ai(self) -> "Settings":
+        if self.chunk_target_tokens > self.chunk_max_tokens:
+            raise ValueError("CHUNK_TARGET_TOKENS cannot exceed CHUNK_MAX_TOKENS")
+        if self.embedding_tokenizer != "cl100k_base":
+            raise ValueError("M2 embedding tokenizer must be cl100k_base")
+        if self.chat_tokenizer not in {"cl100k_base", "o200k_base"}:
+            raise ValueError("M2 chat tokenizer must be cl100k_base or o200k_base")
+        if self.embedding_batch_size * self.chunk_max_tokens > 250_000:
+            raise ValueError("Embedding batch token budget exceeds provider limits")
+        if self.embedding_provider == AIProvider.OPENAI and self.embedding_model not in {
+            "text-embedding-3-small", "text-embedding-3-large"
+        }:
+            raise ValueError("OpenAI embeddings require an explicitly supported M2 model")
+        if self.ai_enabled:
+            if self.is_hardened and (
+                self.embedding_provider != AIProvider.OPENAI or self.chat_provider != AIProvider.OPENAI
+            ):
+                raise ValueError("Enabled hardened AI requires production providers")
+            if AIProvider.OPENAI in {self.embedding_provider, self.chat_provider} and (
+                not self.openai_api_key or not self.openai_api_key.get_secret_value().strip()
+            ):
+                raise ValueError("Enabled OpenAI features require OPENAI_API_KEY")
+            if not self.embedding_model.strip() or not self.chat_model.strip():
+                raise ValueError("Explicit embedding and chat models are required")
+            if self.chat_provider == AIProvider.OPENAI and self.chat_model.startswith("fake"):
+                raise ValueError("OpenAI chat requires an explicit production CHAT_MODEL")
+        return self
 
     @field_validator("cors_origins", "allowed_content_types", "trusted_proxy_cidrs", mode="before")
     @classmethod

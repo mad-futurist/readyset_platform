@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:17-alpine
+        image: pgvector/pgvector:0.8.2-pg17
         env:
           POSTGRES_DB: readyset_test
           POSTGRES_USER: readyset
@@ -36,6 +36,47 @@ jobs:
       - run: uv run --frozen alembic check
       - run: uv run --frozen pytest -m "not storage and not redis" --cov=app --cov-report=term-missing
 
+  worker:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/api
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with: { version: "0.12.16", python-version: "3.13" }
+      - run: uv sync --frozen --extra dev
+      - run: uv run --frozen pytest -m "worker and not postgres"
+
+  vector-retrieval-integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:0.8.2-pg17
+        env:
+          POSTGRES_DB: readyset_vector_test
+          POSTGRES_USER: readyset
+          POSTGRES_PASSWORD: readyset
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U readyset -d readyset_vector_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    defaults:
+      run:
+        working-directory: apps/api
+    env:
+      ENVIRONMENT: test
+      DATABASE_URL: postgresql+psycopg://readyset:readyset@localhost:5432/readyset_vector_test
+      RUN_POSTGRES_TESTS: "1"
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with: { version: "0.12.16", python-version: "3.13" }
+      - run: uv sync --frozen --extra dev
+      - run: uv run --frozen alembic upgrade head
+      - run: uv run --frozen alembic check
+      - run: uv run --frozen pytest -m vector
+
   storage-integration:
     runs-on: ubuntu-latest
     defaults:
@@ -52,11 +93,13 @@ jobs:
       - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
         with: { version: "0.12.16", python-version: "3.13" }
       - run: uv sync --frozen --extra dev
+      - name: Build official pinned MinIO source
+        run: docker build -t readyset-minio:ci ../../infra/minio
       - name: Start pinned MinIO
         run: >-
           docker run -d --name readyset-minio -p 9000:9000
           -e MINIO_ROOT_USER=readyset -e MINIO_ROOT_PASSWORD=readyset-local-only
-          quay.io/minio/minio:RELEASE.2025-07-23T15-54-02Z server /data
+          readyset-minio:ci server /data
       - name: Wait for MinIO
         run: |
           for attempt in {1..30}; do
@@ -113,10 +156,55 @@ jobs:
       - uses: actions/checkout@v5
       - run: docker build -t readyset-api:ci apps/api
       - run: docker build -t readyset-web:ci -f apps/web/Dockerfile .
+      - run: docker build -t readyset-worker:ci -f apps/worker/Dockerfile .
+      - run: docker build -t readyset-minio:ci infra/minio
       - name: Verify non-root runtime users
         run: |
           test "$(docker image inspect --format '{{.Config.User}}' readyset-api:ci)" = "readyset"
           test "$(docker image inspect --format '{{.Config.User}}' readyset-web:ci)" = "node"
+          test "$(docker image inspect --format '{{.Config.User}}' readyset-worker:ci)" = "readyset"
+          test "$(docker image inspect --format '{{.Config.User}}' readyset-minio:ci)" = "10001:10001"
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+        with: { version: "0.12.16", python-version: "3.13" }
+      - run: uv sync --project apps/api --frozen
+      - name: Live packaged ingestion and retrieval acceptance
+        run: |
+          docker network create readyset-acceptance
+          docker run -d --name acceptance-postgres --network readyset-acceptance \
+            -e POSTGRES_DB=readyset -e POSTGRES_USER=readyset -e POSTGRES_PASSWORD=readyset \
+            pgvector/pgvector:0.8.2-pg17
+          docker run -d --name acceptance-minio --network readyset-acceptance \
+            -e MINIO_ROOT_USER=readyset -e MINIO_ROOT_PASSWORD=readyset-local-only \
+            readyset-minio:ci server /data
+          for attempt in {1..30}; do
+            docker exec acceptance-postgres pg_isready -U readyset && break
+            sleep 1
+          done
+          cat > /tmp/readyset-acceptance.env <<'ENV'
+          ENVIRONMENT=test
+          DATABASE_URL=postgresql+psycopg://readyset:readyset@acceptance-postgres:5432/readyset
+          STORAGE_ENDPOINT_URL=http://acceptance-minio:9000
+          STORAGE_BUCKET=readyset-acceptance
+          AI_ENABLED=true
+          EMBEDDING_PROVIDER=fake
+          CHAT_PROVIDER=fake
+          ENV
+          docker run --rm --network readyset-acceptance --env-file /tmp/readyset-acceptance.env readyset-api:ci alembic upgrade head
+          docker run -d --name acceptance-api --network readyset-acceptance -p 58000:8000 --env-file /tmp/readyset-acceptance.env readyset-api:ci
+          docker run -d --name acceptance-worker --network readyset-acceptance --env-file /tmp/readyset-acceptance.env readyset-worker:ci
+          ready=0
+          for attempt in {1..60}; do
+            if curl --fail --silent http://localhost:58000/readyz; then ready=1; break; fi
+            sleep 1
+          done
+          test "$ready" = 1
+          uv run --project apps/api --frozen python apps/api/scripts/acceptance_m2.py --base-url http://localhost:58000
+          docker exec acceptance-worker python worker.py --health
+      - name: Acceptance diagnostic logs
+        if: failure()
+        run: |
+          docker logs acceptance-api || true
+          docker logs acceptance-worker || true
 
   security:
     runs-on: ubuntu-latest

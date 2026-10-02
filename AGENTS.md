@@ -13,7 +13,7 @@ Ideas may be reimplemented in the production codebase, but no build-time or runt
 ### Architecture and scope
 
 - ReadySet is a modular monolith. `apps/api` owns domain rules and persistence; `apps/web` is an independently deployable client and never receives database or object-storage credentials.
-- `apps/worker` is reserved for future asynchronous ingestion. Add queues, workflows, or microservices only for a demonstrated scaling or failure-isolation need.
+- `apps/worker` runs version-scoped asynchronous ingestion from the shared backend package. Add external queues, workflows, or microservices only for a demonstrated scaling or failure-isolation need.
 - Keep `User`, authentication identity, `OrganizationMembership`, and `EmployeeProfile` distinct. Newcomer and mentor are relationships, not global authentication roles.
 - Implement only the current milestone. Do not import future features from research inputs; prefer the smallest abstraction that enforces the required guarantee.
 
@@ -46,3 +46,12 @@ Ideas may be reimplemented in the production codebase, but no build-time or runt
 
 - Never trust forwarding headers from arbitrary peers. Client-address security decisions may use forwarded addresses only when the immediate peer matches configured trusted proxy networks.
 - Open external streams before starting an HTTP response when open-time failures must map to controlled status codes. Keep response bodies streamed and close their underlying resources reliably.
+
+### Derived knowledge invariants
+
+- Every extracted artifact, chunk and embedding traces to an exact tenant-owned `DocumentVersion`.
+- Retrieval applies the existing document ACL in SQL before ranking or model context; live membership/grants remain authoritative.
+- Default retrieval uses only the active document's current READY version; processing/failed replacements never silently fall back to stale knowledge.
+- Worker execution is at least once, retryable and idempotent; only a valid current lease may finalize derived state.
+- Enterprise sources, extracted text, chunks, queries, answers and embeddings are confidential and must not enter ordinary logs.
+- Citations are server-mapped to real authorized request evidence; model-generated identifiers are never trusted.

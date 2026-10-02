@@ -1,0 +1,26 @@
+[
+  {
+    "question_id": "Q010",
+    "document": "DOC02",
+    "page": 5,
+    "classification": "EMBEDDING_RELEVANCE",
+    "diagnosis": "Required exact-source evidence survives in persisted chunks but is outside top 8; lexical AND query does not rescue it.",
+    "note": "Still lacks staff job-need/least-privilege evidence. Network segmentation and monitoring are quoted instead; answer is very long."
+  },
+  {
+    "question_id": "Q016",
+    "document": "DOC03",
+    "page": 43,
+    "classification": "EMBEDDING_RELEVANCE",
+    "diagnosis": "Required exact-source evidence survives in persisted chunks but is outside top 8; lexical AND query does not rescue it.",
+    "note": "Quotes stop-using-system/contact-team instructions. Does not provide the example 15-minute unanswered-contact escalation or repeat-contact qualification."
+  },
+  {
+    "question_id": "Q017",
+    "document": "DOC03",
+    "page": 51,
+    "classification": "EMBEDDING_RELEVANCE",
+    "diagnosis": "Required exact-source evidence survives in persisted chunks but is outside top 8; lexical AND query does not rescue it.",
+    "note": "Correct reason that counts fall after improved controls, but only a generic objective-assessment heading is selected. Missing documentation-against-policy or cause/vector example."
+  }
+]

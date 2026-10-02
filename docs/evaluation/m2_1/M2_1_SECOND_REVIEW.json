@@ -1,0 +1,44 @@
+{
+  "reviewed_all_60": true,
+  "reviewer": "Same assessor, separate second pass; not an independent human or statistical inter-rater study.",
+  "input": "Frozen expected answers, full raw responses and original source passages; no AI judging.",
+  "first_pass_sha256": "e3ad6931078206fff4d54bef0774cdc1d5d51a349c5777dcf63e2111ad1603a5",
+  "random_seed": "0x5acef85b",
+  "random_pass_ids": [
+    "Q009",
+    "Q011",
+    "Q020",
+    "Q031",
+    "Q033",
+    "Q035",
+    "Q038",
+    "Q039",
+    "Q040",
+    "Q041",
+    "Q045",
+    "Q047",
+    "Q049",
+    "Q057",
+    "Q059"
+  ],
+  "disagreements": [
+    {
+      "question_id": "Q008",
+      "first": 3,
+      "second": 4,
+      "resolved": 4,
+      "reason": "Duration complete; BJ transaction sentence supplies explicit subject for split page-5 fragment. Extra context is short, so revise 3 to 4."
+    }
+  ],
+  "core_findings": [
+    "Q013 major phase names omitted despite retrieval success",
+    "Q016 wrong passage for escalation waiting period",
+    "Q058 wrong source scope instead of warehouse owner"
+  ],
+  "source_audit_corrections": [
+    {
+      "question_id": "Q016",
+      "correction": "Previously described escalation passage as elsewhere in context; actual new top eight excludes physical page 43. Score unchanged, cause clarified as retrieval plus question-grounding failure."
+    }
+  ]
+}
