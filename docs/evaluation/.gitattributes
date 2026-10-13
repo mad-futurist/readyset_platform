@@ -1,0 +1,2 @@
+# Preserve hashes of frozen capture files across Windows/Linux checkouts.
+*.jsonl -text whitespace=cr-at-eol

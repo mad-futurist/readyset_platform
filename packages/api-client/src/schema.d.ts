@@ -281,6 +281,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/documents/{document_id}/versions/{version_id}/ingestion/retry": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Retry Ingestion */
+        post: operations["retry_ingestion_api_v1_documents__document_id__versions__version_id__ingestion_retry_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/knowledge/ask": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Ask */
+        post: operations["ask_api_v1_knowledge_ask_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/knowledge/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Search */
+        post: operations["search_api_v1_knowledge_search_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/organizations": {
         parameters: {
             query?: never;
@@ -547,6 +598,24 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AskRequest */
+        AskRequest: {
+            /** Document Ids */
+            document_ids?: string[] | null;
+            /** Query */
+            query: string;
+            /** Top K */
+            top_k?: number | null;
+        };
+        /** AskResponse */
+        AskResponse: {
+            /** Answer */
+            answer: string;
+            /** Citations */
+            citations: components["schemas"]["Citation"][];
+            /** Insufficient Evidence */
+            insufficient_evidence: boolean;
+        };
         /** AuditEventRead */
         AuditEventRead: {
             /** Action */
@@ -602,6 +671,43 @@ export interface components {
             /** File */
             file: string;
         };
+        /** Citation */
+        Citation: {
+            /**
+             * Chunk Id
+             * Format: uuid
+             */
+            chunk_id: string;
+            /**
+             * Document Id
+             * Format: uuid
+             */
+            document_id: string;
+            /**
+             * Document Version Id
+             * Format: uuid
+             */
+            document_version_id: string;
+            /** Excerpt */
+            excerpt: string;
+            /** Label */
+            label: string;
+            /**
+             * Organization Id
+             * Format: uuid
+             */
+            organization_id: string;
+            /** Score */
+            score: number;
+            /** Source Locator */
+            source_locator: {
+                [key: string]: unknown;
+            };
+            /** Title */
+            title: string;
+            /** Version Number */
+            version_number: number;
+        };
         /**
          * DeliveryStatus
          * @enum {string}
@@ -628,6 +734,7 @@ export interface components {
              * Format: date-time
              */
             created_at: string;
+            current_ingestion_status: components["schemas"]["IngestionStatus"] | null;
             /** Current Version Id */
             current_version_id: string | null;
             /** Description */
@@ -700,6 +807,10 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            /** Ingestion Error Code */
+            ingestion_error_code: string | null;
+            /** Ingestion Retryable */
+            ingestion_retryable: boolean;
             ingestion_status: components["schemas"]["IngestionStatus"];
             /** Mime Type */
             mime_type: string;
@@ -1038,6 +1149,55 @@ export interface components {
             development_verification_token?: string | null;
             /** Message */
             message: string;
+        };
+        /** RetrievedEvidence */
+        RetrievedEvidence: {
+            /**
+             * Chunk Id
+             * Format: uuid
+             */
+            chunk_id: string;
+            /**
+             * Document Id
+             * Format: uuid
+             */
+            document_id: string;
+            /**
+             * Document Version Id
+             * Format: uuid
+             */
+            document_version_id: string;
+            /** Excerpt */
+            excerpt: string;
+            /**
+             * Organization Id
+             * Format: uuid
+             */
+            organization_id: string;
+            /** Score */
+            score: number;
+            /** Source Locator */
+            source_locator: {
+                [key: string]: unknown;
+            };
+            /** Title */
+            title: string;
+            /** Version Number */
+            version_number: number;
+        };
+        /** SearchRequest */
+        SearchRequest: {
+            /** Document Ids */
+            document_ids?: string[] | null;
+            /** Query */
+            query: string;
+            /** Top K */
+            top_k?: number | null;
+        };
+        /** SearchResponse */
+        SearchResponse: {
+            /** Items */
+            items: components["schemas"]["RetrievedEvidence"][];
         };
         /** TeamCreate */
         TeamCreate: {
@@ -1791,6 +1951,113 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    retry_ingestion_api_v1_documents__document_id__versions__version_id__ingestion_retry_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path: {
+                document_id: string;
+                version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentVersionRead"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    ask_api_v1_knowledge_ask_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AskRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AskResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    search_api_v1_knowledge_search_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-ReadySet-Organization"?: string | null;
+                "X-CSRF-Token"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SearchRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchResponse"];
                 };
             };
             /** @description Validation Error */

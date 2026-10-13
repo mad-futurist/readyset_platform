@@ -60,6 +60,12 @@ async function request<T>(
 }
 
 export const api = {
+  searchKnowledge: (organizationId: string, input: Schemas["SearchRequest"]) =>
+    request<Schemas["SearchResponse"]>("/knowledge/search", { method: "POST", body: JSON.stringify(input) }, organizationId),
+  askKnowledge: (organizationId: string, input: Schemas["AskRequest"]) =>
+    request<Schemas["AskResponse"]>("/knowledge/ask", { method: "POST", body: JSON.stringify(input) }, organizationId),
+  retryIngestion: (organizationId: string, documentId: string, versionId: string) =>
+    request<Schemas["DocumentVersionRead"]>(`/documents/${documentId}/versions/${versionId}/ingestion/retry`, { method: "POST" }, organizationId),
   me: () => request<Schemas["AuthResponse"]>("/auth/me"),
   register: (input: Schemas["RegisterRequest"]) =>
     request<Schemas["RegistrationResponse"]>("/auth/register", {

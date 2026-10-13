@@ -1,4 +1,6 @@
-# M1.1 implementation status
+# Implementation status
+
+The foundation table records verified M1.1 history; the M2 ledger below records the new milestone.
 
 Status words are evidence labels, not a general claim that a deployment is safe without its required services.
 
@@ -30,7 +32,7 @@ Status words are evidence labels, not a general claim that a deployment is safe 
 | Backups | Provider-neutral requirements documented | Restore drill is external | PITR-capable PostgreSQL and object durability | OPERATIONAL REQUIREMENT |
 | Deployment | Ordered migration/release/runbook documented | Must be rehearsed per platform | Provider selection and secret manager | OPERATIONAL REQUIREMENT |
 | RLS | Application/repository scoping remains the M1 tenant boundary | Tenant adversarial tests | Revisit for regulated deployments | DEFERRED |
-| RAG/M2 | No parsers, chunks, embeddings, LMS, agents, queues, or connectors | Scope/isolation review | M2 decision | DEFERRED |
+| RAG/M2 (at M1 closure) | Historical M1 deferral; superseded by the M2 ledger below | See M2 evidence | See M2 operations | HISTORICAL DEFERRED |
 
 ## Known limitations
 
@@ -38,3 +40,35 @@ Status words are evidence labels, not a general claim that a deployment is safe 
 - Audit rows are append-oriented through application APIs; privileged database and migration roles can modify them.
 - Synchronous SMTP can fail after authoritative state commits. Registration and invitation responses represent this explicitly; reset and verification-resend remain non-enumerating.
 - CI proves PostgreSQL, MinIO and Redis protocol behavior plus container construction; the selected production providers and real maintained ClamAV deployment remain operational responsibilities.
+
+## M2 document intelligence
+
+| Area | Implementation/evidence | Status |
+|---|---|---|
+| Worker | Independently runnable shared-package process, non-root image, heartbeat and graceful stop | IMPLEMENTED; image/runtime checks in verification ledger |
+| Ingestion jobs | Transactional upload enqueue, unique version job, SKIP LOCKED, renewable fenced leases, backoff/reclaim/manual retry | TESTED on PostgreSQL |
+| Extraction | Bounded structured PDF/DOCX/Markdown/text with source locators and synthetic corpus | TESTED |
+| Chunking | Deterministic tokenizer bounds, structural/page boundaries and Unicode-safe split spans | TESTED |
+| Embeddings | Fake and OpenAI ports, batched inputs, fixed 1536 dimensions | TESTED with mocks and 2026-10-02 real OpenAI evaluation; production provider approval remains OPERATIONAL REQUIREMENT |
+| Vector index | Additive pgvector/type/HNSW/GIN migration, composite integrity and clean drift | TESTED on PostgreSQL |
+| Retrieval | SQL ACL before exact vector/lexical ranking, live grants/member role, current READY and archived semantics | TESTED on PostgreSQL |
+| Ask AI | Stateless read-only bounded context, source instructions treated as data, post-generation eligibility check | TESTED with fake and 60-question real-provider baseline; semantic grounding has measured limitations |
+| Citation provenance | Organization/document/version/chunk/locator, server labels, unknown-label rejection | TESTED |
+| Frontend | Ingestion polling/status/retry, workspace Ask AI, citation source-version metadata | IMPLEMENTED; exact web checks in verification ledger |
+| Provider decisions | Vendor terms/retention/region, key management, real-provider acceptance | OPERATIONAL REQUIREMENT |
+| Scale/OCR | Exact authorized-subset ranking; no OCR or complete PDF/DOCX layout reconstruction | KNOWN LIMITATION |
+| M3+ | LMS, onboarding, agents/actions, connectors, memory, billing and generic pipelines | DEFERRED |
+
+M2 closure and exact CI results are tracked in `docs/review/M2_VERIFICATION.md`; fake tests do not establish live-provider quality. The separate 2026-10-02 [real-provider evaluation](../evaluation/M2_REAL_PROVIDER_EVALUATION.md) preserves the baseline: 10 documents, 60 questions, 100% citation provenance, 88.5% citation support, 3.67/4 factual correctness. Verdict: **READY WITH TARGETED M2.1 FIXES**. A real-model bare unknown source-label validation defect was fixed; retrieval/citation entailment weaknesses remain KNOWN LIMITATIONS. M3 remains DEFERRED.
+
+M2 IMPLEMENTED and TESTED closure: remote CI run `36876978380`, implementation head `c3e859082bc31cc0f1e51f72b471135d218360ea`, all eight jobs green including packaged fake-provider acceptance. The final delivery head is rechecked remotely before delivery.
+
+## M2.1 measured candidate (2026-10-02)
+
+IMPLEMENTED in the draft: PostgreSQL English literal-term lexical retrieval and one-call structured source-passage selection. No parser/chunk/embedding representation/schema/public DTO change; no M3 features. These are reviewable candidates, not quality-accepted staging behavior.
+
+TESTED: [frozen baseline-versus-M2.1 comparison](../evaluation/m2_1/M2_1_COMPARISON.md), fresh ten-document ingestion and all sixty original questions. Baseline files/source hashes remain unchanged. Hit@5 50/52 → 50/52, PDF 13/15 → 14/15, NIST 3/5 → 4/5, material citation precision 77/87 → 66/68, provenance 100%, absent-question abstention 7/8 → 8/8, false abstentions 0/52. Correctness 3.67 → 3.50/4. Fifteen live security scenarios, four stronger injection/restricted-source supplements and two constrained-evidence grounding supplements passed. All sixty answers received two manual passes by the same assessor; independent human agreement remains unavailable.
+
+KNOWN LIMITATION, acceptance-blocking: Q013 omits phase names despite retrieving the passage, Q016 loses the waiting-period evidence and answers related handling instructions, and Q058 answers Atlas ownership instead of warehouse ownership. Literal quotations cannot establish question-specific sufficiency. Verdict **NOT READY — GROUNDING/RETRIEVAL REGRESSION**. The original M2 verdict above is historical and does not accept the M2.1 candidate. M2.1 quality is not complete; M3 remains DEFERRED.
+
+TESTED engineering/security checks are recorded in [the verification ledger](../review/M2_VERIFICATION.md). Passing CI cannot override the measured quality rejection. OPERATIONAL REQUIREMENTS for provider approval, secrets, scanning, releases, backups and load rehearsal continue to apply.

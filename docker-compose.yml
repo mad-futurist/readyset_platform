@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:17-alpine
+    image: pgvector/pgvector:0.8.2-pg17
     environment:
       POSTGRES_DB: readyset
       POSTGRES_USER: readyset
@@ -14,7 +14,7 @@ services:
       retries: 10
 
   minio:
-    image: quay.io/minio/minio:RELEASE.2025-07-23T15-54-02Z
+    build: ./infra/minio
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: readyset
@@ -22,7 +22,7 @@ services:
     ports: ["9000:9000", "9001:9001"]
     volumes: ["readyset_minio:/data"]
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:9000/minio/health/live"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -53,6 +53,11 @@ services:
       GOOGLE_AUTH_ENABLED: ${GOOGLE_AUTH_ENABLED:-false}
       INVITATIONS_ENABLED: "true"
       DEVELOPMENT_TOKEN_EXPOSURE: "true"
+      AI_ENABLED: "true"
+      EMBEDDING_PROVIDER: fake
+      EMBEDDING_MODEL: fake-hash-v1
+      CHAT_PROVIDER: fake
+      CHAT_MODEL: fake-evidence-v1
       EMAIL_BACKEND: ${EMAIL_BACKEND:-capture}
       EMAIL_FROM: ${EMAIL_FROM:-ReadySet <no-reply@localhost>}
       SMTP_HOST: ${SMTP_HOST:-}
@@ -90,6 +95,16 @@ services:
         API_INTERNAL_URL: http://api:8000
     ports: ["3000:3000"]
     depends_on: [api]
+
+  worker:
+    build:
+      context: .
+      dockerfile: apps/worker/Dockerfile
+    environment: *api-environment
+    stop_grace_period: 120s
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+      minio: { condition: service_healthy }
 
 volumes:
   readyset_postgres:

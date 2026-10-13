@@ -1,0 +1,8 @@
+{
+  "status": "INCOMPLETE_CONTRACT_REPAIR_TRIAL",
+  "rows": 9,
+  "raw_sha256": "48b0c10f0e5c705368ddc6b29259df12e1623a040f68c36cd53e3aebe2ba0141",
+  "stopped_at": "Q010",
+  "reason": "Provider returned 17 selections; existing server limit was 12. Strict request schema now communicates the same maxItems=12. Final full run starts in another fresh DB/bucket; these nine successes are excluded from its metrics.",
+  "probe_capture_sha256": "48f4c8e2972962f1f643ef6718fba79dc7f233e41be0102d807cc73cffb7d2f2"
+}

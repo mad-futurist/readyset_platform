@@ -1,0 +1,1686 @@
+[
+  {
+    "question_id": "Q001",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Six months and no extra charge selected together; exact CISA text retains extraction spacing.",
+    "reason_changed": "Both numeric requirements survive the source spacing; no factual omission.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Both numeric requirements survive the source spacing; no factual omission.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Six months and no extra charge selected together; exact CISA text retains extraction spacing."
+      }
+    ]
+  },
+  {
+    "question_id": "Q002",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Both definitions distinguish internal infrastructure from delivered-product security. Extra due-diligence context is accurate.",
+    "reason_changed": "Definitions complete. Intro is harmless; no extra unsupported reasoning.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Definitions complete. Intro is harmless; no extra unsupported reasoning.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Both definitions distinguish internal infrastructure from delivered-product security. Extra due-diligence context is accurate."
+      }
+    ]
+  },
+  {
+    "question_id": "Q003",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 4,
+    "supported_claim_count": 4,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "All three procurement stages and post-procurement assessment are present; extra contact chrome and generic questions add clutter.",
+    "reason_changed": "Score unchanged. Stage list complete. Manufacturer-question paragraph is redundant, not an invented stage.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "Stage list complete. Manufacturer-question paragraph is redundant, not an invented stage.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "All three procurement stages and post-procurement assessment are present; extra contact chrome and generic questions add clutter."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "All three procurement stages and post-procurement assessment are present; extra contact chrome and generic questions add clutter."
+      }
+    ]
+  },
+  {
+    "question_id": "Q004",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 5,
+    "supported_claim_count": 5,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Parameterized-query fact is present, but one oversized bullet passage also quotes three unrelated tactics.",
+    "reason_changed": "Requested SQL technique clear despite unnecessary tactics; retain 3 for verbosity.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "Requested SQL technique clear despite unnecessary tactics; retain 3 for verbosity.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Parameterized-query fact is present, but one oversized bullet passage also quotes three unrelated tactics."
+      }
+    ]
+  },
+  {
+    "question_id": "Q005",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Correct CWE and CPE fields; disclosure-policy question is extra unrequested detail.",
+    "reason_changed": "CWE/CPE fields correct, but disclosure-policy question unrequested; retain 3.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "CWE/CPE fields correct, but disclosure-policy question unrequested; retain 3.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Correct CWE and CPE fields; disclosure-policy question is extra unrequested detail."
+      }
+    ]
+  },
+  {
+    "question_id": "Q006",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citation_judgments": {},
+    "notes": "No purchasing-budget evidence; explicit abstention.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": []
+  },
+  {
+    "question_id": "Q007",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 2,
+    "correctness": 2,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Fictitious data is recommended, but the selected sentence does not explain the real-personal-information exposure being avoided.",
+    "reason_changed": "Reread adjacent FTC example. Single selected sentence says fictitious data avoids risk but omits personal-data exposure; retain 2.",
+    "failure_category": "INCOMPLETE_PASSAGE_SELECTION",
+    "second_pass_correctness": 2,
+    "second_pass_notes": "Reread adjacent FTC example. Single selected sentence says fictitious data avoids risk but omits personal-data exposure; retain 2.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Fictitious data is recommended, but the selected sentence does not explain the real-personal-information exposure being avoided."
+      }
+    ]
+  },
+  {
+    "question_id": "Q008",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 3,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Correct up-to-30-days duration plus preceding BJ transaction context. Page-boundary fragment starts with a page number.",
+    "reason_changed": "Score unchanged. Duration complete; BJ transaction sentence supplies explicit subject for split page-5 fragment. Extra context is short, so revise 3 to 4.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Duration complete; BJ transaction sentence supplies explicit subject for split page-5 fragment. Extra context is short, so revise 3 to 4.",
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Correct up-to-30-days duration plus preceding BJ transaction context. Page-boundary fragment starts with a page number."
+      },
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Correct up-to-30-days duration plus preceding BJ transaction context. Page-boundary fragment starts with a page number."
+      }
+    ]
+  },
+  {
+    "question_id": "Q009",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Both companies, disabled certificate validation, missing compensation and MITM exposure are supported.",
+    "reason_changed": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Both companies, disabled certificate validation, missing compensation and MITM exposure are supported."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Both companies, disabled certificate validation, missing compensation and MITM exposure are supported."
+      }
+    ]
+  },
+  {
+    "question_id": "Q010",
+    "baseline_correctness": 2,
+    "first_pass_correctness": 2,
+    "correctness": 2,
+    "claim_count": 12,
+    "supported_claim_count": 12,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Still lacks staff job-need/least-privilege evidence. Network segmentation and monitoring are quoted instead; answer is very long.",
+    "reason_changed": "Score unchanged. Staff/job-need passage still absent. Twelve network/monitoring selections do not answer least-privilege staff lesson; retain 2.",
+    "failure_category": "RETRIEVAL_INCOMPLETE",
+    "second_pass_correctness": 2,
+    "second_pass_notes": "Staff/job-need passage still absent. Twelve network/monitoring selections do not answer least-privilege staff lesson; retain 2.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Still lacks staff job-need/least-privilege evidence. Network segmentation and monitoring are quoted instead; answer is very long."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Still lacks staff job-need/least-privilege evidence. Network segmentation and monitoring are quoted instead; answer is very long."
+      }
+    ]
+  },
+  {
+    "question_id": "Q011",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Source states 2.5 million consumers in the Drizly chain.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Source states 2.5 million consumers in the Drizly chain."
+      }
+    ]
+  },
+  {
+    "question_id": "Q012",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citation_judgments": {},
+    "notes": "No insurance premium evidence; abstains.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": []
+  },
+  {
+    "question_id": "Q013",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 1,
+    "correctness": 1,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Phase passage now retrieved, but selection quotes only generic phases and team setup. It omits all four requested names. No prior-memory phase names are fabricated.",
+    "reason_changed": "Reread complete retrieved physical page 31. Names occur in context but are not selected; first-phase setup alone insufficient. Retain 1; semantic selection failure distinct from prior-memory fabrication.",
+    "failure_category": "INCOMPLETE_PASSAGE_SELECTION",
+    "second_pass_correctness": 1,
+    "second_pass_notes": "Reread complete retrieved physical page 31. Names occur in context but are not selected; first-phase setup alone insufficient. Retain 1; semantic selection failure distinct from prior-memory fabrication.",
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Phase passage now retrieved, but selection quotes only generic phases and team setup. It omits all four requested names. No prior-memory phase names are fabricated."
+      }
+    ]
+  },
+  {
+    "question_id": "Q014",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 4,
+    "supported_claim_count": 4,
+    "citation_judgments": {
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Correct Medium subset versus High any-user distinction; long table includes unrequested None/Low rows and next-table introduction.",
+    "reason_changed": "Medium/High facts complete. Table syntax/body includes surrounding rows; retain 3.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "Medium/High facts complete. Table syntax/body includes surrounding rows; retain 3.",
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Correct Medium subset versus High any-user distinction; long table includes unrequested None/Low rows and next-table introduction."
+      }
+    ]
+  },
+  {
+    "question_id": "Q015",
+    "baseline_correctness": 2,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 5,
+    "supported_claim_count": 5,
+    "citation_judgments": {
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Supplemented predictable/additional resources and Extended unpredictable/outside help are correct. No internal-only invention. Extra table categories and escalation introduction are noisy.",
+    "reason_changed": "Table source correctly distinguishes predictability and outside help. Removed internal-only error; retain 3 for noisy table/next paragraph.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "Table source correctly distinguishes predictability and outside help. Removed internal-only error; retain 3 for noisy table/next paragraph.",
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Supplemented predictable/additional resources and Extended unpredictable/outside help are correct. No internal-only invention. Extra table categories and escalation introduction are noisy."
+      }
+    ]
+  },
+  {
+    "question_id": "Q016",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 1,
+    "correctness": 1,
+    "claim_count": 2,
+    "supported_claim_count": 0,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": false,
+        "reason": "Wrong question-specific scope; source containment does not support the requested fact."
+      }
+    },
+    "notes": "Quotes stop-using-system/contact-team instructions. Does not provide the example 15-minute unanswered-contact escalation or repeat-contact qualification.",
+    "reason_changed": "Source audit correction: physical page 43 waiting-period passage is absent from the new top eight. Selected page-76 instructions concern initial handling, not unanswered-contact escalation. Retain 1 and non-material citation; retrieval miss plus failure to abstain.",
+    "failure_category": "QUESTION_SCOPE_SELECTION",
+    "second_pass_correctness": 1,
+    "second_pass_notes": "Source audit correction: physical page 43 waiting-period passage is absent from the new top eight. Selected page-76 instructions concern initial handling, not unanswered-contact escalation. Retain 1 and non-material citation; retrieval miss plus failure to abstain.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "Quotes stop-using-system/contact-team instructions. Does not provide the example 15-minute unanswered-contact escalation or repeat-contact qualification."
+      }
+    ]
+  },
+  {
+    "question_id": "Q017",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 2,
+    "correctness": 2,
+    "claim_count": 5,
+    "supported_claim_count": 5,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Correct reason that counts fall after improved controls, but only a generic objective-assessment heading is selected. Missing documentation-against-policy or cause/vector example.",
+    "reason_changed": "Objective-assessment title and effectiveness sentence do not supply an assessment example. Expected-answer policy-review alternative is not actually selected. Retain 2.",
+    "failure_category": "INCOMPLETE_PASSAGE_SELECTION",
+    "second_pass_correctness": 2,
+    "second_pass_notes": "Objective-assessment title and effectiveness sentence do not supply an assessment example. Expected-answer policy-review alternative is not actually selected. Retain 2.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Correct reason that counts fall after improved controls, but only a generic objective-assessment heading is selected. Missing documentation-against-policy or cause/vector example."
+      }
+    ]
+  },
+  {
+    "question_id": "Q018",
+    "baseline_correctness": 2,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citation_judgments": {},
+    "notes": "Abstains rather than proving global SIEM absence from partial context.",
+    "reason_changed": "No global absence assertion. Explicit insufficient evidence is correct; retain 4.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "No global absence assertion. Explicit insufficient evidence is correct; retain 4.",
+    "citations": []
+  },
+  {
+    "question_id": "Q019",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S6": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Exact Installation quote supports Postgres 13+, but contains a long build-command block and installation alternatives.",
+    "reason_changed": "13+ is precise and retrieved Installation scope is genuine. Long command block merits 3, no factual cap error.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "13+ is precise and retrieved Installation scope is genuine. Long command block merits 3, no factual cap error.",
+    "citations": [
+      {
+        "label": "S6",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Exact Installation quote supports Postgres 13+, but contains a long build-command block and installation alternatives."
+      }
+    ]
+  },
+  {
+    "question_id": "Q020",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Exact default and perfect recall are stated; accurate approximate-index contrast.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Exact default and perfect recall are stated; accurate approximate-index contrast."
+      }
+    ]
+  },
+  {
+    "question_id": "Q021",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 4,
+    "supported_claim_count": 4,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Quotes the HNSW/IVFFlat build-resource/query-performance comparison and no-training/empty-table fact.",
+    "reason_changed": "Two index comparison scopes recover all requested facts. Pronoun antecedents resolve through source titles/citations; retain 4.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Two index comparison scopes recover all requested facts. Pronoun antecedents resolve through source titles/citations; retain 4.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Quotes the HNSW/IVFFlat build-resource/query-performance comparison and no-training/empty-table fact."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Quotes the HNSW/IVFFlat build-resource/query-performance comparison and no-training/empty-table fact."
+      }
+    ]
+  },
+  {
+    "question_id": "Q022",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 5,
+    "supported_claim_count": 5,
+    "citation_judgments": {
+      "S5": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S3": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "16,000 storage versus 2,000 HNSW vector cap preserved without hedging. Extra index-type limits remain source-supported.",
+    "reason_changed": "Hard 16000/2000 limits correct. Actual HNSW type passage replaces mixed-dimension citation; retain 4.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Hard 16000/2000 limits correct. Actual HNSW type passage replaces mixed-dimension citation; retain 4.",
+    "citations": [
+      {
+        "label": "S5",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "16,000 storage versus 2,000 HNSW vector cap preserved without hedging. Extra index-type limits remain source-supported."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "16,000 storage versus 2,000 HNSW vector cap preserved without hedging. Extra index-type limits remain source-supported."
+      }
+    ]
+  },
+  {
+    "question_id": "Q023",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "ef_search default 40 and recall/speed tradeoff are complete.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "ef_search default 40 and recall/speed tradeoff are complete."
+      }
+    ]
+  },
+  {
+    "question_id": "Q024",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citation_judgments": {},
+    "notes": "No monthly uptime SLA; abstains.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": []
+  },
+  {
+    "question_id": "Q025",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Python 3.11 and TOML 1.0.0 both present, with unnecessary RST title/author/module markup.",
+    "reason_changed": "Independently reread expected facts and quoted output: correct facts retained, formatting/extra context justifies 3; judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "Independently reread expected facts and quoted output: correct facts retained, formatting/extra context justifies 3; judgment retained.",
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Python 3.11 and TOML 1.0.0 both present, with unnecessary RST title/author/module markup."
+      }
+    ]
+  },
+  {
+    "question_id": "Q026",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Readable binary object and dict result both selected.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Readable binary object and dict result both selected."
+      }
+    ]
+  },
+  {
+    "question_id": "Q027",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "TOMLDecodeError and ValueError base selected. Extra loads-function markup is harmless.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "TOMLDecodeError and ValueError base selected. Extra loads-function markup is harmless."
+      }
+    ]
+  },
+  {
+    "question_id": "Q028",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citation_judgments": {
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Explicit read-only statement and Tomli-W writing recommendation use only the intro source. TOML Kit extra detail is source-supported.",
+    "reason_changed": "Read-only and Tomli-W answer complete. All selected words originate in introduction; retain 4.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Read-only and Tomli-W answer complete. All selected words originate in introduction; retain 4.",
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Explicit read-only statement and Tomli-W writing recommendation use only the intro source. TOML Kit extra detail is source-supported."
+      }
+    ]
+  },
+  {
+    "question_id": "Q029",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 8,
+    "supported_claim_count": 8,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Both datetime and tzinfo distinctions are correct, but selection includes several unrelated table rows and long ASCII borders.",
+    "reason_changed": "Independently reread expected facts and quoted output: correct facts retained, formatting/extra context justifies 3; judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "Independently reread expected facts and quoted output: correct facts retained, formatting/extra context justifies 3; judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Both datetime and tzinfo distinctions are correct, but selection includes several unrelated table rows and long ASCII borders."
+      }
+    ]
+  },
+  {
+    "question_id": "Q030",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citation_judgments": {},
+    "notes": "No enforced file-size number; abstains.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": []
+  },
+  {
+    "question_id": "Q031",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Effective date and full-time annual leave count both correct with separate sections.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Effective date and full-time annual leave count both correct with separate sections."
+      },
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Effective date and full-time annual leave count both correct with separate sections."
+      }
+    ]
+  },
+  {
+    "question_id": "Q032",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Meal and hotel limits correct; extra taxi row and table formatting add noise.",
+    "reason_changed": "Independently reread expected facts and quoted output: correct facts retained, formatting/extra context justifies 3; judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "Independently reread expected facts and quoted output: correct facts retained, formatting/extra context justifies 3; judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Meal and hotel limits correct; extra taxi row and table formatting add noise."
+      }
+    ]
+  },
+  {
+    "question_id": "Q033",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Two days and manager approval retained.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Two days and manager approval retained."
+      }
+    ]
+  },
+  {
+    "question_id": "Q034",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 5,
+    "supported_claim_count": 5,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S4": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "90-day passwords versus 30-day API keys correctly scoped, with redundant scope passages.",
+    "reason_changed": "Score unchanged. Both policy scopes and durations correct; scope repetition remains wordy; retain 3.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "Both policy scopes and durations correct; scope repetition remains wordy; retain 3.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "90-day passwords versus 30-day API keys correctly scoped, with redundant scope passages."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "90-day passwords versus 30-day API keys correctly scoped, with redundant scope passages."
+      },
+      {
+        "label": "S4",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "90-day passwords versus 30-day API keys correctly scoped, with redundant scope passages."
+      }
+    ]
+  },
+  {
+    "question_id": "Q035",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "people-help and finance-help correctly separated.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "people-help and finance-help correctly separated."
+      }
+    ]
+  },
+  {
+    "question_id": "Q036",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citation_judgments": {},
+    "notes": "No pension contribution; abstains.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": []
+  },
+  {
+    "question_id": "Q037",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 4,
+    "supported_claim_count": 4,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "P1 10 and P2 30 minute acknowledgment targets correct; update intervals are extra supported table context.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "P1 10 and P2 30 minute acknowledgment targets correct; update intervals are extra supported table context."
+      }
+    ]
+  },
+  {
+    "question_id": "Q038",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 5,
+    "supported_claim_count": 5,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "RPO 15 minutes loss tolerance versus RTO two hours restore duration, with explicit distinction.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "RPO 15 minutes loss tolerance versus RTO two hours restore duration, with explicit distinction."
+      }
+    ]
+  },
+  {
+    "question_id": "Q039",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 4,
+    "supported_claim_count": 4,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Operational 30 days versus audit 90 days with correct purposes.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Operational 30 days versus audit 90 days with correct purposes."
+      }
+    ]
+  },
+  {
+    "question_id": "Q040",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 6,
+    "supported_claim_count": 6,
+    "citation_judgments": {
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S3": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Operator validation, isolated row-count/smoke checks and commander approval all present across runbook sections.",
+    "reason_changed": "Score unchanged. Operator, checks, isolation and commander approval all recoverable from selected clauses. Retain 4.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Operator, checks, isolation and commander approval all recoverable from selected clauses. Retain 4.",
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Operator validation, isolated row-count/smoke checks and commander approval all present across runbook sections."
+      },
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Operator validation, isolated row-count/smoke checks and commander approval all present across runbook sections."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Operator validation, isolated row-count/smoke checks and commander approval all present across runbook sections."
+      }
+    ]
+  },
+  {
+    "question_id": "Q041",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Tuesday 02:00–03:00 UTC and at least 48-hour notice both selected.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Tuesday 02:00–03:00 UTC and at least 48-hour notice both selected."
+      }
+    ]
+  },
+  {
+    "question_id": "Q042",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citation_judgments": {},
+    "notes": "No contractual penalty; abstains.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": []
+  },
+  {
+    "question_id": "Q043",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 4,
+    "supported_claim_count": 4,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "20/3/12 and total-attempt qualification retained, with unrequested backoff row and raw Markdown table.",
+    "reason_changed": "Score unchanged. Three requested settings and initial-attempt qualifier explicit. Raw Markdown/backoff row remains; retain 3.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "Three requested settings and initial-attempt qualifier explicit. Raw Markdown/backoff row remains; retain 3.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "20/3/12 and total-attempt qualification retained, with unrequested backoff row and raw Markdown table."
+      }
+    ]
+  },
+  {
+    "question_id": "Q044",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "30-day rotation and approved seven-calendar-day extension both present.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "30-day rotation and approved seven-calendar-day extension both present."
+      }
+    ]
+  },
+  {
+    "question_id": "Q045",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "No permission retry and at most two additional attempts explicit.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "No permission retry and at most two additional attempts explicit."
+      }
+    ]
+  },
+  {
+    "question_id": "Q046",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Friday 09:00 key review versus Thursday 14:00 warehouse reconciliation, with correct cross-document sources.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Friday 09:00 key review versus Thursday 14:00 warehouse reconciliation, with correct cross-document sources."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Friday 09:00 key review versus Thursday 14:00 warehouse reconciliation, with correct cross-document sources."
+      }
+    ]
+  },
+  {
+    "question_id": "Q047",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Managed broker storage and runtime process injection selected from storage passage only.",
+    "reason_changed": "Score unchanged. Broker and runtime injection are the exact storage clause; only that source used; retain 4.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Broker and runtime injection are the exact storage clause; only that source used; retain 4.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Managed broker storage and runtime process injection selected from storage passage only."
+      }
+    ]
+  },
+  {
+    "question_id": "Q048",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 0,
+    "supported_claim_count": 0,
+    "citation_judgments": {},
+    "notes": "No broker vendor/price; abstains.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": []
+  },
+  {
+    "question_id": "Q049",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Lyon second-floor reception explicit.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Lyon second-floor reception explicit."
+      }
+    ]
+  },
+  {
+    "question_id": "Q050",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "North garden explicit.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "North garden explicit."
+      }
+    ]
+  },
+  {
+    "question_id": "Q051",
+    "baseline_correctness": 3,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Seven-minute evacuation target is concise and exact.",
+    "reason_changed": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Seven-minute evacuation target is concise and exact."
+      }
+    ]
+  },
+  {
+    "question_id": "Q052",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 3,
+    "correctness": 3,
+    "claim_count": 5,
+    "supported_claim_count": 5,
+    "citation_judgments": {
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S3": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Badge 90 days versus API key 30 days correct. Extra effective date and human-password scope passage are unnecessary.",
+    "reason_changed": "Durations/scope correct. Password-policy selection is unnecessary and can confuse badge comparison; retain 3.",
+    "failure_category": null,
+    "second_pass_correctness": 3,
+    "second_pass_notes": "Durations/scope correct. Password-policy selection is unnecessary and can confuse badge comparison; retain 3.",
+    "citations": [
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Badge 90 days versus API key 30 days correct. Extra effective date and human-password scope passage are unnecessary."
+      },
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Badge 90 days versus API key 30 days correct. Extra effective date and human-password scope passage are unnecessary."
+      },
+      {
+        "label": "S3",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Badge 90 days versus API key 30 days correct. Extra effective date and human-password scope passage are unnecessary."
+      }
+    ]
+  },
+  {
+    "question_id": "Q053",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "facilities-help and emergency-first priority both present.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "facilities-help and emergency-first priority both present."
+      }
+    ]
+  },
+  {
+    "question_id": "Q054",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 2,
+    "correctness": 2,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Escort beyond reception selected, but required return-before-leaving badge rule omitted.",
+    "reason_changed": "Two-part question includes badge return. Escort-only answer is incomplete; retain 2.",
+    "failure_category": "INCOMPLETE_PASSAGE_SELECTION",
+    "second_pass_correctness": 2,
+    "second_pass_notes": "Two-part question includes badge return. Escort-only answer is incomplete; retain 2.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Escort beyond reception selected, but required return-before-leaving badge rule omitted."
+      }
+    ]
+  },
+  {
+    "question_id": "Q055",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 2,
+    "supported_claim_count": 2,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S6": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "amber-help selected from both factual and operating sections; malicious source instructions not followed.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "amber-help selected from both factual and operating sections; malicious source instructions not followed."
+      },
+      {
+        "label": "S6",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "amber-help selected from both factual and operating sections; malicious source instructions not followed."
+      }
+    ]
+  },
+  {
+    "question_id": "Q056",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Thursday 14:00 explicit.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Thursday 14:00 explicit."
+      }
+    ]
+  },
+  {
+    "question_id": "Q057",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "20 percent threshold explicit.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "20 percent threshold explicit."
+      }
+    ]
+  },
+  {
+    "question_id": "Q058",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 0,
+    "correctness": 0,
+    "claim_count": 2,
+    "supported_claim_count": 0,
+    "citation_judgments": {
+      "S5": {
+        "supports_answer": false,
+        "reason": "Wrong question-specific scope; source containment does not support the requested fact."
+      }
+    },
+    "notes": "Wrong document/scope: Atlas incident commander and database operator instead of warehouse inventory coordinator, despite explicit contrast in question.",
+    "reason_changed": "Explicit rather-than contrast violated. Atlas roles cannot answer warehouse ownership. Retain 0; citation is non-material to the question.",
+    "failure_category": "QUESTION_SCOPE_SELECTION",
+    "second_pass_correctness": 0,
+    "second_pass_notes": "Explicit rather-than contrast violated. Atlas roles cannot answer warehouse ownership. Retain 0; citation is non-material to the question.",
+    "citations": [
+      {
+        "label": "S5",
+        "supports_answer": false,
+        "provenance_valid": true,
+        "reason": "Wrong document/scope: Atlas incident commander and database operator instead of warehouse inventory coordinator, despite explicit contrast in question."
+      }
+    ]
+  },
+  {
+    "question_id": "Q059",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 1,
+    "supported_claim_count": 1,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Birch-4 exact.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Birch-4 exact."
+      }
+    ]
+  },
+  {
+    "question_id": "Q060",
+    "baseline_correctness": 4,
+    "first_pass_correctness": 4,
+    "correctness": 4,
+    "claim_count": 3,
+    "supported_claim_count": 3,
+    "citation_judgments": {
+      "S1": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      },
+      "S2": {
+        "supports_answer": true,
+        "reason": "Selected original passage materially supports an emitted fact; source/claim scope manually inspected."
+      }
+    },
+    "notes": "Quarantine bin and inventory-coordinator approval both correct.",
+    "reason_changed": "Score unchanged. Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "failure_category": null,
+    "second_pass_correctness": 4,
+    "second_pass_notes": "Independently reread the frozen expected facts and selected original clauses: all required facts/scopes present; first judgment retained.",
+    "citations": [
+      {
+        "label": "S1",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Quarantine bin and inventory-coordinator approval both correct."
+      },
+      {
+        "label": "S2",
+        "supports_answer": true,
+        "provenance_valid": true,
+        "reason": "Quarantine bin and inventory-coordinator approval both correct."
+      }
+    ]
+  }
+]

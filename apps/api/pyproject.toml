@@ -14,6 +14,10 @@ dependencies = [
   "google-auth>=2.35,<3",
   "httpx>=0.27,<1",
   "psycopg[binary]>=3.2,<4",
+  "pgvector>=0.4,<0.5",
+  "pypdf>=6.9,<7",
+  "python-docx>=1.2,<2",
+  "tiktoken>=0.12,<1",
   "pwdlib[argon2]>=0.2,<1",
   "pydantic-settings>=2.6,<3",
   "python-multipart>=0.0.12,<1",
@@ -57,4 +61,6 @@ markers = [
   "postgres: requires a migrated PostgreSQL database",
   "storage: requires an S3-compatible object store",
   "redis: requires a Redis server",
+  "worker: ingestion worker, parser and chunker tests",
+  "vector: requires PostgreSQL with pgvector",
 ]

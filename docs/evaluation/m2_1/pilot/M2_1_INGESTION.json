@@ -1,0 +1,262 @@
+[
+  {
+    "evaluation_id": "DOC01",
+    "document_id": "1d3076b7-b761-45fe-984d-7aeb96e750a0",
+    "version_id": "f068034b-8ffb-40b7-b3cd-a028a69aa672",
+    "upload_timestamp": "2026-10-02T12:54:42.097351+00:00",
+    "processing_start": "2026-10-02 12:54:43.307220+00:00",
+    "completed_at": "2026-10-02 12:54:47.752052+00:00",
+    "status": "READY",
+    "error_code": null,
+    "extractor": "pdf-v1:pypdf-6.19.0",
+    "chunker": "structure-v1:cl100k_base:target=400:max=800:overlap=0",
+    "metadata": {
+      "model": "text-embedding-3-small",
+      "block_count": 5,
+      "chunk_count": 5,
+      "input_tokens": 2466,
+      "stage_seconds": {
+        "chunk": 0.566,
+        "embed": 2.84,
+        "extract": 0.651,
+        "download": 0.215
+      },
+      "embedding_calls": 1,
+      "processing_seconds": 4.276
+    }
+  },
+  {
+    "evaluation_id": "DOC02",
+    "document_id": "1fd33c84-df34-44d2-8cf1-2ac1f6545ac1",
+    "version_id": "e1cf845d-563b-4308-8525-2d679206fb2e",
+    "upload_timestamp": "2026-10-02T12:54:48.127626+00:00",
+    "processing_start": "2026-10-02 12:54:48.344057+00:00",
+    "completed_at": "2026-10-02 12:54:52.753269+00:00",
+    "status": "READY",
+    "error_code": null,
+    "extractor": "pdf-v1:pypdf-6.19.0",
+    "chunker": "structure-v1:cl100k_base:target=400:max=800:overlap=0",
+    "metadata": {
+      "model": "text-embedding-3-small",
+      "block_count": 21,
+      "chunk_count": 21,
+      "input_tokens": 7634,
+      "stage_seconds": {
+        "chunk": 0.019,
+        "embed": 1.37,
+        "extract": 2.841,
+        "download": 0.062
+      },
+      "embedding_calls": 1,
+      "processing_seconds": 4.294
+    }
+  },
+  {
+    "evaluation_id": "DOC03",
+    "document_id": "1c96fc77-8ca6-486c-bef7-cf5ad9f36e3e",
+    "version_id": "ac37095e-17cf-4cdf-accf-d94154e6119a",
+    "upload_timestamp": "2026-10-02T12:54:53.178370+00:00",
+    "processing_start": "2026-10-02 12:54:53.545884+00:00",
+    "completed_at": "2026-10-02 12:55:08.357256+00:00",
+    "status": "READY",
+    "error_code": null,
+    "extractor": "pdf-v1:pypdf-6.19.0",
+    "chunker": "structure-v1:cl100k_base:target=400:max=800:overlap=0",
+    "metadata": {
+      "model": "text-embedding-3-small",
+      "block_count": 162,
+      "chunk_count": 108,
+      "input_tokens": 44379,
+      "stage_seconds": {
+        "chunk": 0.193,
+        "embed": 2.927,
+        "extract": 10.981,
+        "download": 0.073
+      },
+      "embedding_calls": 4,
+      "processing_seconds": 14.178
+    }
+  },
+  {
+    "evaluation_id": "DOC04",
+    "document_id": "4dcef648-50ed-4d66-b980-da07a1a53ff3",
+    "version_id": "aa16dacf-b6e7-4961-be87-27c3d2411965",
+    "upload_timestamp": "2026-10-02T12:55:10.269120+00:00",
+    "processing_start": "2026-10-02 12:55:10.493334+00:00",
+    "completed_at": "2026-10-02 12:55:13.041115+00:00",
+    "status": "READY",
+    "error_code": null,
+    "extractor": "markdown-lines-v1",
+    "chunker": "structure-v1:cl100k_base:target=400:max=800:overlap=0",
+    "metadata": {
+      "model": "text-embedding-3-small",
+      "block_count": 452,
+      "chunk_count": 97,
+      "input_tokens": 10897,
+      "stage_seconds": {
+        "chunk": 0.095,
+        "embed": 2.218,
+        "extract": 0.009,
+        "download": 0.015
+      },
+      "embedding_calls": 4,
+      "processing_seconds": 2.341
+    }
+  },
+  {
+    "evaluation_id": "DOC05",
+    "document_id": "2ccaf4dd-ab33-478c-b433-2309739c0ca0",
+    "version_id": "a88c8869-ea74-4fee-9eaa-04c2a0738778",
+    "upload_timestamp": "2026-10-02T12:55:14.189352+00:00",
+    "processing_start": "2026-10-02 12:55:14.461399+00:00",
+    "completed_at": "2026-10-02 12:55:15.053481+00:00",
+    "status": "READY",
+    "error_code": null,
+    "extractor": "utf8-lines-v1",
+    "chunker": "structure-v1:cl100k_base:target=400:max=800:overlap=0",
+    "metadata": {
+      "model": "text-embedding-3-small",
+      "block_count": 33,
+      "chunk_count": 2,
+      "input_tokens": 883,
+      "stage_seconds": {
+        "chunk": 0.014,
+        "embed": 0.371,
+        "extract": 0.0,
+        "download": 0.012
+      },
+      "embedding_calls": 1,
+      "processing_seconds": 0.401
+    }
+  },
+  {
+    "evaluation_id": "DOC06",
+    "document_id": "3782f7bb-83c7-4ffe-b876-c23d05751238",
+    "version_id": "e6cb2618-de21-4df1-81bb-d58bcc9a3ce0",
+    "upload_timestamp": "2026-10-02T12:55:15.632082+00:00",
+    "processing_start": "2026-10-02 12:55:16.332906+00:00",
+    "completed_at": "2026-10-02 12:55:16.944038+00:00",
+    "status": "READY",
+    "error_code": null,
+    "extractor": "docx-v1:python-docx-1.2.0",
+    "chunker": "structure-v1:cl100k_base:target=400:max=800:overlap=0",
+    "metadata": {
+      "model": "text-embedding-3-small",
+      "block_count": 17,
+      "chunk_count": 7,
+      "input_tokens": 469,
+      "stage_seconds": {
+        "chunk": 0.003,
+        "embed": 0.375,
+        "extract": 0.097,
+        "download": 0.028
+      },
+      "embedding_calls": 1,
+      "processing_seconds": 0.506
+    }
+  },
+  {
+    "evaluation_id": "DOC07",
+    "document_id": "3988eead-dec9-4b06-8be4-d31681643a30",
+    "version_id": "f9fc7009-9874-496f-91cd-a47aeeecac3f",
+    "upload_timestamp": "2026-10-02T12:55:17.652913+00:00",
+    "processing_start": "2026-10-02 12:55:17.938194+00:00",
+    "completed_at": "2026-10-02 12:55:18.494578+00:00",
+    "status": "READY",
+    "error_code": null,
+    "extractor": "docx-v1:python-docx-1.2.0",
+    "chunker": "structure-v1:cl100k_base:target=400:max=800:overlap=0",
+    "metadata": {
+      "model": "text-embedding-3-small",
+      "block_count": 17,
+      "chunk_count": 7,
+      "input_tokens": 450,
+      "stage_seconds": {
+        "chunk": 0.003,
+        "embed": 0.342,
+        "extract": 0.091,
+        "download": 0.018
+      },
+      "embedding_calls": 1,
+      "processing_seconds": 0.458
+    }
+  },
+  {
+    "evaluation_id": "DOC08",
+    "document_id": "c2686f91-88ba-411a-9663-09c75dc87f96",
+    "version_id": "bb47d991-00e4-4c69-8f52-fe6ee87a42c0",
+    "upload_timestamp": "2026-10-02T12:55:19.208028+00:00",
+    "processing_start": "2026-10-02 12:55:19.356702+00:00",
+    "completed_at": "2026-10-02 12:55:19.767008+00:00",
+    "status": "READY",
+    "error_code": null,
+    "extractor": "markdown-lines-v1",
+    "chunker": "structure-v1:cl100k_base:target=400:max=800:overlap=0",
+    "metadata": {
+      "model": "text-embedding-3-small",
+      "block_count": 15,
+      "chunk_count": 8,
+      "input_tokens": 447,
+      "stage_seconds": {
+        "chunk": 0.002,
+        "embed": 0.305,
+        "extract": 0.0,
+        "download": 0.014
+      },
+      "embedding_calls": 1,
+      "processing_seconds": 0.325
+    }
+  },
+  {
+    "evaluation_id": "DOC09",
+    "document_id": "4c6138de-0971-47a3-a244-c9e9cdb25526",
+    "version_id": "5a335328-8249-44e3-a9b0-665f922c58f5",
+    "upload_timestamp": "2026-10-02T12:55:20.253043+00:00",
+    "processing_start": "2026-10-02 12:55:20.344269+00:00",
+    "completed_at": "2026-10-02 12:55:20.681760+00:00",
+    "status": "READY",
+    "error_code": null,
+    "extractor": "utf8-lines-v1",
+    "chunker": "structure-v1:cl100k_base:target=400:max=800:overlap=0",
+    "metadata": {
+      "model": "text-embedding-3-small",
+      "block_count": 4,
+      "chunk_count": 1,
+      "input_tokens": 171,
+      "stage_seconds": {
+        "chunk": 0.001,
+        "embed": 0.224,
+        "extract": 0.0,
+        "download": 0.01
+      },
+      "embedding_calls": 1,
+      "processing_seconds": 0.238
+    }
+  },
+  {
+    "evaluation_id": "DOC10",
+    "document_id": "e922aab9-6904-4702-87aa-3fd6a839beb8",
+    "version_id": "5e10fab3-d19a-49d3-8f6f-13541ee8cfba",
+    "upload_timestamp": "2026-10-02T12:55:21.057307+00:00",
+    "processing_start": "2026-10-02 12:55:21.276204+00:00",
+    "completed_at": "2026-10-02 12:55:22.158649+00:00",
+    "status": "READY",
+    "error_code": null,
+    "extractor": "markdown-lines-v1",
+    "chunker": "structure-v1:cl100k_base:target=400:max=800:overlap=0",
+    "metadata": {
+      "model": "text-embedding-3-small",
+      "block_count": 7,
+      "chunk_count": 4,
+      "input_tokens": 204,
+      "stage_seconds": {
+        "chunk": 0.003,
+        "embed": 0.567,
+        "extract": 0.0,
+        "download": 0.015
+      },
+      "embedding_calls": 1,
+      "processing_seconds": 0.589
+    }
+  }
+]

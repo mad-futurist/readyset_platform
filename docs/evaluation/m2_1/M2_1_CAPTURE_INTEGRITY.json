@@ -1,0 +1,8 @@
+{
+  "dataset_sha256": "5acef85bd33f943145cf21c33a95e357fdf2d5666e86dadb416dba59f5ea6741",
+  "baseline_raw_sha256": "1b01bbf55f437f398a3153adfd84df327acc668ad451cee70677d3db0c79ff3c",
+  "results_sha256": "1fcfd46bd3c285681869ac2bbe487e3d8053ae1379d76dbab831863bad50ec99",
+  "rows": 60,
+  "provenance_checked_against_real_postgres": true,
+  "raw_excerpts": "Temporary capture retained locally; committed prefixes retain full-excerpt hashes."
+}

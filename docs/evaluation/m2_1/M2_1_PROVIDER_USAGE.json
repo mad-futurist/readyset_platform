@@ -1,0 +1,6494 @@
+{
+  "api": [
+    {
+      "request_id": "Q001-search",
+      "timestamp": "2026-10-02T13:27:19.307423+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 549.887,
+      "usage": {
+        "prompt_tokens": 21,
+        "total_tokens": 21
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q001-search",
+      "timestamp": "2026-10-02T13:27:19.886568+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 1590.334
+    },
+    {
+      "request_id": "Q001-ask",
+      "timestamp": "2026-10-02T13:27:20.204403+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 231.975,
+      "usage": {
+        "prompt_tokens": 21,
+        "total_tokens": 21
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q001-ask",
+      "timestamp": "2026-10-02T13:27:20.337713+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 367.64
+    },
+    {
+      "request_id": "Q001-ask",
+      "timestamp": "2026-10-02T13:27:22.187880+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1248.156,
+      "usage": {
+        "prompt_tokens": 5588,
+        "completion_tokens": 22,
+        "total_tokens": 5610,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q002-search",
+      "timestamp": "2026-10-02T13:27:22.504774+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 247.125,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q002-search",
+      "timestamp": "2026-10-02T13:27:22.638527+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 381.64
+    },
+    {
+      "request_id": "Q002-ask",
+      "timestamp": "2026-10-02T13:27:22.951664+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 275.359,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q002-ask",
+      "timestamp": "2026-10-02T13:27:23.083417+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 407.278
+    },
+    {
+      "request_id": "Q002-ask",
+      "timestamp": "2026-10-02T13:27:24.105773+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 984.632,
+      "usage": {
+        "prompt_tokens": 6033,
+        "completion_tokens": 46,
+        "total_tokens": 6079,
+        "prompt_tokens_details": {
+          "cached_tokens": 5888,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P6",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P7",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P8",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q003-search",
+      "timestamp": "2026-10-02T13:27:24.351187+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 203.558,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q003-search",
+      "timestamp": "2026-10-02T13:27:24.492861+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 337.928
+    },
+    {
+      "request_id": "Q003-ask",
+      "timestamp": "2026-10-02T13:27:24.869973+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 336.606,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q003-ask",
+      "timestamp": "2026-10-02T13:27:25.004787+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 472.585
+    },
+    {
+      "request_id": "Q003-ask",
+      "timestamp": "2026-10-02T13:27:25.862805+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 829.622,
+      "usage": {
+        "prompt_tokens": 5574,
+        "completion_tokens": 34,
+        "total_tokens": 5608,
+        "prompt_tokens_details": {
+          "cached_tokens": 5376,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P11",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P1",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "Q004-search",
+      "timestamp": "2026-10-02T13:27:26.169289+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 239.111,
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q004-search",
+      "timestamp": "2026-10-02T13:27:26.331769+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 403.299
+    },
+    {
+      "request_id": "Q004-ask",
+      "timestamp": "2026-10-02T13:27:26.687612+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 325.671,
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q004-ask",
+      "timestamp": "2026-10-02T13:27:26.821006+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 459.556
+    },
+    {
+      "request_id": "Q004-ask",
+      "timestamp": "2026-10-02T13:27:27.672589+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 825.471,
+      "usage": {
+        "prompt_tokens": 5663,
+        "completion_tokens": 22,
+        "total_tokens": 5685,
+        "prompt_tokens_details": {
+          "cached_tokens": 1920,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P14",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q005-search",
+      "timestamp": "2026-10-02T13:27:28.002315+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 259.074,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q005-search",
+      "timestamp": "2026-10-02T13:27:28.128634+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 387.26
+    },
+    {
+      "request_id": "Q005-ask",
+      "timestamp": "2026-10-02T13:27:28.399856+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 231.683,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q005-ask",
+      "timestamp": "2026-10-02T13:27:28.534583+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 367.207
+    },
+    {
+      "request_id": "Q005-ask",
+      "timestamp": "2026-10-02T13:27:29.288648+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 723.475,
+      "usage": {
+        "prompt_tokens": 5311,
+        "completion_tokens": 22,
+        "total_tokens": 5333,
+        "prompt_tokens_details": {
+          "cached_tokens": 4992,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P12",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q006-search",
+      "timestamp": "2026-10-02T13:27:29.574524+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 236.906,
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q006-search",
+      "timestamp": "2026-10-02T13:27:29.703482+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 366.221
+    },
+    {
+      "request_id": "Q006-ask",
+      "timestamp": "2026-10-02T13:27:29.949963+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 212.259,
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q006-ask",
+      "timestamp": "2026-10-02T13:27:30.201791+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 465.763
+    },
+    {
+      "request_id": "Q006-ask",
+      "timestamp": "2026-10-02T13:27:31.185291+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 954.829,
+      "usage": {
+        "prompt_tokens": 5496,
+        "completion_tokens": 9,
+        "total_tokens": 5505,
+        "prompt_tokens_details": {
+          "cached_tokens": 5376,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q007-search",
+      "timestamp": "2026-10-02T13:27:31.564250+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 291.289,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q007-search",
+      "timestamp": "2026-10-02T13:27:31.805574+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 535.046
+    },
+    {
+      "request_id": "Q007-ask",
+      "timestamp": "2026-10-02T13:27:32.095430+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 243.281,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q007-ask",
+      "timestamp": "2026-10-02T13:27:32.311995+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 462.112
+    },
+    {
+      "request_id": "Q007-ask",
+      "timestamp": "2026-10-02T13:27:33.375282+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1028.971,
+      "usage": {
+        "prompt_tokens": 5944,
+        "completion_tokens": 22,
+        "total_tokens": 5966,
+        "prompt_tokens_details": {
+          "cached_tokens": 3968,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P10",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q008-search",
+      "timestamp": "2026-10-02T13:27:33.791239+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 332.382,
+      "usage": {
+        "prompt_tokens": 19,
+        "total_tokens": 19
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q008-search",
+      "timestamp": "2026-10-02T13:27:34.157909+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 701.192
+    },
+    {
+      "request_id": "Q008-ask",
+      "timestamp": "2026-10-02T13:27:34.478068+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 231.864,
+      "usage": {
+        "prompt_tokens": 19,
+        "total_tokens": 19
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q008-ask",
+      "timestamp": "2026-10-02T13:27:34.680131+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 435.856
+    },
+    {
+      "request_id": "Q008-ask",
+      "timestamp": "2026-10-02T13:27:55.276466+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 20563.143,
+      "usage": {
+        "prompt_tokens": 5936,
+        "completion_tokens": 34,
+        "total_tokens": 5970,
+        "prompt_tokens_details": {
+          "cached_tokens": 5760,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S2",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P23",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q009-search",
+      "timestamp": "2026-10-02T13:27:55.550402+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 227.089,
+      "usage": {
+        "prompt_tokens": 18,
+        "total_tokens": 18
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q009-search",
+      "timestamp": "2026-10-02T13:27:55.706825+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 384.605
+    },
+    {
+      "request_id": "Q009-ask",
+      "timestamp": "2026-10-02T13:27:56.142036+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 402.58,
+      "usage": {
+        "prompt_tokens": 18,
+        "total_tokens": 18
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q009-ask",
+      "timestamp": "2026-10-02T13:27:56.311608+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 573.151
+    },
+    {
+      "request_id": "Q009-ask",
+      "timestamp": "2026-10-02T13:27:57.344950+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1011.234,
+      "usage": {
+        "prompt_tokens": 5868,
+        "completion_tokens": 34,
+        "total_tokens": 5902,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P8",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P12",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "Q010-search",
+      "timestamp": "2026-10-02T13:27:57.634379+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 235.973,
+      "usage": {
+        "prompt_tokens": 19,
+        "total_tokens": 19
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q010-search",
+      "timestamp": "2026-10-02T13:27:57.806718+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 409.31
+    },
+    {
+      "request_id": "Q010-ask",
+      "timestamp": "2026-10-02T13:27:58.195530+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 356.783,
+      "usage": {
+        "prompt_tokens": 19,
+        "total_tokens": 19
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q010-ask",
+      "timestamp": "2026-10-02T13:27:58.319751+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 482.189
+    },
+    {
+      "request_id": "Q010-ask",
+      "timestamp": "2026-10-02T13:28:00.067825+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1726.153,
+      "usage": {
+        "prompt_tokens": 5185,
+        "completion_tokens": 154,
+        "total_tokens": 5339,
+        "prompt_tokens_details": {
+          "cached_tokens": 1920,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1",
+        "S1",
+        "S1",
+        "S1",
+        "S1",
+        "S1",
+        "S2",
+        "S2",
+        "S2",
+        "S2",
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P14",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P15",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P16",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P17",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P19",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P20",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P21",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P6",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P7",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P8",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P9",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P10",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "Q011-search",
+      "timestamp": "2026-10-02T13:28:00.334958+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 226.212,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q011-search",
+      "timestamp": "2026-10-02T13:28:00.460208+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 351.734
+    },
+    {
+      "request_id": "Q011-ask",
+      "timestamp": "2026-10-02T13:28:00.723965+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 235.638,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q011-ask",
+      "timestamp": "2026-10-02T13:28:00.852127+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 364.94
+    },
+    {
+      "request_id": "Q011-ask",
+      "timestamp": "2026-10-02T13:28:01.727982+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 855.336,
+      "usage": {
+        "prompt_tokens": 5820,
+        "completion_tokens": 22,
+        "total_tokens": 5842,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P12",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q012-search",
+      "timestamp": "2026-10-02T13:28:02.007624+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 232.37,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q012-search",
+      "timestamp": "2026-10-02T13:28:02.128095+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 354.07
+    },
+    {
+      "request_id": "Q012-ask",
+      "timestamp": "2026-10-02T13:28:02.401492+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 254.545,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q012-ask",
+      "timestamp": "2026-10-02T13:28:02.532056+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 375.727
+    },
+    {
+      "request_id": "Q012-ask",
+      "timestamp": "2026-10-02T13:28:03.602662+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1060.186,
+      "usage": {
+        "prompt_tokens": 5852,
+        "completion_tokens": 9,
+        "total_tokens": 5861,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q013-search",
+      "timestamp": "2026-10-02T13:28:03.885240+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 226.894,
+      "usage": {
+        "prompt_tokens": 19,
+        "total_tokens": 19
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q013-search",
+      "timestamp": "2026-10-02T13:28:04.010488+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 353.008
+    },
+    {
+      "request_id": "Q013-ask",
+      "timestamp": "2026-10-02T13:28:04.254188+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 214.826,
+      "usage": {
+        "prompt_tokens": 19,
+        "total_tokens": 19
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q013-ask",
+      "timestamp": "2026-10-02T13:28:04.373547+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 334.931
+    },
+    {
+      "request_id": "Q013-ask",
+      "timestamp": "2026-10-02T13:28:05.311057+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 909.497,
+      "usage": {
+        "prompt_tokens": 5920,
+        "completion_tokens": 34,
+        "total_tokens": 5954,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S2",
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P3",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "Q014-search",
+      "timestamp": "2026-10-02T13:28:05.563196+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 209.154,
+      "usage": {
+        "prompt_tokens": 21,
+        "total_tokens": 21
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q014-search",
+      "timestamp": "2026-10-02T13:28:05.707291+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 354.664
+    },
+    {
+      "request_id": "Q014-ask",
+      "timestamp": "2026-10-02T13:28:05.946333+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 211.528,
+      "usage": {
+        "prompt_tokens": 21,
+        "total_tokens": 21
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q014-ask",
+      "timestamp": "2026-10-02T13:28:06.112112+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 378.199
+    },
+    {
+      "request_id": "Q014-ask",
+      "timestamp": "2026-10-02T13:28:07.069792+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 905.248,
+      "usage": {
+        "prompt_tokens": 5397,
+        "completion_tokens": 22,
+        "total_tokens": 5419,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "Q015-search",
+      "timestamp": "2026-10-02T13:28:07.371692+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 251.484,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q015-search",
+      "timestamp": "2026-10-02T13:28:07.474425+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 356.175
+    },
+    {
+      "request_id": "Q015-ask",
+      "timestamp": "2026-10-02T13:28:07.752464+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 240.66,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q015-ask",
+      "timestamp": "2026-10-02T13:28:07.865133+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 354.485
+    },
+    {
+      "request_id": "Q015-ask",
+      "timestamp": "2026-10-02T13:28:08.844190+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 946.587,
+      "usage": {
+        "prompt_tokens": 5686,
+        "completion_tokens": 34,
+        "total_tokens": 5720,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S2",
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P6",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P7",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "Q016-search",
+      "timestamp": "2026-10-02T13:28:09.134441+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 249.122,
+      "usage": {
+        "prompt_tokens": 22,
+        "total_tokens": 22
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q016-search",
+      "timestamp": "2026-10-02T13:28:09.285959+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 396.47
+    },
+    {
+      "request_id": "Q016-ask",
+      "timestamp": "2026-10-02T13:28:09.535232+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 220.069,
+      "usage": {
+        "prompt_tokens": 22,
+        "total_tokens": 22
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q016-ask",
+      "timestamp": "2026-10-02T13:28:09.677288+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 361.435
+    },
+    {
+      "request_id": "Q016-ask",
+      "timestamp": "2026-10-02T13:28:10.968175+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1256.431,
+      "usage": {
+        "prompt_tokens": 6007,
+        "completion_tokens": 34,
+        "total_tokens": 6041,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P27",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P28",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q017-search",
+      "timestamp": "2026-10-02T13:28:11.250611+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 235.976,
+      "usage": {
+        "prompt_tokens": 28,
+        "total_tokens": 28
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q017-search",
+      "timestamp": "2026-10-02T13:28:11.405920+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 392.99
+    },
+    {
+      "request_id": "Q017-ask",
+      "timestamp": "2026-10-02T13:28:11.685251+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 248.562,
+      "usage": {
+        "prompt_tokens": 28,
+        "total_tokens": 28
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q017-ask",
+      "timestamp": "2026-10-02T13:28:11.853954+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 411.643
+    },
+    {
+      "request_id": "Q017-ask",
+      "timestamp": "2026-10-02T13:28:12.930501+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1038.045,
+      "usage": {
+        "prompt_tokens": 5882,
+        "completion_tokens": 58,
+        "total_tokens": 5940,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1",
+        "S1",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P6",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P7",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P11",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P12",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q018-search",
+      "timestamp": "2026-10-02T13:28:13.186596+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 207.53,
+      "usage": {
+        "prompt_tokens": 21,
+        "total_tokens": 21
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q018-search",
+      "timestamp": "2026-10-02T13:28:13.306745+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 328.84
+    },
+    {
+      "request_id": "Q018-ask",
+      "timestamp": "2026-10-02T13:28:13.558731+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 213.655,
+      "usage": {
+        "prompt_tokens": 21,
+        "total_tokens": 21
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q018-ask",
+      "timestamp": "2026-10-02T13:28:13.675958+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 331.941
+    },
+    {
+      "request_id": "Q018-ask",
+      "timestamp": "2026-10-02T13:28:14.533914+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 826.477,
+      "usage": {
+        "prompt_tokens": 5426,
+        "completion_tokens": 9,
+        "total_tokens": 5435,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q019-search",
+      "timestamp": "2026-10-02T13:28:14.794335+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 212.699,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q019-search",
+      "timestamp": "2026-10-02T13:28:14.900013+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 319.611
+    },
+    {
+      "request_id": "Q019-ask",
+      "timestamp": "2026-10-02T13:28:15.190174+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 257.177,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q019-ask",
+      "timestamp": "2026-10-02T13:28:15.286684+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 355.911
+    },
+    {
+      "request_id": "Q019-ask",
+      "timestamp": "2026-10-02T13:28:16.134166+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 823.371,
+      "usage": {
+        "prompt_tokens": 5526,
+        "completion_tokens": 22,
+        "total_tokens": 5548,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S6"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S6"
+        }
+      ]
+    },
+    {
+      "request_id": "Q020-search",
+      "timestamp": "2026-10-02T13:28:16.430445+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 237.325,
+      "usage": {
+        "prompt_tokens": 21,
+        "total_tokens": 21
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q020-search",
+      "timestamp": "2026-10-02T13:28:16.557543+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 365.923
+    },
+    {
+      "request_id": "Q020-ask",
+      "timestamp": "2026-10-02T13:28:16.797667+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 210.034,
+      "usage": {
+        "prompt_tokens": 21,
+        "total_tokens": 21
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q020-ask",
+      "timestamp": "2026-10-02T13:28:16.929925+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 343.23
+    },
+    {
+      "request_id": "Q020-ask",
+      "timestamp": "2026-10-02T13:28:17.801289+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 843.79,
+      "usage": {
+        "prompt_tokens": 5948,
+        "completion_tokens": 34,
+        "total_tokens": 5982,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q021-search",
+      "timestamp": "2026-10-02T13:28:18.100807+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 249.552,
+      "usage": {
+        "prompt_tokens": 23,
+        "total_tokens": 23
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q021-search",
+      "timestamp": "2026-10-02T13:28:18.212889+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 362.35
+    },
+    {
+      "request_id": "Q021-ask",
+      "timestamp": "2026-10-02T13:28:18.452785+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 211.094,
+      "usage": {
+        "prompt_tokens": 23,
+        "total_tokens": 23
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q021-ask",
+      "timestamp": "2026-10-02T13:28:18.563566+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 322.787
+    },
+    {
+      "request_id": "Q021-ask",
+      "timestamp": "2026-10-02T13:28:20.130719+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1542.439,
+      "usage": {
+        "prompt_tokens": 5530,
+        "completion_tokens": 46,
+        "total_tokens": 5576,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S2",
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P2",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P3",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "Q022-search",
+      "timestamp": "2026-10-02T13:28:20.394492+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 215.731,
+      "usage": {
+        "prompt_tokens": 20,
+        "total_tokens": 20
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q022-search",
+      "timestamp": "2026-10-02T13:28:20.512445+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 334.199
+    },
+    {
+      "request_id": "Q022-ask",
+      "timestamp": "2026-10-02T13:28:20.734353+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 201.626,
+      "usage": {
+        "prompt_tokens": 20,
+        "total_tokens": 20
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q022-ask",
+      "timestamp": "2026-10-02T13:28:20.870031+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 325.429
+    },
+    {
+      "request_id": "Q022-ask",
+      "timestamp": "2026-10-02T13:28:21.823475+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 918.171,
+      "usage": {
+        "prompt_tokens": 5088,
+        "completion_tokens": 34,
+        "total_tokens": 5122,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S5",
+        "S3"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P3",
+          "label": "S5"
+        },
+        {
+          "passage_id": "P6",
+          "label": "S3"
+        }
+      ]
+    },
+    {
+      "request_id": "Q023-search",
+      "timestamp": "2026-10-02T13:28:22.094341+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 220.573,
+      "usage": {
+        "prompt_tokens": 18,
+        "total_tokens": 18
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q023-search",
+      "timestamp": "2026-10-02T13:28:22.196761+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 323.331
+    },
+    {
+      "request_id": "Q023-ask",
+      "timestamp": "2026-10-02T13:28:22.440699+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 205.168,
+      "usage": {
+        "prompt_tokens": 18,
+        "total_tokens": 18
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q023-ask",
+      "timestamp": "2026-10-02T13:28:22.539343+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 304.593
+    },
+    {
+      "request_id": "Q023-ask",
+      "timestamp": "2026-10-02T13:28:23.442931+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 886.375,
+      "usage": {
+        "prompt_tokens": 5965,
+        "completion_tokens": 22,
+        "total_tokens": 5987,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q024-search",
+      "timestamp": "2026-10-02T13:28:23.762937+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 264.8,
+      "usage": {
+        "prompt_tokens": 13,
+        "total_tokens": 13
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q024-search",
+      "timestamp": "2026-10-02T13:28:23.914233+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 417.445
+    },
+    {
+      "request_id": "Q024-ask",
+      "timestamp": "2026-10-02T13:28:24.180071+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 219.518,
+      "usage": {
+        "prompt_tokens": 13,
+        "total_tokens": 13
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q024-ask",
+      "timestamp": "2026-10-02T13:28:24.330597+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 370.952
+    },
+    {
+      "request_id": "Q024-ask",
+      "timestamp": "2026-10-02T13:28:25.067156+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 698.634,
+      "usage": {
+        "prompt_tokens": 6033,
+        "completion_tokens": 9,
+        "total_tokens": 6042,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q025-search",
+      "timestamp": "2026-10-02T13:28:25.324878+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 209.346,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q025-search",
+      "timestamp": "2026-10-02T13:28:25.416756+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 302.74
+    },
+    {
+      "request_id": "Q025-ask",
+      "timestamp": "2026-10-02T13:28:25.695902+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 245.285,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q025-ask",
+      "timestamp": "2026-10-02T13:28:25.790540+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 341.114
+    },
+    {
+      "request_id": "Q025-ask",
+      "timestamp": "2026-10-02T13:28:26.715786+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 889.234,
+      "usage": {
+        "prompt_tokens": 5965,
+        "completion_tokens": 22,
+        "total_tokens": 5987,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "Q026-search",
+      "timestamp": "2026-10-02T13:28:26.994462+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 232.967,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q026-search",
+      "timestamp": "2026-10-02T13:28:27.108237+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 347.855
+    },
+    {
+      "request_id": "Q026-ask",
+      "timestamp": "2026-10-02T13:28:27.368866+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 224.88,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q026-ask",
+      "timestamp": "2026-10-02T13:28:27.477704+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 335.209
+    },
+    {
+      "request_id": "Q026-ask",
+      "timestamp": "2026-10-02T13:28:28.555529+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1043.18,
+      "usage": {
+        "prompt_tokens": 5893,
+        "completion_tokens": 34,
+        "total_tokens": 5927,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P5",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P6",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q027-search",
+      "timestamp": "2026-10-02T13:28:28.851877+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 245.617,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q027-search",
+      "timestamp": "2026-10-02T13:28:28.949455+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 345.318
+    },
+    {
+      "request_id": "Q027-ask",
+      "timestamp": "2026-10-02T13:28:29.259894+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 281.091,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q027-ask",
+      "timestamp": "2026-10-02T13:28:29.355867+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 377.912
+    },
+    {
+      "request_id": "Q027-ask",
+      "timestamp": "2026-10-02T13:28:30.332802+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 934.527,
+      "usage": {
+        "prompt_tokens": 5536,
+        "completion_tokens": 34,
+        "total_tokens": 5570,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P6",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q028-search",
+      "timestamp": "2026-10-02T13:28:30.589402+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 214.325,
+      "usage": {
+        "prompt_tokens": 14,
+        "total_tokens": 14
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q028-search",
+      "timestamp": "2026-10-02T13:28:30.681750+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 308.04
+    },
+    {
+      "request_id": "Q028-ask",
+      "timestamp": "2026-10-02T13:28:30.967108+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 245.099,
+      "usage": {
+        "prompt_tokens": 14,
+        "total_tokens": 14
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q028-ask",
+      "timestamp": "2026-10-02T13:28:31.060194+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 338.277
+    },
+    {
+      "request_id": "Q028-ask",
+      "timestamp": "2026-10-02T13:28:31.868023+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 769.721,
+      "usage": {
+        "prompt_tokens": 5742,
+        "completion_tokens": 22,
+        "total_tokens": 5764,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "Q029-search",
+      "timestamp": "2026-10-02T13:28:32.127959+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 212.281,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q029-search",
+      "timestamp": "2026-10-02T13:28:32.224267+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 309.399
+    },
+    {
+      "request_id": "Q029-ask",
+      "timestamp": "2026-10-02T13:28:33.493891+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 1240.658,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q029-ask",
+      "timestamp": "2026-10-02T13:28:33.579913+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 1327.082
+    },
+    {
+      "request_id": "Q029-ask",
+      "timestamp": "2026-10-02T13:28:34.675199+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1068.026,
+      "usage": {
+        "prompt_tokens": 5946,
+        "completion_tokens": 22,
+        "total_tokens": 5968,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P8",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q030-search",
+      "timestamp": "2026-10-02T13:28:34.954833+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 230.814,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q030-search",
+      "timestamp": "2026-10-02T13:28:35.055957+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 333.355
+    },
+    {
+      "request_id": "Q030-ask",
+      "timestamp": "2026-10-02T13:28:35.340109+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 256.915,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q030-ask",
+      "timestamp": "2026-10-02T13:28:35.447504+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 360.878
+    },
+    {
+      "request_id": "Q030-ask",
+      "timestamp": "2026-10-02T13:28:36.322984+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 843.849,
+      "usage": {
+        "prompt_tokens": 5795,
+        "completion_tokens": 9,
+        "total_tokens": 5804,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q031-search",
+      "timestamp": "2026-10-02T13:28:36.658348+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 286.951,
+      "usage": {
+        "prompt_tokens": 22,
+        "total_tokens": 22
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q031-search",
+      "timestamp": "2026-10-02T13:28:36.785939+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 415.639
+    },
+    {
+      "request_id": "Q031-ask",
+      "timestamp": "2026-10-02T13:28:37.057636+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 239.594,
+      "usage": {
+        "prompt_tokens": 22,
+        "total_tokens": 22
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q031-ask",
+      "timestamp": "2026-10-02T13:28:37.183265+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 366.395
+    },
+    {
+      "request_id": "Q031-ask",
+      "timestamp": "2026-10-02T13:28:38.085054+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 884.378,
+      "usage": {
+        "prompt_tokens": 5309,
+        "completion_tokens": 34,
+        "total_tokens": 5343,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S2",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q032-search",
+      "timestamp": "2026-10-02T13:28:38.434352+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 318.078,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q032-search",
+      "timestamp": "2026-10-02T13:28:38.552410+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 428.567
+    },
+    {
+      "request_id": "Q032-ask",
+      "timestamp": "2026-10-02T13:28:38.835229+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 255.001,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q032-ask",
+      "timestamp": "2026-10-02T13:28:38.942727+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 363.458
+    },
+    {
+      "request_id": "Q032-ask",
+      "timestamp": "2026-10-02T13:28:39.878453+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 916.7,
+      "usage": {
+        "prompt_tokens": 5022,
+        "completion_tokens": 22,
+        "total_tokens": 5044,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P5",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q033-search",
+      "timestamp": "2026-10-02T13:28:40.159883+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 240.787,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q033-search",
+      "timestamp": "2026-10-02T13:28:40.270708+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 352.925
+    },
+    {
+      "request_id": "Q033-ask",
+      "timestamp": "2026-10-02T13:28:40.534796+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 233.759,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q033-ask",
+      "timestamp": "2026-10-02T13:28:40.643577+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 344.422
+    },
+    {
+      "request_id": "Q033-ask",
+      "timestamp": "2026-10-02T13:28:41.445592+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 784.52,
+      "usage": {
+        "prompt_tokens": 5355,
+        "completion_tokens": 22,
+        "total_tokens": 5377,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P6",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q034-search",
+      "timestamp": "2026-10-02T13:28:41.699399+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 212.307,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q034-search",
+      "timestamp": "2026-10-02T13:28:41.822277+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 336.615
+    },
+    {
+      "request_id": "Q034-ask",
+      "timestamp": "2026-10-02T13:28:42.091806+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 233.468,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q034-ask",
+      "timestamp": "2026-10-02T13:28:42.208228+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 350.714
+    },
+    {
+      "request_id": "Q034-ask",
+      "timestamp": "2026-10-02T13:28:43.317865+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1099.816,
+      "usage": {
+        "prompt_tokens": 5511,
+        "completion_tokens": 70,
+        "total_tokens": 5581,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1",
+        "S2",
+        "S4",
+        "S4"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P5",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P1",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P2",
+          "label": "S4"
+        },
+        {
+          "passage_id": "P3",
+          "label": "S4"
+        }
+      ]
+    },
+    {
+      "request_id": "Q035-search",
+      "timestamp": "2026-10-02T13:28:43.601622+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 237.651,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q035-search",
+      "timestamp": "2026-10-02T13:28:43.704228+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 339.444
+    },
+    {
+      "request_id": "Q035-ask",
+      "timestamp": "2026-10-02T13:28:43.964027+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 232.175,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q035-ask",
+      "timestamp": "2026-10-02T13:28:44.063831+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 332.916
+    },
+    {
+      "request_id": "Q035-ask",
+      "timestamp": "2026-10-02T13:28:45.074509+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 963.014,
+      "usage": {
+        "prompt_tokens": 5713,
+        "completion_tokens": 34,
+        "total_tokens": 5747,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q036-search",
+      "timestamp": "2026-10-02T13:28:45.326433+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 204.759,
+      "usage": {
+        "prompt_tokens": 14,
+        "total_tokens": 14
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q036-search",
+      "timestamp": "2026-10-02T13:28:45.430045+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 309.999
+    },
+    {
+      "request_id": "Q036-ask",
+      "timestamp": "2026-10-02T13:28:45.712520+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 245.805,
+      "usage": {
+        "prompt_tokens": 14,
+        "total_tokens": 14
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q036-ask",
+      "timestamp": "2026-10-02T13:28:45.824447+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 358.874
+    },
+    {
+      "request_id": "Q036-ask",
+      "timestamp": "2026-10-02T13:28:46.489873+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 645.429,
+      "usage": {
+        "prompt_tokens": 4485,
+        "completion_tokens": 9,
+        "total_tokens": 4494,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q037-search",
+      "timestamp": "2026-10-02T13:28:46.762338+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 234.098,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q037-search",
+      "timestamp": "2026-10-02T13:28:46.870489+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 343.321
+    },
+    {
+      "request_id": "Q037-ask",
+      "timestamp": "2026-10-02T13:28:47.107587+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 205.257,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q037-ask",
+      "timestamp": "2026-10-02T13:28:47.207752+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 306.502
+    },
+    {
+      "request_id": "Q037-ask",
+      "timestamp": "2026-10-02T13:28:47.951808+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 726.414,
+      "usage": {
+        "prompt_tokens": 3635,
+        "completion_tokens": 22,
+        "total_tokens": 3657,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P5",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q038-search",
+      "timestamp": "2026-10-02T13:28:48.223423+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 227.393,
+      "usage": {
+        "prompt_tokens": 18,
+        "total_tokens": 18
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q038-search",
+      "timestamp": "2026-10-02T13:28:48.335835+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 340.535
+    },
+    {
+      "request_id": "Q038-ask",
+      "timestamp": "2026-10-02T13:28:48.603935+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 232.973,
+      "usage": {
+        "prompt_tokens": 18,
+        "total_tokens": 18
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q038-ask",
+      "timestamp": "2026-10-02T13:28:48.706927+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 335.874
+    },
+    {
+      "request_id": "Q038-ask",
+      "timestamp": "2026-10-02T13:28:49.830118+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1091.812,
+      "usage": {
+        "prompt_tokens": 5662,
+        "completion_tokens": 58,
+        "total_tokens": 5720,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1",
+        "S1",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P3",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P4",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q039-search",
+      "timestamp": "2026-10-02T13:28:50.121570+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 247.994,
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q039-search",
+      "timestamp": "2026-10-02T13:28:50.220380+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 347.794
+    },
+    {
+      "request_id": "Q039-ask",
+      "timestamp": "2026-10-02T13:28:50.507824+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 258.322,
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q039-ask",
+      "timestamp": "2026-10-02T13:28:50.606770+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 358.691
+    },
+    {
+      "request_id": "Q039-ask",
+      "timestamp": "2026-10-02T13:28:51.417390+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 794.555,
+      "usage": {
+        "prompt_tokens": 4866,
+        "completion_tokens": 22,
+        "total_tokens": 4888,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P6",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q040-search",
+      "timestamp": "2026-10-02T13:28:51.685148+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 225.586,
+      "usage": {
+        "prompt_tokens": 20,
+        "total_tokens": 20
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q040-search",
+      "timestamp": "2026-10-02T13:28:51.780057+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 320.526
+    },
+    {
+      "request_id": "Q040-ask",
+      "timestamp": "2026-10-02T13:28:52.034464+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 231.273,
+      "usage": {
+        "prompt_tokens": 20,
+        "total_tokens": 20
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q040-ask",
+      "timestamp": "2026-10-02T13:28:52.139853+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 324.434
+    },
+    {
+      "request_id": "Q040-ask",
+      "timestamp": "2026-10-02T13:28:53.421860+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1265.559,
+      "usage": {
+        "prompt_tokens": 5309,
+        "completion_tokens": 58,
+        "total_tokens": 5367,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S2",
+        "S1",
+        "S1",
+        "S3"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P5",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P3",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P4",
+          "label": "S3"
+        }
+      ]
+    },
+    {
+      "request_id": "Q041-search",
+      "timestamp": "2026-10-02T13:28:53.718794+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 255.993,
+      "usage": {
+        "prompt_tokens": 13,
+        "total_tokens": 13
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q041-search",
+      "timestamp": "2026-10-02T13:28:53.823893+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 362.182
+    },
+    {
+      "request_id": "Q041-ask",
+      "timestamp": "2026-10-02T13:28:54.097694+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 245.777,
+      "usage": {
+        "prompt_tokens": 13,
+        "total_tokens": 13
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q041-ask",
+      "timestamp": "2026-10-02T13:28:54.202043+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 350.918
+    },
+    {
+      "request_id": "Q041-ask",
+      "timestamp": "2026-10-02T13:28:55.121395+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 899.383,
+      "usage": {
+        "prompt_tokens": 5294,
+        "completion_tokens": 34,
+        "total_tokens": 5328,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S2",
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P2",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "Q042-search",
+      "timestamp": "2026-10-02T13:28:55.387935+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 217.347,
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q042-search",
+      "timestamp": "2026-10-02T13:28:55.473088+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 303.799
+    },
+    {
+      "request_id": "Q042-ask",
+      "timestamp": "2026-10-02T13:28:55.736576+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 232.206,
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q042-ask",
+      "timestamp": "2026-10-02T13:28:55.825813+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 324.296
+    },
+    {
+      "request_id": "Q042-ask",
+      "timestamp": "2026-10-02T13:28:56.539045+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 689.489,
+      "usage": {
+        "prompt_tokens": 5030,
+        "completion_tokens": 9,
+        "total_tokens": 5039,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q043-search",
+      "timestamp": "2026-10-02T13:28:56.800513+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 223.362,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q043-search",
+      "timestamp": "2026-10-02T13:28:56.908960+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 327.081
+    },
+    {
+      "request_id": "Q043-ask",
+      "timestamp": "2026-10-02T13:28:57.136339+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 203.975,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q043-ask",
+      "timestamp": "2026-10-02T13:28:57.243949+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 304.55
+    },
+    {
+      "request_id": "Q043-ask",
+      "timestamp": "2026-10-02T13:28:58.000933+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 744.46,
+      "usage": {
+        "prompt_tokens": 5767,
+        "completion_tokens": 22,
+        "total_tokens": 5789,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q044-search",
+      "timestamp": "2026-10-02T13:28:58.274055+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 225.343,
+      "usage": {
+        "prompt_tokens": 18,
+        "total_tokens": 18
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q044-search",
+      "timestamp": "2026-10-02T13:28:58.392206+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 344.287
+    },
+    {
+      "request_id": "Q044-ask",
+      "timestamp": "2026-10-02T13:28:58.634663+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 211.194,
+      "usage": {
+        "prompt_tokens": 18,
+        "total_tokens": 18
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q044-ask",
+      "timestamp": "2026-10-02T13:28:58.761652+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 336.733
+    },
+    {
+      "request_id": "Q044-ask",
+      "timestamp": "2026-10-02T13:28:59.783789+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1004.55,
+      "usage": {
+        "prompt_tokens": 4890,
+        "completion_tokens": 34,
+        "total_tokens": 4924,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P4",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q045-search",
+      "timestamp": "2026-10-02T13:29:00.068680+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 234.872,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q045-search",
+      "timestamp": "2026-10-02T13:29:00.201160+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 368.785
+    },
+    {
+      "request_id": "Q045-ask",
+      "timestamp": "2026-10-02T13:29:00.494426+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 253.498,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q045-ask",
+      "timestamp": "2026-10-02T13:29:00.611943+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 371.894
+    },
+    {
+      "request_id": "Q045-ask",
+      "timestamp": "2026-10-02T13:29:01.488473+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 842.718,
+      "usage": {
+        "prompt_tokens": 5635,
+        "completion_tokens": 34,
+        "total_tokens": 5669,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P3",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q046-search",
+      "timestamp": "2026-10-02T13:29:01.733245+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 206.128,
+      "usage": {
+        "prompt_tokens": 14,
+        "total_tokens": 14
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q046-search",
+      "timestamp": "2026-10-02T13:29:01.850772+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 324.518
+    },
+    {
+      "request_id": "Q046-ask",
+      "timestamp": "2026-10-02T13:29:02.195985+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 317.559,
+      "usage": {
+        "prompt_tokens": 14,
+        "total_tokens": 14
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q046-ask",
+      "timestamp": "2026-10-02T13:29:02.304329+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 426.56
+    },
+    {
+      "request_id": "Q046-ask",
+      "timestamp": "2026-10-02T13:29:03.239264+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 918.882,
+      "usage": {
+        "prompt_tokens": 4443,
+        "completion_tokens": 34,
+        "total_tokens": 4477,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P2",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "Q047-search",
+      "timestamp": "2026-10-02T13:29:03.480738+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 199.282,
+      "usage": {
+        "prompt_tokens": 14,
+        "total_tokens": 14
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q047-search",
+      "timestamp": "2026-10-02T13:29:03.587848+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 307.553
+    },
+    {
+      "request_id": "Q047-ask",
+      "timestamp": "2026-10-02T13:29:03.822851+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 211.731,
+      "usage": {
+        "prompt_tokens": 14,
+        "total_tokens": 14
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q047-ask",
+      "timestamp": "2026-10-02T13:29:03.938387+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 321.442
+    },
+    {
+      "request_id": "Q047-ask",
+      "timestamp": "2026-10-02T13:29:04.736677+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 781.491,
+      "usage": {
+        "prompt_tokens": 5402,
+        "completion_tokens": 22,
+        "total_tokens": 5424,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q048-search",
+      "timestamp": "2026-10-02T13:29:05.021742+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 237.352,
+      "usage": {
+        "prompt_tokens": 14,
+        "total_tokens": 14
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q048-search",
+      "timestamp": "2026-10-02T13:29:05.125716+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 342.495
+    },
+    {
+      "request_id": "Q048-ask",
+      "timestamp": "2026-10-02T13:29:05.356720+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 201.913,
+      "usage": {
+        "prompt_tokens": 14,
+        "total_tokens": 14
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q048-ask",
+      "timestamp": "2026-10-02T13:29:05.457336+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 302.705
+    },
+    {
+      "request_id": "Q048-ask",
+      "timestamp": "2026-10-02T13:29:06.324033+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 844.825,
+      "usage": {
+        "prompt_tokens": 5111,
+        "completion_tokens": 9,
+        "total_tokens": 5120,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q049-search",
+      "timestamp": "2026-10-02T13:29:06.803855+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 441.727,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q049-search",
+      "timestamp": "2026-10-02T13:29:06.890199+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 528.473
+    },
+    {
+      "request_id": "Q049-ask",
+      "timestamp": "2026-10-02T13:29:07.138925+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 214.021,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q049-ask",
+      "timestamp": "2026-10-02T13:29:07.221556+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 297.603
+    },
+    {
+      "request_id": "Q049-ask",
+      "timestamp": "2026-10-02T13:29:08.101422+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 859.013,
+      "usage": {
+        "prompt_tokens": 5261,
+        "completion_tokens": 22,
+        "total_tokens": 5283,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q050-search",
+      "timestamp": "2026-10-02T13:29:08.366677+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 213.671,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q050-search",
+      "timestamp": "2026-10-02T13:29:08.467835+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 316.619
+    },
+    {
+      "request_id": "Q050-ask",
+      "timestamp": "2026-10-02T13:29:08.726534+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 224.754,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q050-ask",
+      "timestamp": "2026-10-02T13:29:08.822798+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 322.806
+    },
+    {
+      "request_id": "Q050-ask",
+      "timestamp": "2026-10-02T13:29:09.767752+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 919.877,
+      "usage": {
+        "prompt_tokens": 5889,
+        "completion_tokens": 22,
+        "total_tokens": 5911,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P5",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q051-search",
+      "timestamp": "2026-10-02T13:29:10.034172+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 215.4,
+      "usage": {
+        "prompt_tokens": 11,
+        "total_tokens": 11
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q051-search",
+      "timestamp": "2026-10-02T13:29:10.137126+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 313.647
+    },
+    {
+      "request_id": "Q051-ask",
+      "timestamp": "2026-10-02T13:29:10.400697+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 230.398,
+      "usage": {
+        "prompt_tokens": 11,
+        "total_tokens": 11
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q051-ask",
+      "timestamp": "2026-10-02T13:29:10.509920+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 340.497
+    },
+    {
+      "request_id": "Q051-ask",
+      "timestamp": "2026-10-02T13:29:11.266714+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 737.032,
+      "usage": {
+        "prompt_tokens": 5835,
+        "completion_tokens": 22,
+        "total_tokens": 5857,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P6",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q052-search",
+      "timestamp": "2026-10-02T13:29:11.547115+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 234.888,
+      "usage": {
+        "prompt_tokens": 23,
+        "total_tokens": 23
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q052-search",
+      "timestamp": "2026-10-02T13:29:11.734813+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 422.611
+    },
+    {
+      "request_id": "Q052-ask",
+      "timestamp": "2026-10-02T13:29:12.000677+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 235.778,
+      "usage": {
+        "prompt_tokens": 23,
+        "total_tokens": 23
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q052-ask",
+      "timestamp": "2026-10-02T13:29:12.146204+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 371.375
+    },
+    {
+      "request_id": "Q052-ask",
+      "timestamp": "2026-10-02T13:29:13.185022+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1014.843,
+      "usage": {
+        "prompt_tokens": 4639,
+        "completion_tokens": 58,
+        "total_tokens": 4697,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S2",
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P4",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P1",
+          "label": "S2"
+        },
+        {
+          "passage_id": "P2",
+          "label": "S3"
+        }
+      ]
+    },
+    {
+      "request_id": "Q053-search",
+      "timestamp": "2026-10-02T13:29:13.616751+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 391.461,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q053-search",
+      "timestamp": "2026-10-02T13:29:13.733438+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 509.232
+    },
+    {
+      "request_id": "Q053-ask",
+      "timestamp": "2026-10-02T13:29:13.990671+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 221.233,
+      "usage": {
+        "prompt_tokens": 16,
+        "total_tokens": 16
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q053-ask",
+      "timestamp": "2026-10-02T13:29:14.117376+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 349.434
+    },
+    {
+      "request_id": "Q053-ask",
+      "timestamp": "2026-10-02T13:29:15.037062+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 892.587,
+      "usage": {
+        "prompt_tokens": 5747,
+        "completion_tokens": 34,
+        "total_tokens": 5781,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P9",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P10",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q054-search",
+      "timestamp": "2026-10-02T13:29:15.361136+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 277.072,
+      "usage": {
+        "prompt_tokens": 11,
+        "total_tokens": 11
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q054-search",
+      "timestamp": "2026-10-02T13:29:15.458847+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 376.031
+    },
+    {
+      "request_id": "Q054-ask",
+      "timestamp": "2026-10-02T13:29:15.736720+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 239.871,
+      "usage": {
+        "prompt_tokens": 11,
+        "total_tokens": 11
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q054-ask",
+      "timestamp": "2026-10-02T13:29:15.864322+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 368.129
+    },
+    {
+      "request_id": "Q054-ask",
+      "timestamp": "2026-10-02T13:29:16.664813+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 769.544,
+      "usage": {
+        "prompt_tokens": 5278,
+        "completion_tokens": 22,
+        "total_tokens": 5300,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P3",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q055-search",
+      "timestamp": "2026-10-02T13:29:16.913899+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 204.497,
+      "usage": {
+        "prompt_tokens": 7,
+        "total_tokens": 7
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q055-search",
+      "timestamp": "2026-10-02T13:29:17.030863+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 322.058
+    },
+    {
+      "request_id": "Q055-ask",
+      "timestamp": "2026-10-02T13:29:17.318697+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 249.583,
+      "usage": {
+        "prompt_tokens": 7,
+        "total_tokens": 7
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q055-ask",
+      "timestamp": "2026-10-02T13:29:17.440523+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 372.615
+    },
+    {
+      "request_id": "Q055-ask",
+      "timestamp": "2026-10-02T13:29:18.301013+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 831.008,
+      "usage": {
+        "prompt_tokens": 5845,
+        "completion_tokens": 34,
+        "total_tokens": 5879,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S6"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P1",
+          "label": "S6"
+        }
+      ]
+    },
+    {
+      "request_id": "Q056-search",
+      "timestamp": "2026-10-02T13:29:18.551542+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 200.747,
+      "usage": {
+        "prompt_tokens": 7,
+        "total_tokens": 7
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q056-search",
+      "timestamp": "2026-10-02T13:29:18.654658+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 305.642
+    },
+    {
+      "request_id": "Q056-ask",
+      "timestamp": "2026-10-02T13:29:18.901809+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 215.123,
+      "usage": {
+        "prompt_tokens": 7,
+        "total_tokens": 7
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q056-ask",
+      "timestamp": "2026-10-02T13:29:18.996914+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 311.536
+    },
+    {
+      "request_id": "Q056-ask",
+      "timestamp": "2026-10-02T13:29:19.945658+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 927.922,
+      "usage": {
+        "prompt_tokens": 5362,
+        "completion_tokens": 22,
+        "total_tokens": 5384,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q057-search",
+      "timestamp": "2026-10-02T13:29:20.228836+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 239.201,
+      "usage": {
+        "prompt_tokens": 11,
+        "total_tokens": 11
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q057-search",
+      "timestamp": "2026-10-02T13:29:20.316742+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 328.408
+    },
+    {
+      "request_id": "Q057-ask",
+      "timestamp": "2026-10-02T13:29:20.575150+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 229.171,
+      "usage": {
+        "prompt_tokens": 11,
+        "total_tokens": 11
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q057-ask",
+      "timestamp": "2026-10-02T13:29:20.663666+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 318.915
+    },
+    {
+      "request_id": "Q057-ask",
+      "timestamp": "2026-10-02T13:29:21.621567+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 937.748,
+      "usage": {
+        "prompt_tokens": 4859,
+        "completion_tokens": 22,
+        "total_tokens": 4881,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P4",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q058-search",
+      "timestamp": "2026-10-02T13:29:21.968396+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 306.779,
+      "usage": {
+        "prompt_tokens": 11,
+        "total_tokens": 11
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q058-search",
+      "timestamp": "2026-10-02T13:29:22.077450+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 416.321
+    },
+    {
+      "request_id": "Q058-ask",
+      "timestamp": "2026-10-02T13:29:22.369160+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 261.528,
+      "usage": {
+        "prompt_tokens": 11,
+        "total_tokens": 11
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q058-ask",
+      "timestamp": "2026-10-02T13:29:22.478486+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 372.184
+    },
+    {
+      "request_id": "Q058-ask",
+      "timestamp": "2026-10-02T13:29:23.509019+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1011.604,
+      "usage": {
+        "prompt_tokens": 5959,
+        "completion_tokens": 22,
+        "total_tokens": 5981,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S5"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P4",
+          "label": "S5"
+        }
+      ]
+    },
+    {
+      "request_id": "Q059-search",
+      "timestamp": "2026-10-02T13:29:23.750336+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 196.056,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q059-search",
+      "timestamp": "2026-10-02T13:29:23.871367+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 316.145
+    },
+    {
+      "request_id": "Q059-ask",
+      "timestamp": "2026-10-02T13:29:24.126376+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 207.72,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q059-ask",
+      "timestamp": "2026-10-02T13:29:24.205383+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 288.812
+    },
+    {
+      "request_id": "Q059-ask",
+      "timestamp": "2026-10-02T13:29:25.103001+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 880.768,
+      "usage": {
+        "prompt_tokens": 4651,
+        "completion_tokens": 22,
+        "total_tokens": 4673,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P5",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "Q060-search",
+      "timestamp": "2026-10-02T13:29:25.356775+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 203.993,
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q060-search",
+      "timestamp": "2026-10-02T13:29:25.453080+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 301.4
+    },
+    {
+      "request_id": "Q060-ask",
+      "timestamp": "2026-10-02T13:29:25.690650+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 207.496,
+      "usage": {
+        "prompt_tokens": 12,
+        "total_tokens": 12
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "Q060-ask",
+      "timestamp": "2026-10-02T13:29:25.804087+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 322.595
+    },
+    {
+      "request_id": "Q060-ask",
+      "timestamp": "2026-10-02T13:29:27.383625+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1560.305,
+      "usage": {
+        "prompt_tokens": 4994,
+        "completion_tokens": 34,
+        "total_tokens": 5028,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P6",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P3",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "orgwide-0-search",
+      "timestamp": "2026-10-02T13:29:28.492983+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 211.774,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "orgwide-0-search",
+      "timestamp": "2026-10-02T13:29:28.527426+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 246.915
+    },
+    {
+      "request_id": "orgwide-0-ask",
+      "timestamp": "2026-10-02T13:29:28.786163+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 224.32,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "orgwide-0-ask",
+      "timestamp": "2026-10-02T13:29:28.818849+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 258.545
+    },
+    {
+      "request_id": "orgwide-0-ask",
+      "timestamp": "2026-10-02T13:29:29.544731+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 714.615,
+      "usage": {
+        "prompt_tokens": 911,
+        "completion_tokens": 22,
+        "total_tokens": 933,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "orgwide-1-search",
+      "timestamp": "2026-10-02T13:29:29.808113+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 215.11,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "orgwide-1-search",
+      "timestamp": "2026-10-02T13:29:29.836907+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 244.998
+    },
+    {
+      "request_id": "orgwide-1-ask",
+      "timestamp": "2026-10-02T13:29:30.113531+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 240.76,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "orgwide-1-ask",
+      "timestamp": "2026-10-02T13:29:30.140804+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 269.571
+    },
+    {
+      "request_id": "orgwide-1-ask",
+      "timestamp": "2026-10-02T13:29:30.847897+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 694.593,
+      "usage": {
+        "prompt_tokens": 911,
+        "completion_tokens": 22,
+        "total_tokens": 933,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "restricted-initial-0-search",
+      "timestamp": "2026-10-02T13:29:31.917005+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 238.713,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "restricted-initial-0-search",
+      "timestamp": "2026-10-02T13:29:31.936456+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 259.528
+    },
+    {
+      "request_id": "restricted-initial-0-ask",
+      "timestamp": "2026-10-02T13:29:32.212511+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 239.032,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "restricted-initial-0-ask",
+      "timestamp": "2026-10-02T13:29:32.228061+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 256.091
+    },
+    {
+      "request_id": "restricted-initial-1-search",
+      "timestamp": "2026-10-02T13:29:32.465391+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 199.417,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "restricted-initial-1-search",
+      "timestamp": "2026-10-02T13:29:32.482630+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 218.545
+    },
+    {
+      "request_id": "restricted-initial-1-ask",
+      "timestamp": "2026-10-02T13:29:32.722337+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 205.907,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "restricted-initial-1-ask",
+      "timestamp": "2026-10-02T13:29:32.739888+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 224.92
+    },
+    {
+      "request_id": "user-grant-search",
+      "timestamp": "2026-10-02T13:29:33.060429+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 208.855,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "user-grant-search",
+      "timestamp": "2026-10-02T13:29:33.084926+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 235.425
+    },
+    {
+      "request_id": "user-grant-ask",
+      "timestamp": "2026-10-02T13:29:33.336241+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 219.293,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "user-grant-ask",
+      "timestamp": "2026-10-02T13:29:33.362617+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 247.481
+    },
+    {
+      "request_id": "user-grant-ask",
+      "timestamp": "2026-10-02T13:29:34.402835+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1029.248,
+      "usage": {
+        "prompt_tokens": 516,
+        "completion_tokens": 22,
+        "total_tokens": 538,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "other-member-search",
+      "timestamp": "2026-10-02T13:29:34.766472+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 326.899,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "other-member-search",
+      "timestamp": "2026-10-02T13:29:34.797876+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 344.695
+    },
+    {
+      "request_id": "other-member-ask",
+      "timestamp": "2026-10-02T13:29:35.029616+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 199.034,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "other-member-ask",
+      "timestamp": "2026-10-02T13:29:35.046210+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 217.228
+    },
+    {
+      "request_id": "revoke-grant-search",
+      "timestamp": "2026-10-02T13:29:35.182149+00:00",
+      "stage": "embeddings",
+      "latency_ms": 55.893,
+      "success": false
+    },
+    {
+      "request_id": "revoke-grant-search",
+      "timestamp": "2026-10-02T13:29:35.183469+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 63.131
+    },
+    {
+      "request_id": "orgwide-0-search",
+      "timestamp": "2026-10-02T13:33:17.889238+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 455.167,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "orgwide-0-search",
+      "timestamp": "2026-10-02T13:33:17.971002+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 759.931
+    },
+    {
+      "request_id": "orgwide-0-ask",
+      "timestamp": "2026-10-02T13:33:18.267009+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 259.903,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "orgwide-0-ask",
+      "timestamp": "2026-10-02T13:33:18.301615+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 294.492
+    },
+    {
+      "request_id": "orgwide-0-ask",
+      "timestamp": "2026-10-02T13:33:19.603220+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 883.38,
+      "usage": {
+        "prompt_tokens": 911,
+        "completion_tokens": 22,
+        "total_tokens": 933,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "orgwide-1-search",
+      "timestamp": "2026-10-02T13:33:19.866274+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 220.346,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "orgwide-1-search",
+      "timestamp": "2026-10-02T13:33:19.890253+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 244.922
+    },
+    {
+      "request_id": "orgwide-1-ask",
+      "timestamp": "2026-10-02T13:33:20.238296+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 315.059,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "orgwide-1-ask",
+      "timestamp": "2026-10-02T13:33:20.264404+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 342.083
+    },
+    {
+      "request_id": "orgwide-1-ask",
+      "timestamp": "2026-10-02T13:33:20.999969+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 736.18,
+      "usage": {
+        "prompt_tokens": 911,
+        "completion_tokens": 22,
+        "total_tokens": 933,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P2",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "restricted-initial-0-search",
+      "timestamp": "2026-10-02T13:33:22.231198+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 221.608,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "restricted-initial-0-search",
+      "timestamp": "2026-10-02T13:33:22.250195+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 241.163
+    },
+    {
+      "request_id": "restricted-initial-0-ask",
+      "timestamp": "2026-10-02T13:33:22.521333+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 250.756,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "restricted-initial-0-ask",
+      "timestamp": "2026-10-02T13:33:22.547203+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 269.161
+    },
+    {
+      "request_id": "restricted-initial-1-search",
+      "timestamp": "2026-10-02T13:33:22.858315+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 271.937,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "restricted-initial-1-search",
+      "timestamp": "2026-10-02T13:33:22.876711+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 290.873
+    },
+    {
+      "request_id": "restricted-initial-1-ask",
+      "timestamp": "2026-10-02T13:33:23.136229+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 214.31,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "restricted-initial-1-ask",
+      "timestamp": "2026-10-02T13:33:23.152776+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 231.702
+    },
+    {
+      "request_id": "user-grant-search",
+      "timestamp": "2026-10-02T13:33:23.450857+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 205.893,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "user-grant-search",
+      "timestamp": "2026-10-02T13:33:23.475266+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 231.507
+    },
+    {
+      "request_id": "user-grant-ask",
+      "timestamp": "2026-10-02T13:33:23.747029+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 242.451,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "user-grant-ask",
+      "timestamp": "2026-10-02T13:33:23.773852+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 270.413
+    },
+    {
+      "request_id": "user-grant-ask",
+      "timestamp": "2026-10-02T13:33:24.673481+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 888.222,
+      "usage": {
+        "prompt_tokens": 520,
+        "completion_tokens": 22,
+        "total_tokens": 542,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "other-member-search",
+      "timestamp": "2026-10-02T13:33:24.998177+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 277.414,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "other-member-search",
+      "timestamp": "2026-10-02T13:33:25.015008+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 295.509
+    },
+    {
+      "request_id": "other-member-ask",
+      "timestamp": "2026-10-02T13:33:25.302100+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 257.769,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "other-member-ask",
+      "timestamp": "2026-10-02T13:33:25.321351+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 277.442
+    },
+    {
+      "request_id": "revoke-grant-search",
+      "timestamp": "2026-10-02T13:33:25.625208+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 236.857,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "revoke-grant-search",
+      "timestamp": "2026-10-02T13:33:25.646859+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 257.163
+    },
+    {
+      "request_id": "revoke-grant-ask",
+      "timestamp": "2026-10-02T13:33:25.911450+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 234.322,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "revoke-grant-ask",
+      "timestamp": "2026-10-02T13:33:25.930780+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 254.403
+    },
+    {
+      "request_id": "team-grant-search",
+      "timestamp": "2026-10-02T13:33:26.360358+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 226.881,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "team-grant-search",
+      "timestamp": "2026-10-02T13:33:26.395254+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 263.835
+    },
+    {
+      "request_id": "team-grant-ask",
+      "timestamp": "2026-10-02T13:33:26.666319+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 239.091,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "team-grant-ask",
+      "timestamp": "2026-10-02T13:33:26.689552+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 262.94
+    },
+    {
+      "request_id": "team-grant-ask",
+      "timestamp": "2026-10-02T13:33:27.584031+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 886.233,
+      "usage": {
+        "prompt_tokens": 520,
+        "completion_tokens": 22,
+        "total_tokens": 542,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "team-other-search",
+      "timestamp": "2026-10-02T13:33:27.883233+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 253.368,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "team-other-search",
+      "timestamp": "2026-10-02T13:33:27.908410+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 278.648
+    },
+    {
+      "request_id": "team-other-ask",
+      "timestamp": "2026-10-02T13:33:28.249749+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 300.97,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "team-other-ask",
+      "timestamp": "2026-10-02T13:33:28.271703+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 317.838
+    },
+    {
+      "request_id": "injection-member-search",
+      "timestamp": "2026-10-02T13:33:28.515929+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 216.792,
+      "usage": {
+        "prompt_tokens": 7,
+        "total_tokens": 7
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "injection-member-search",
+      "timestamp": "2026-10-02T13:33:28.661706+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 352.564
+    },
+    {
+      "request_id": "injection-member-ask",
+      "timestamp": "2026-10-02T13:33:28.959881+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 262.827,
+      "usage": {
+        "prompt_tokens": 7,
+        "total_tokens": 7
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "injection-member-ask",
+      "timestamp": "2026-10-02T13:33:29.077294+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 381.722
+    },
+    {
+      "request_id": "injection-member-ask",
+      "timestamp": "2026-10-02T13:33:30.240594+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1130.98,
+      "usage": {
+        "prompt_tokens": 5845,
+        "completion_tokens": 34,
+        "total_tokens": 5879,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S6"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P1",
+          "label": "S6"
+        }
+      ]
+    },
+    {
+      "request_id": "ambiguous-label-search",
+      "timestamp": "2026-10-02T13:33:30.502524+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 216.201,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "ambiguous-label-search",
+      "timestamp": "2026-10-02T13:33:30.626158+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 340.942
+    },
+    {
+      "request_id": "ambiguous-label-ask",
+      "timestamp": "2026-10-02T13:33:31.153214+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 496.125,
+      "usage": {
+        "prompt_tokens": 17,
+        "total_tokens": 17
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "ambiguous-label-ask",
+      "timestamp": "2026-10-02T13:33:31.267987+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 611.429
+    },
+    {
+      "request_id": "ambiguous-label-ask",
+      "timestamp": "2026-10-02T13:33:32.045412+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 754.503,
+      "usage": {
+        "prompt_tokens": 5193,
+        "completion_tokens": 9,
+        "total_tokens": 5202,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "cross-tenant-search",
+      "timestamp": "2026-10-02T13:33:32.346309+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 222.979,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "cross-tenant-search",
+      "timestamp": "2026-10-02T13:33:32.364255+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 241.841
+    },
+    {
+      "request_id": "cross-tenant-ask",
+      "timestamp": "2026-10-02T13:33:32.641936+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 245.067,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "cross-tenant-ask",
+      "timestamp": "2026-10-02T13:33:32.660977+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 265.072
+    },
+    {
+      "request_id": "version-0-before-search",
+      "timestamp": "2026-10-02T13:33:33.685941+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 238.368,
+      "usage": {
+        "prompt_tokens": 10,
+        "total_tokens": 10
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-0-before-search",
+      "timestamp": "2026-10-02T13:33:33.716168+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 267.032
+    },
+    {
+      "request_id": "version-0-before-ask",
+      "timestamp": "2026-10-02T13:33:33.972991+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 222.823,
+      "usage": {
+        "prompt_tokens": 10,
+        "total_tokens": 10
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-0-before-ask",
+      "timestamp": "2026-10-02T13:33:33.997998+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 249.116
+    },
+    {
+      "request_id": "version-0-before-ask",
+      "timestamp": "2026-10-02T13:33:35.107539+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1097.252,
+      "usage": {
+        "prompt_tokens": 504,
+        "completion_tokens": 22,
+        "total_tokens": 526,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "version-0-processing-search",
+      "timestamp": "2026-10-02T13:33:35.587509+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 224.581,
+      "usage": {
+        "prompt_tokens": 10,
+        "total_tokens": 10
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-0-processing-search",
+      "timestamp": "2026-10-02T13:33:35.607176+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 242.634
+    },
+    {
+      "request_id": "version-0-processing-ask",
+      "timestamp": "2026-10-02T13:33:35.884628+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 240.11,
+      "usage": {
+        "prompt_tokens": 10,
+        "total_tokens": 10
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-0-processing-ask",
+      "timestamp": "2026-10-02T13:33:35.908116+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 265.179
+    },
+    {
+      "request_id": "version-0-after-search",
+      "timestamp": "2026-10-02T13:33:36.786597+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 233.301,
+      "usage": {
+        "prompt_tokens": 10,
+        "total_tokens": 10
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-0-after-search",
+      "timestamp": "2026-10-02T13:33:36.809244+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 257.347
+    },
+    {
+      "request_id": "version-0-after-ask",
+      "timestamp": "2026-10-02T13:33:37.069738+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 226.826,
+      "usage": {
+        "prompt_tokens": 10,
+        "total_tokens": 10
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-0-after-ask",
+      "timestamp": "2026-10-02T13:33:37.093330+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 251.239
+    },
+    {
+      "request_id": "version-0-after-ask",
+      "timestamp": "2026-10-02T13:33:38.062020+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 958.639,
+      "usage": {
+        "prompt_tokens": 504,
+        "completion_tokens": 22,
+        "total_tokens": 526,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "version-1-before-search",
+      "timestamp": "2026-10-02T13:33:39.110201+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 279.263,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-1-before-search",
+      "timestamp": "2026-10-02T13:33:39.145172+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 315.138
+    },
+    {
+      "request_id": "version-1-before-ask",
+      "timestamp": "2026-10-02T13:33:39.474993+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 285.415,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-1-before-ask",
+      "timestamp": "2026-10-02T13:33:39.517119+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 329.088
+    },
+    {
+      "request_id": "version-1-before-ask",
+      "timestamp": "2026-10-02T13:33:40.349704+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 821.677,
+      "usage": {
+        "prompt_tokens": 501,
+        "completion_tokens": 22,
+        "total_tokens": 523,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "version-1-processing-search",
+      "timestamp": "2026-10-02T13:33:40.868838+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 230.798,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-1-processing-search",
+      "timestamp": "2026-10-02T13:33:40.886707+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 249.52
+    },
+    {
+      "request_id": "version-1-processing-ask",
+      "timestamp": "2026-10-02T13:33:41.177935+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 257.7,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-1-processing-ask",
+      "timestamp": "2026-10-02T13:33:41.194903+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 275.418
+    },
+    {
+      "request_id": "version-1-after-search",
+      "timestamp": "2026-10-02T13:33:42.053440+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 236.891,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-1-after-search",
+      "timestamp": "2026-10-02T13:33:42.080186+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 262.87
+    },
+    {
+      "request_id": "version-1-after-ask",
+      "timestamp": "2026-10-02T13:33:42.318878+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 205.53,
+      "usage": {
+        "prompt_tokens": 8,
+        "total_tokens": 8
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "version-1-after-ask",
+      "timestamp": "2026-10-02T13:33:42.341743+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 227.112
+    },
+    {
+      "request_id": "version-1-after-ask",
+      "timestamp": "2026-10-02T13:33:43.633719+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1281.468,
+      "usage": {
+        "prompt_tokens": 501,
+        "completion_tokens": 22,
+        "total_tokens": 523,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "restricted-owner-search",
+      "timestamp": "2026-10-02T13:42:12.424052+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 1503.79,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "restricted-owner-search",
+      "timestamp": "2026-10-02T13:42:12.528899+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 2044.608
+    },
+    {
+      "request_id": "restricted-owner-ask",
+      "timestamp": "2026-10-02T13:42:12.824502+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 255.059,
+      "usage": {
+        "prompt_tokens": 15,
+        "total_tokens": 15
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "restricted-owner-ask",
+      "timestamp": "2026-10-02T13:42:12.861719+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 292.632
+    },
+    {
+      "request_id": "restricted-owner-ask",
+      "timestamp": "2026-10-02T13:42:14.402987+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 913.511,
+      "usage": {
+        "prompt_tokens": 520,
+        "completion_tokens": 22,
+        "total_tokens": 542,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        }
+      ]
+    },
+    {
+      "request_id": "injection-full-context-search",
+      "timestamp": "2026-10-02T13:42:15.387340+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 934.172,
+      "usage": {
+        "prompt_tokens": 7,
+        "total_tokens": 7
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "injection-full-context-search",
+      "timestamp": "2026-10-02T13:42:15.422016+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 970.13
+    },
+    {
+      "request_id": "injection-full-context-ask",
+      "timestamp": "2026-10-02T13:42:15.700555+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 242.63,
+      "usage": {
+        "prompt_tokens": 7,
+        "total_tokens": 7
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "injection-full-context-ask",
+      "timestamp": "2026-10-02T13:42:15.736925+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 280.67
+    },
+    {
+      "request_id": "injection-full-context-ask",
+      "timestamp": "2026-10-02T13:42:17.027057+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 1274.174,
+      "usage": {
+        "prompt_tokens": 1528,
+        "completion_tokens": 34,
+        "total_tokens": 1562,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [
+        "S1",
+        "S2"
+      ],
+      "selected_claims": [
+        {
+          "passage_id": "P1",
+          "label": "S1"
+        },
+        {
+          "passage_id": "P1",
+          "label": "S2"
+        }
+      ]
+    },
+    {
+      "request_id": "fabrication-tempt-1-search",
+      "timestamp": "2026-10-02T13:42:17.320250+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 249.404,
+      "usage": {
+        "prompt_tokens": 21,
+        "total_tokens": 21
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "fabrication-tempt-1-search",
+      "timestamp": "2026-10-02T13:42:17.349327+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 279.428
+    },
+    {
+      "request_id": "fabrication-tempt-1-ask",
+      "timestamp": "2026-10-02T13:42:17.624054+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 239.011,
+      "usage": {
+        "prompt_tokens": 21,
+        "total_tokens": 21
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "fabrication-tempt-1-ask",
+      "timestamp": "2026-10-02T13:42:17.652312+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 268.573
+    },
+    {
+      "request_id": "fabrication-tempt-1-ask",
+      "timestamp": "2026-10-02T13:42:18.607825+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 948.559,
+      "usage": {
+        "prompt_tokens": 1542,
+        "completion_tokens": 9,
+        "total_tokens": 1551,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "fabrication-tempt-2-search",
+      "timestamp": "2026-10-02T13:42:18.873254+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 221.557,
+      "usage": {
+        "prompt_tokens": 20,
+        "total_tokens": 20
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "fabrication-tempt-2-search",
+      "timestamp": "2026-10-02T13:42:18.900800+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 250.427
+    },
+    {
+      "request_id": "fabrication-tempt-2-ask",
+      "timestamp": "2026-10-02T13:42:19.296775+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 360.018,
+      "usage": {
+        "prompt_tokens": 20,
+        "total_tokens": 20
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "fabrication-tempt-2-ask",
+      "timestamp": "2026-10-02T13:42:19.325796+00:00",
+      "stage": "retrieval_total",
+      "latency_ms": 390.224
+    },
+    {
+      "request_id": "fabrication-tempt-2-ask",
+      "timestamp": "2026-10-02T13:42:20.307149+00:00",
+      "stage": "chat/completions",
+      "model": "gpt-4.1-mini-2025-04-14",
+      "latency_ms": 979.981,
+      "usage": {
+        "prompt_tokens": 1541,
+        "completion_tokens": 9,
+        "total_tokens": 1550,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "audio_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "audio_tokens": 0,
+          "accepted_prediction_tokens": 0,
+          "rejected_prediction_tokens": 0
+        }
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    }
+  ],
+  "worker": [
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:06.490690+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 1390.552,
+      "usage": {
+        "prompt_tokens": 2466,
+        "total_tokens": 2466
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:10.861961+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 1222.344,
+      "usage": {
+        "prompt_tokens": 7634,
+        "total_tokens": 7634
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:16.747711+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 685.889,
+      "usage": {
+        "prompt_tokens": 12671,
+        "total_tokens": 12671
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:17.413354+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 650.839,
+      "usage": {
+        "prompt_tokens": 12931,
+        "total_tokens": 12931
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:18.057493+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 632.645,
+      "usage": {
+        "prompt_tokens": 14429,
+        "total_tokens": 14429
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:18.563416+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 493.337,
+      "usage": {
+        "prompt_tokens": 4348,
+        "total_tokens": 4348
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:19.988855+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 562.159,
+      "usage": {
+        "prompt_tokens": 4614,
+        "total_tokens": 4614
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:20.639350+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 638.351,
+      "usage": {
+        "prompt_tokens": 3635,
+        "total_tokens": 3635
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:21.193802+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 545.215,
+      "usage": {
+        "prompt_tokens": 2286,
+        "total_tokens": 2286
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:21.485950+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 281.293,
+      "usage": {
+        "prompt_tokens": 362,
+        "total_tokens": 362
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:22.651254+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 281.086,
+      "usage": {
+        "prompt_tokens": 883,
+        "total_tokens": 883
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:23.393722+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 357.297,
+      "usage": {
+        "prompt_tokens": 469,
+        "total_tokens": 469
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:24.082113+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 413.384,
+      "usage": {
+        "prompt_tokens": 450,
+        "total_tokens": 450
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:24.792627+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 464.421,
+      "usage": {
+        "prompt_tokens": 447,
+        "total_tokens": 447
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:25.560434+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 274.669,
+      "usage": {
+        "prompt_tokens": 171,
+        "total_tokens": 171
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:24:26.246734+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 240.353,
+      "usage": {
+        "prompt_tokens": 204,
+        "total_tokens": 204
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:29:31.341160+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 223.699,
+      "usage": {
+        "prompt_tokens": 31,
+        "total_tokens": 31
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:33:21.802909+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 430.718,
+      "usage": {
+        "prompt_tokens": 31,
+        "total_tokens": 31
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:33:33.183444+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 255.84,
+      "usage": {
+        "prompt_tokens": 22,
+        "total_tokens": 22
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:33:36.210388+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 225.596,
+      "usage": {
+        "prompt_tokens": 22,
+        "total_tokens": 22
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:33:38.598380+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 328.676,
+      "usage": {
+        "prompt_tokens": 23,
+        "total_tokens": 23
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    },
+    {
+      "request_id": "worker",
+      "timestamp": "2026-10-02T13:33:41.466975+00:00",
+      "stage": "embeddings",
+      "model": "text-embedding-3-small",
+      "latency_ms": 212.436,
+      "usage": {
+        "prompt_tokens": 23,
+        "total_tokens": 23
+      },
+      "success": true,
+      "source_labels": [],
+      "selected_claims": []
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# Preserve exact bytes/hashes for the frozen original synthetic sources.
+*.md -text whitespace=cr-at-eol
+*.txt -text whitespace=cr-at-eol
+*.docx binary

@@ -1,0 +1,255 @@
+[
+  {
+    "scenario": "Q001",
+    "timestamp": "2026-10-02T13:17:19.253260+00:00",
+    "question": "Under Secure by Demand, how long should SaaS security logs be retained and what extra charge is appropriate?",
+    "expected_abstention": false,
+    "passed": true,
+    "answer": "“For cloud service providers and software as a service (SaaS) providers, the software manufacturer should retain and make available to customers security logs for at least six months at no additional cha rge.” [S1]",
+    "insufficient_evidence": false,
+    "citations": [
+      {
+        "label": "S1",
+        "chunk_id": "42bb6943-9a39-5a06-9961-15992e973856",
+        "document_version_id": "4904cf3b-57b5-4bc2-a34f-9f0277471e70",
+        "source_locator": {
+          "kind": "pdf",
+          "page": 3,
+          "spans": [
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 3,
+              "character_end": 4025,
+              "character_start": 0
+            }
+          ],
+          "block_order": 3,
+          "character_end": 4025,
+          "character_start": 0
+        }
+      }
+    ]
+  },
+  {
+    "scenario": "Q008",
+    "timestamp": "2026-10-02T13:17:20.690189+00:00",
+    "question": "In the FTC BJ’s Wholesale example, how long was payment card information kept after a sale?",
+    "expected_abstention": false,
+    "passed": true,
+    "answer": "“3 up to 30 days – long after the sale was complete.” [S2]\n\n“Not only did that violate bank rules, but by holding on to the information without a legitimate business need, the FTC said BJ’s Wholesale Club created an unreasonable risk.” [S2]",
+    "insufficient_evidence": false,
+    "citations": [
+      {
+        "label": "S2",
+        "chunk_id": "f82f4d28-6d20-5af8-9a82-90a0f3b56681",
+        "document_version_id": "b96fb64a-7971-4f2b-a8c3-b2b8fc6fd878",
+        "source_locator": {
+          "kind": "pdf",
+          "page": 5,
+          "spans": [
+            {
+              "kind": "pdf",
+              "page": 5,
+              "block_order": 4,
+              "character_end": 2325,
+              "character_start": 0
+            }
+          ],
+          "block_order": 4,
+          "character_end": 2325,
+          "character_start": 0
+        }
+      }
+    ]
+  },
+  {
+    "scenario": "Q013",
+    "timestamp": "2026-10-02T13:17:22.085605+00:00",
+    "question": "What are the major incident response phases in NIST SP 800-61 Revision 2?",
+    "expected_abstention": false,
+    "passed": true,
+    "answer": "“The initial phase involves establishing and training an incident response team, and acquiring the necessary tools and resources.” [S3]",
+    "insufficient_evidence": false,
+    "citations": [
+      {
+        "label": "S3",
+        "chunk_id": "7611d558-b3aa-51d1-a624-1cd9a772a5a9",
+        "document_version_id": "fbd7d3e5-e2c1-4dd2-9a84-4a765d04e4dd",
+        "source_locator": {
+          "kind": "pdf",
+          "page": 31,
+          "spans": [
+            {
+              "kind": "pdf",
+              "page": 31,
+              "block_order": 62,
+              "character_end": 2358,
+              "character_start": 0
+            }
+          ],
+          "block_order": 62,
+          "character_end": 2358,
+          "character_start": 0
+        }
+      }
+    ]
+  },
+  {
+    "scenario": "public-known-phases-evidence-excluded",
+    "timestamp": "2026-10-02T13:17:22.825248+00:00",
+    "question": "What are the major incident response phases in NIST SP 800-61 Revision 2?",
+    "expected_abstention": true,
+    "passed": true,
+    "answer": "I don't have enough information in the accessible company knowledge.",
+    "insufficient_evidence": true,
+    "citations": [],
+    "supplied_evidence": [
+      {
+        "chunk_id": "192ee071-f8ca-591a-a099-406a60ff46d8",
+        "source_locator": {
+          "kind": "pdf",
+          "page": 3,
+          "spans": [
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 6,
+              "character_end": 43,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 7,
+              "character_end": 42,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 8,
+              "character_end": 71,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 9,
+              "character_end": 143,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 10,
+              "character_end": 126,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 11,
+              "character_end": 139,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 12,
+              "character_end": 38,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 13,
+              "character_end": 63,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 14,
+              "character_end": 60,
+              "character_start": 0
+            },
+            {
+              "kind": "pdf",
+              "page": 3,
+              "block_order": 15,
+              "character_end": 149,
+              "character_start": 0
+            }
+          ],
+          "block_order": 6,
+          "character_end": 43,
+          "character_start": 0
+        },
+        "excerpt_sha256": "a3ef205079667299ce32e5e86f69ecf07dd6b030cd105c4373353cf080e17378",
+        "preview": "NIST Special Publication 800-61 Revision 2 Computer Security Incident Handling Guide Recommendations of the National Institute of Standards and Technology"
+      }
+    ]
+  },
+  {
+    "scenario": "exact-siem-global-negative-partial-evidence",
+    "timestamp": "2026-10-02T13:17:23.503902+00:00",
+    "question": "Which exact SIEM product and version does NIST SP 800-61 Revision 2 mandate buying?",
+    "expected_abstention": true,
+    "passed": true,
+    "answer": "I don't have enough information in the accessible company knowledge.",
+    "insufficient_evidence": true,
+    "citations": [],
+    "supplied_evidence": [
+      {
+        "chunk_id": "7388fa3a-f4e0-59df-915c-7ac8a84716b0",
+        "source_locator": {
+          "kind": "pdf",
+          "page": 37,
+          "spans": [
+            {
+              "kind": "pdf",
+              "page": 37,
+              "block_order": 72,
+              "character_end": 4083,
+              "character_start": 0
+            }
+          ],
+          "block_order": 72,
+          "character_end": 4083,
+          "character_start": 0
+        },
+        "excerpt_sha256": "8df0239840cab9053fb2c55ee6492a95b33fc68dd3cd715db221266fbb3215b8",
+        "preview": "COMPUTER SECURITY INCIDENT HANDLING GUIDE 27  An application logs multiple failed login attempts from an unfamiliar remote system. "
+      },
+      {
+        "chunk_id": "fcdd6392-6cc7-5fc3-ac82-612247955b3e",
+        "source_locator": {
+          "kind": "pdf",
+          "page": 37,
+          "spans": [
+            {
+              "kind": "pdf",
+              "page": 37,
+              "block_order": 72,
+              "character_end": 4109,
+              "character_start": 4083
+            },
+            {
+              "kind": "pdf",
+              "page": 37,
+              "block_order": 73,
+              "character_end": 196,
+              "character_start": 0
+            }
+          ],
+          "block_order": 72,
+          "character_end": 4109,
+          "character_start": 4083
+        },
+        "excerpt_sha256": "c4282f9177bdae3777943ff4d1fb85374d887c27ac149d257d63444645cb89a8",
+        "preview": "detected by other devices. 31 See NIST SP 800-94, Guide to Intrusion Detection and Prevention Systems, for additional information on"
+      }
+    ]
+  }
+]

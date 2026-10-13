@@ -1,0 +1,42 @@
+{
+  "DOC01": {
+    "document_id": "12615a89-6320-4c4a-b732-db33c5f29c7f",
+    "version_id": "e166ec5c-e6fd-451d-a544-bfac7e7ab11c"
+  },
+  "DOC02": {
+    "document_id": "fc5a6d56-1e24-4413-a38f-0380af2453d3",
+    "version_id": "a48ca000-2572-4d09-ad6f-8b3e67e60ecd"
+  },
+  "DOC03": {
+    "document_id": "a4813d3b-6a2d-4f35-963d-48a7cce6124f",
+    "version_id": "a406dda0-8895-4e1a-803a-46a008089c30"
+  },
+  "DOC04": {
+    "document_id": "3df6362b-d7ad-45b1-8f00-ce23e3d23ee1",
+    "version_id": "19819bbd-0ece-43a1-94ba-a2cae3697bd2"
+  },
+  "DOC05": {
+    "document_id": "e5edec60-7569-4c86-9d94-9d28a61f49d5",
+    "version_id": "9049ee1a-ad5f-4187-bb9c-00119a778f77"
+  },
+  "DOC06": {
+    "document_id": "b0207328-4c42-42a8-83b5-a4e46f29f22b",
+    "version_id": "202a0b23-e277-4e75-9ac0-45c94aac85c2"
+  },
+  "DOC07": {
+    "document_id": "2a97c57a-bc6f-4106-be37-bf30cb2d54d7",
+    "version_id": "cfa8b07d-a889-49e0-a2d9-792760580bb2"
+  },
+  "DOC08": {
+    "document_id": "544ad8a4-98a3-4674-95da-20311ac552d8",
+    "version_id": "9423fb1c-844f-480c-aa75-bcbf5564b97e"
+  },
+  "DOC09": {
+    "document_id": "562695ed-32f3-453a-9a48-f775ed911b84",
+    "version_id": "0c92f4ed-7752-45d0-a977-583c178b10ee"
+  },
+  "DOC10": {
+    "document_id": "8b10e1f4-c682-440b-b102-8893cfc9e3df",
+    "version_id": "e6575b8c-f234-4b52-996d-3f694fee9045"
+  }
+}
